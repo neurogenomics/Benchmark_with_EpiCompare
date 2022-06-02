@@ -1,0 +1,16 @@
+---
+title: "cutandrun_EpiCompare"
+author: "Xindong"
+date: '2022-06-01'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Library the EpiCompare package
+```{r}
+library(EpiCompare)
+```
+
