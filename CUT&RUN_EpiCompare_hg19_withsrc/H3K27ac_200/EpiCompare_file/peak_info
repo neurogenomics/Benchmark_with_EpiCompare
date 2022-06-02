@@ -1,0 +1,3 @@
+"Sample"	"PeakN before tidy"	"Blacklisted peaks removed (%)"	"Non-standard peaks removed (%)"	"PeakN after tidy"
+"1"	"H3K27ac_200_top001"	16774	0.584	2.3	16292
+"2"	"H3K27ac_200_control"	251672	0.149	0.315	250504

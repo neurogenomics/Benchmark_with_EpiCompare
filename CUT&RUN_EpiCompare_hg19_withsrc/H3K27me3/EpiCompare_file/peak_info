@@ -1,0 +1,6 @@
+"Sample"	"PeakN before tidy"	"Blacklisted peaks removed (%)"	"Non-standard peaks removed (%)"	"PeakN after tidy"
+"1"	"H3K27me3_500_dedup_control"	30529	0.177	0.577	30299
+"2"	"H3K27me3_50_top001"	17983	0.478	1.88	17560
+"3"	"H3K27me3_500_top001"	22364	0.233	0.841	22125
+"4"	"H3K27me3_CR_50"	186887	0.163	0.512	185625
+"5"	"H3K27me3_CR_500"	30529	0.177	0.577	30299

@@ -9,8 +9,56 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Library the EpiCompare package
+### Load the EpiCompare package
 ```{r}
 library(EpiCompare)
 ```
+### Load the cutandrun called peaks and ENCODE reference
+```{r}
+H3K27ac_200_control <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun_EpiCompare/1st_trial/called_peaks/H3K27ac_200_dedup_control.peaks.stringent.bed", as = "GRanges")
+H3K27ac_200_top001 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun_EpiCompare/1st_trial/called_peaks/H3K27ac_200_dedup_top001.peaks.stringent.bed", as = "GRanges")
+
+H3K27ac_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun_EpiCompare/1st_trial/ENCODE_11PTMs/H3K27ac_ENCODE.bed", as = "GRanges")
+
+peaklist <- list(H3K27ac_200_control, H3K27ac_200_top001)
+names(peaklist) <- c("H3K27ac_200_control", "H3K27ac_200_top001") 
+
+ENCODE <- list("H3K27ac_ENCODE" = H3K27ac_ENCODE)
+
+gc()
+```
+
+
+### Load the hg38 blacklist
+```{r}
+data(hg38_blacklist)
+```
+
+### Run the EpiCompare
+```{r}
+EpiCompare(peakfiles = peaklist,
+           genome_build = "hg19",
+           blacklist = hg19_blacklist,
+           picard_files = list(),
+           reference = ENCODE,
+           upset_plot = TRUE,
+           stat_plot = TRUE,
+           chromHMM_plot = TRUE,
+           chromHMM_annotation = "K562",
+           chipseeker_plot = TRUE,
+           enrichment_plot = TRUE,
+           tss_plot = TRUE,
+           interact = TRUE,
+           save_output = TRUE,
+           output_dir = "/Users/apple/Downloads/EpiCompare/H3K4me1_200")
+```
+
+
+
+
+
+
+
+
+
 
