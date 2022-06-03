@@ -33,15 +33,17 @@ library(EpiCompare)
 ```
 ### Load the cutandrun called peaks and ENCODE reference
 ```{r}
-H3K27ac_200_control <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun_EpiCompare/1st_trial/called_peaks/H3K27ac_200_dedup_control.peaks.stringent.bed", as = "GRanges")
-H3K27ac_200_top001 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun_EpiCompare/1st_trial/called_peaks/H3K27ac_200_dedup_top001.peaks.stringent.bed", as = "GRanges")
 
-H3K27ac_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/ENCFF038DDS.bed", as = "GRanges")
 
-peaklist <- list(H3K27ac_200_control, H3K27ac_200_top001)
-names(peaklist) <- c("H3K27ac_200_control", "H3K27ac_200_top001") 
+H3K9me1_200_control <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/called_peaks/H3K9me1_200_dedup_control.peaks.stringent.bed", as = "GRanges")
+H3K9me1_200_top001 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/called_peaks/H3K9me1_200_dedup_top001.peaks.stringent.bed", as = "GRanges")
 
-ENCODE <- list("H3K27ac_ENCODE" = H3K27ac_ENCODE)
+H3K9me1_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K9me1_ENCFF285EKW.bed", as = "GRanges")
+
+peaklist <- list(H3K9me1_200_control, H3K9me1_200_top001)
+names(peaklist) <- c("H3K9me1_200_control", "H3K9me1_200_top001") 
+
+ENCODE <- list("H3K9me1_ENCODE" = H3K9me1_ENCODE)
 
 gc()
 ```
@@ -56,8 +58,8 @@ data(hg19_blacklist)
 ### Run the EpiCompare
 ```{r}
 EpiCompare(peakfiles = peaklist,
-           genome_build = "hg19",
-           blacklist = hg19_blacklist,
+           genome_build = "hg38",
+           blacklist = hg38_blacklist,
            picard_files = list(),
            reference = ENCODE,
            upset_plot = TRUE,
@@ -69,7 +71,7 @@ EpiCompare(peakfiles = peaklist,
            tss_plot = TRUE,
            interact = TRUE,
            save_output = TRUE,
-           output_dir = "/Users/apple/Downloads/H3K27ac_200_test")
+           output_dir = "/Users/apple/Downloads/cutandrun/cutandrun_EpiCompare/H3K9me1")
 
 
 # EpiCompare(peakfiles = peaklist,
