@@ -1,4 +1,6 @@
 ENCODE resource information:
+hg38 ENCODE ref (with replicates from different experiment)
+
 H3K4me1_ENCFF159VKJ_1.bed
 https://www.encodeproject.org/experiments/ENCSR000EWC/
 H3K4me1_ENCFF759NWD_2.bed
@@ -12,7 +14,6 @@ https://www.encodeproject.org/experiments/ENCSR668LDD/
 
 H3K9ac_ENCFF558JOB.bed
 https://www.encodeproject.org/experiments/ENCSR000EVZ/
-
 
 H3K27ac_ENCFF038DDS.bed
 https://www.encodeproject.org/files/ENCFF038DDS/
