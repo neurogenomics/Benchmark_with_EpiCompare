@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+### Load the EpiCompare package
+```{r}
+library(EpiCompare)
+```
+### Load the cutandrun called peaks and ENCODE reference
+```{r}
+
+
+H3K9ac_200_control <- ChIPseeker::readPeakFile("/Users/apple/Downloads/called_peaks/H3K9ac_200_dedup_control.peaks.stringent.bed", as = "GRanges")
+H3K9ac_200_top001 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/called_peaks/H3K9ac_200_dedup_top001.peaks.stringent.bed", as = "GRanges")
+
+H3K9ac_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K9ac_ENCFF558JOB.bed", as = "GRanges")
+
+peaklist <- list(H3K9ac_200_control, H3K9ac_200_top001)
+names(peaklist) <- c("H3K9ac_200_control", "H3K9ac_200_top001") 
+
+ENCODE <- list("H3K9ac_ENCODE" = H3K9ac_ENCODE)
+
+gc()
+```
+### Load the hg38 blacklist
+```{r}
+data(hg38_blacklist)
+```
+
+### Run the EpiCompare
+```{r}
+EpiCompare(peakfiles = peaklist,
+           genome_build = "hg38",
+           blacklist = hg38_blacklist,
+           picard_files = list(),
+           reference = ENCODE,
+           upset_plot = TRUE,
+           stat_plot = TRUE,
+           chromHMM_plot = TRUE,
+           chromHMM_annotation = "K562",
+           chipseeker_plot = TRUE,
+           enrichment_plot = TRUE,
+           tss_plot = TRUE,
+           interact = TRUE,
+           save_output = TRUE,
+           output_dir = "/Users/apple/Downloads/H3K9ac")
+
+```
+
