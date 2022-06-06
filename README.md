@@ -11,7 +11,7 @@ TOP001: peaks with 1% confidence
 control: peaks exclude IgG peaks
 
 The cutandrun EpiCompare report (hg38):
-H3K4me1: https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H3K4me1/EpiCompare.html
+[H3K4me1] (https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H3K4me1/EpiCompare.html)
 H3K4me2: https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H3K4me2/EpiCompare.html
 H3K4me3: https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H3K4me3/EpiCompare.html
 H3K9ac: https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H3K9ac/EpiCompare.html
