@@ -1,4 +1,4 @@
-# CUt-RUN_EpiCompare
+# CUTandRUN_EpiCompare
 CUT&amp;RUN EpiCompare reports by Xindong (appreciate the data from Yi)
 
 Data information:<br>
