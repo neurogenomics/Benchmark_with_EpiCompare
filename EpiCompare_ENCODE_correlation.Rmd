@@ -10,11 +10,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, root.dir=here::here())
 knitr::opts_knit$set(echo = TRUE, root.dir=here::here())
-
-#### GitHub ####
-if(!require("EpiCompare")) remotes::install_github("neurogenomics/EpiCompare")
 ```
-
 
 ### Load the EpiCompare package
 ```{r}
@@ -30,27 +26,42 @@ library(EpiCompare)
 
 
 ### A549 H3K4me3
+#### Experiment 1
 ```{r}
-ENCODE_peak1 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/called_peaks/H3K27me3_500_dedup_top001.peaks.stringent.bed", as = "GRanges")
-ENCODE_peak2 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/called_peaks/H3K9me1_200_dedup_control.peaks.stringent.bed", as = "GRanges")
+H3K4me3_EN4G38_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF573MUH/@@download/ENCFF573MUH.bed.gz", format = "narrowPeak")
+H3K4me3_EN4G38_E1_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF810EWT/@@download/ENCFF810EWT.bed.gz", format = "narrowPeak")
+H3K4me3_EN4G38_E1_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF767JIG/@@download/ENCFF767JIG.bed.gz", format = "narrowPeak")
+H3K4me3_EN4G38_E1_IRpseudo3 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF243UCU/@@download/ENCFF243UCU.bed.gz", format = "narrowPeak")
+H3K4me3_EN4G38_E1_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF901AFI/@@download/ENCFF901AFI.bed.gz", format = "narrowPeak")
 
-
-peakfiles <- list(ENCODE_peak1,ENCODE_peak2)
-names(peakfiles) <- c("ENCODE_peak1","ENCODE_peak2")
-
-gc()
 ```
 
+#### Experiment 2
 ```{r}
+H3K4me3_EN4G38_E2_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF046DTX/@@download/ENCFF046DTX.bed.gz", format = "narrowPeak")
+H3K4me3_EN4G38_E2_IR123_R <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF199HJP/@@download/ENCFF199HJP.bed.gz", format = "narrowPeak")
+```
+
+#### Experiment 3
+```{r}
+H3K4me3_EN4G38_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF941JPZ/@@download/ENCFF941JPZ.bed.gz", format = "narrowPeak")
+H3K4me3_EN4G38_E3_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF638HVG/@@download/ENCFF638HVG.bed.gz", format = "narrowPeak")
+```
+
+
+
+### Run EpiCompare
+```{r}
+peakfiles <- list(H3K4me3_EN4G38_E1_IRpseudo123,H3K4me3_EN4G38_E1_IRpseudo1,H3K4me3_EN4G38_E1_IRpseudo2,H3K4me3_EN4G38_E1_IRpseudo3, H3K4me3_EN4G38_E1_IR123, H3K4me3_EN4G38_E2_IR123, H3K4me3_EN4G38_E2_IR123_R, H3K4me3_EN4G38_E3_IRpseudo12, H3K4me3_EN4G38_E3_IR12)
+names(peakfiles) <- c("H3K4me3_EN4G38_E1_IRpseudo123","H3K4me3_EN4G38_E1_IRpseudo1","H3K4me3_EN4G38_E1_IRpseudo2","H3K4me3_EN4G38_E1_IRpseudo3", "H3K4me3_EN4G38_E1_IR123", "H3K4me3_EN4G38_E2_IR123", "H3K4me3_EN4G38_E2_IR123_R", "H3K4me3_EN4G38_E3_IRpseudo12", "H3K4me3_EN4G38_E3_IR12")
+ENCODE_ref <- list("H3K4me3_EN4G38_E1_IRpseudo123" = H3K4me3_EN4G38_E1_IRpseudo123)
+gc()
 data(hg38_blacklist)
 EpiCompare(peakfiles = peakfiles,
                        picard_files = list(),
                        blacklist = hg38_blacklist,
-                       genome_build = list(peakfiles="hg38",
-                                           reference="hg38",
-                                           blacklist="hg38"),
-                       genome_build_output = "hg38",
-                       reference = ENCODE_peak1,
+                       genome_build = "hg38",
+                       reference = ENCODE_ref,
                        upset_plot = TRUE,
                        stat_plot = TRUE,
                        chromHMM_plot = TRUE,
@@ -59,8 +70,8 @@ EpiCompare(peakfiles = peakfiles,
                        enrichment_plot = TRUE,
                        tss_plot = TRUE,
                        save_output = TRUE,
-                       precision_recall_plot = TRUE,
-                       output_dir = "/Users/apple/Downloads/test")
+                       # precision_recall_plot = TRUE,
+                       output_dir = "/Users/apple/Downloads/cutandrun/ENCODE_correlation/A549_H3K4me3")
 ```
 
 
