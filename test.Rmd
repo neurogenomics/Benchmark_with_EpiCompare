@@ -152,6 +152,91 @@ EpiCompare(peakfiles = peaklist_EX,
 
 
 
+### A549 rerun 
+```{r}
+library(EpiCompare)
+H3K4me3_ENLabG38_E05 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_A549_H3K4me3/ENCFF789KGD.bed", as = "GRanges")
+H3K4me3_ENLabG38_E10 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_A549_H3K4me3/ENCFF323SAI.bed", as = "GRanges")
+H3K4me3_ENLabG38_E12 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_A549_H3K4me3/ENCFF662KPN.bed", as = "GRanges")
+peaklist <- list(H3K4me3_ENLabG38_E10,H3K4me3_ENLabG38_E12)
+names(peaklist) <- c("H3K4me3_ENLabG38_E10","H3K4me3_ENLabG38_E12")
+ENCODE <- list("H3K4me3_ENLabG38_E05" = H3K4me3_ENLabG38_E05)
+data(hg38_blacklist)
+EpiCompare(peakfiles = peaklist,
+           genome_build = "hg38",
+           blacklist = hg38_blacklist,
+           picard_files = list(),
+           reference = ENCODE,
+           upset_plot = TRUE,
+           stat_plot = TRUE,
+           chromHMM_plot = TRUE,
+           chromHMM_annotation = "Nhlf",
+           chipseeker_plot = TRUE,
+           enrichment_plot = TRUE,
+           tss_plot = TRUE,
+           interact = TRUE,
+           save_output = TRUE,
+           output_dir = "/Users/apple/Downloads/cutandrun/ENCODE_correlation/A549_H3K9me3_peakcount12")
+
+```
+
+
+
+
+### A549 H3K9me3
+#### Correlation within experiment
+```{r}
+H3K9me3_EN4G38_E0_5 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF481MXR/@@download/ENCFF481MXR.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E01 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF138JVF/@@download/ENCFF138JVF.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E02 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF124GNU/@@download/ENCFF124GNU.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E03 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF494QKI/@@download/ENCFF494QKI.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E04 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF461PWD/@@download/ENCFF461PWD.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E05 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF005LME/@@download/ENCFF005LME.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E06 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF038PZX/@@download/ENCFF038PZX.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E07 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF283ZMN/@@download/ENCFF283ZMN.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E08 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF836GHH/@@download/ENCFF836GHH.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E10 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF811QUJ/@@download/ENCFF811QUJ.bed.gz", format = "narrowPeak")
+H3K9me3_EN4G38_E12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF444EWQ/@@download/ENCFF444EWQ.bed.gz", format = "narrowPeak")
+
+
+peaklist <- list(H3K9me3_EN4G38_E0_5,H3K9me3_EN4G38_E01,H3K9me3_EN4G38_E02,H3K9me3_EN4G38_E03,H3K9me3_EN4G38_E04,H3K9me3_EN4G38_E05,H3K9me3_EN4G38_E06,H3K9me3_EN4G38_E07,H3K9me3_EN4G38_E08,H3K9me3_EN4G38_E10)
+names(peaklist) <- c("H3K9me3_EN4G38_E0_5","H3K9me3_EN4G38_E01","H3K9me3_EN4G38_E02","H3K9me3_EN4G38_E03","H3K9me3_EN4G38_E04","H3K9me3_EN4G38_E05","H3K9me3_EN4G38_E06","H3K9me3_EN4G38_E07","H3K9me3_EN4G38_E08","H3K9me3_EN4G38_E10")
+
+ENCODE <- list("H3K9me3_EN4G38_E12" = H3K9me3_EN4G38_E12)
+gc()
+data(hg38_blacklist)
+
+EpiCompare(peakfiles = peaklist,
+           genome_build = "hg38",
+           blacklist = hg38_blacklist,
+           picard_files = list(),
+           reference = ENCODE,
+           upset_plot = TRUE,
+           stat_plot = TRUE,
+           chromHMM_plot = TRUE,
+           chromHMM_annotation = "Nhlf",
+           chipseeker_plot = TRUE,
+           enrichment_plot = TRUE,
+           tss_plot = TRUE,
+           interact = TRUE,
+           save_output = TRUE,
+           output_dir = "/Users/apple/Downloads/cutandrun/ENCODE_correlation/A549_H3K9me3_Experimentseries")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### K562 H3K4me3
 #### Correlation between serial experiment
