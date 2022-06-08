@@ -1,0 +1,8 @@
+"Sample"	"PeakN before tidy"	"Blacklisted peaks removed (%)"	"Non-standard peaks removed (%)"	"PeakN after tidy"
+"1"	"H3K4me1_EN4G38_E1_IRpseudo1"	53375	0	0	53375
+"2"	"H3K4me1_EN4G38_E1_IRpseudo2"	75969	0	0	75969
+"3"	"H3K4me1_EN4G38_E1_IRpseudo12"	64418	0	0	64418
+"4"	"H3K4me1_EN4G38_E1_IR12"	59176	0	0	59176
+"5"	"H3K4me1_EN3G38_E1_I1"	81496	0.0233	0.0466	81439
+"6"	"H3K4me1_EN3G38_E1_I2"	141961	0.0225	0.0472	141862
+"7"	"H3K4me1_EN3G38_E1_I12"	99783	0.0241	0.0461	99713

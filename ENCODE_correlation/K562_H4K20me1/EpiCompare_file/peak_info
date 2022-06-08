@@ -1,0 +1,4 @@
+"Sample"	"PeakN before tidy"	"Blacklisted peaks removed (%)"	"Non-standard peaks removed (%)"	"PeakN after tidy"
+"1"	"H4K20me1_EN4G38_E1_IRpseudo1"	24130	0	0	24130
+"2"	"H4K20me1_EN4G38_E1_IRpseudo2"	27241	0	0	27241
+"3"	"H4K20me1_EN4G38_E1_IRpseudo12"	34537	0	0	34537
