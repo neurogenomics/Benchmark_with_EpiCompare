@@ -42,10 +42,9 @@ TOP001: peaks with 1% confidence; Control: peaks exclude IgG negative control pe
 [H3K79me2](https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H3K79me2/EpiCompare.html)
 [H4K20me1](https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H4K20me1/EpiCompare.html)
 
-https://github.com/neurogenomics/CUTandRUN_EpiCompare/tree/master/Images
 ### Histone modification landscape:
 A brief histone PTM landscape:
-![Image text](https://github.com/neurogenomics/CUTandRUN_EpiCompare/tree/master/Images/PTM_landscape_MIT.PNG) [MIT course ref](https://www.youtube.com/watch?v=ywJep35QnjY&list=PLypiXJdtIca6dEYlNoZJwBaz__CdsaoKJ&index=8)
+![image](https://github.com/neurogenomics/CUTandRUN_EpiCompare/raw/master/Images/PTM_landscape_MIT.PNG) [MIT course ref](https://www.youtube.com/watch?v=ywJep35QnjY&list=PLypiXJdtIca6dEYlNoZJwBaz__CdsaoKJ&index=8)
 
 H3K4me1, preferentially associated with enhancers [1](https://pubmed.ncbi.nlm.nih.gov/17571346/),[6](https://pubmed.ncbi.nlm.nih.gov/17277777/); <br>
 H3K4me2, associated with promoters and enhancers [1](https://pubmed.ncbi.nlm.nih.gov/17571346/),[3](https://pubmed.ncbi.nlm.nih.gov/17512414/),[6](https://pubmed.ncbi.nlm.nih.gov/17277777/),[9](https://pubmed.ncbi.nlm.nih.gov/15680324/); <br>
