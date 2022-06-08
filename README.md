@@ -15,6 +15,7 @@ E for experiment number <br>
 IR for isogenic replicates (pseudo if pseudoreplicates, if I only then it's just the peaks)<br>
 #### A549:
 [H3K4me3](https://neurogenomics.github.io/CUTandRUN_EpiCompare/ENCODE_correlation/A549_H3K4me3_ExperimentSeries/EpiCompare.html)
+[H3K9me3](https://neurogenomics.github.io/CUTandRUN_EpiCompare/ENCODE_correlation/A549_H3K9me3_Experimentseries/EpiCompare.html)
 #### K-562:
 [H3K4me1](https://neurogenomics.github.io/CUTandRUN_EpiCompare/ENCODE_correlation/K562_H3K4me1/EpiCompare.html)
 [H3K4me2](https://neurogenomics.github.io/CUTandRUN_EpiCompare/ENCODE_correlation/K562_H3K4me2/EpiCompare.html)
