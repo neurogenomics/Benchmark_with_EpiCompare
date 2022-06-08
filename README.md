@@ -13,6 +13,8 @@ PTM name;<br>
 EN 3/4 for ENCODE 3 or 4; G for genome build<br>
 E for experiment number <br>
 IR for isogenic replicates (pseudo if pseudoreplicates, if I only then it's just the peaks)<br>
+For [ENCODE Replication definition](https://www.encodeproject.org/data-standards/terms/)
+
 #### A549:
 [H3K4me3](https://neurogenomics.github.io/CUTandRUN_EpiCompare/ENCODE_correlation/A549_H3K4me3_ExperimentSeries/EpiCompare.html)
 [H3K9me3](https://neurogenomics.github.io/CUTandRUN_EpiCompare/ENCODE_correlation/A549_H3K9me3_Experimentseries/EpiCompare.html)
