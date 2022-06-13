@@ -1,14 +1,14 @@
 # CUTandRUN_EpiCompare
-CUT&amp;RUN EpiCompare reports by Xindong (appreciate the data from Yi)
+CUT&amp;RUN EpiCompare reports by Xindong 
 
-Data information:<br>
-cutandrun peaks:<br>
-/rds/general/project/neurogenomics-lab/live/Data/cutandrun/cutandrun_EpiCompare/1st_trial/called_peaks<br>
-TOP001: peaks with 1% confidence<br>
-control: peaks exclude IgG peaks<br>
+### CUT&RUN Data information:
+Sample collectiona and preparation by Yi Yang; 
+CUT&RUN peaks storage: /rds/general/project/neurogenomics-lab/live/Data/cutandrun/cutandrun_EpiCompare/1st_trial/called_peaks<br>
+File annotation: <br>
+TOP001: peaks with 1% confidence; control: peaks exclude IgG peaks
 
-### Updated ENCODE correlation bewteen experiments and replicates: 
-Notation: H3K4me3_EN4G38_E1_IRpseudo123 <br>
+### ENCODE correlation bewteen experiments and replicates: 
+Annotation: H3K4me3_EN4G38_E1_IRpseudo123 <br>
 PTM name;<br>
 EN 3/4 for ENCODE 3 or 4; G for genome build<br>
 E for experiment number <br>
@@ -46,7 +46,7 @@ TOP001: peaks with 1% confidence; Control: peaks exclude IgG negative control pe
 [H3K79me2](https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H3K79me2/EpiCompare.html)
 [H4K20me1](https://neurogenomics.github.io/CUTandRUN_EpiCompare/cutandrun_EpiCompare_hg38/H4K20me1/EpiCompare.html)
 
-### Histone modification landscape:
+### Histone modification chromatin annotation:
 A brief histone PTM landscape:
 ![image](https://github.com/neurogenomics/CUTandRUN_EpiCompare/raw/master/Images/PTM_landscape_MIT.PNG) [MIT course ref](https://www.youtube.com/watch?v=ywJep35QnjY&list=PLypiXJdtIca6dEYlNoZJwBaz__CdsaoKJ&index=8)
 
@@ -61,7 +61,7 @@ These are [overall conclusion](https://doi.org/10.1038/nature09906) with 9 cell 
 
 
 
-### ENCODE reference for CUTandRUN EpiCompare:<br>
+### ENCODE ChIP-seq references for CUT&RUN EpiCompare:<br>
 [H3K4me1_ENCFF159VKJ_1.bed](https://www.encodeproject.org/experiments/ENCSR000EWC/)<br>
 [H3K4me1_ENCFF759NWD_2.bed](https://www.encodeproject.org/experiments/ENCSR000AKS/)<br>
 [H3K4me2_ENCFF118PIE.bed](https://www.encodeproject.org/experiments/ENCSR000AKT/)<br>
