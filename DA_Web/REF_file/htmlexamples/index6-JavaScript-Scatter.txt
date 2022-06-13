@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<HTML>
+
+  <HEAD>
+       <TITLE>JavaScript Scatter Plot</TITLE>
+       <!--- Read just one of MANY java script codes --->
+       <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-base.min.js"></script>
+       <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js"></script>
+       <script src="https://cdn.anychart.com/releases/v8/js/anychart-core.min.js"></script>
+       <script src="https://cdn.anychart.com/releases/v8/js/anychart-cartesian.min.js"></script>
+  </HEAD>
+
+    <BODY>
+
+
+<!--- Here is my project title --->
+
+<CENTER>
+<!--- 1em is 16px --->
+<FONT size="6em">
+Dynamic Analysis of Proteins 
+</FONT>
+<BR>
+<FONT size="3em">
+Harry Potter
+</FONT>
+</CENTER>
+
+<!--- Here is the drop down main menu read from file menus.html--->
+
+<!--#include Virtual="menus.shtml" --> 
+<script>
+document.write("Some simple maths 10*3.141592 =",10*3.141592,"<BR>");
+<p>
+</script>
+
+<!--- Here is main body of text --->
+
+       Here is a scatter plot of data in file data.csv
+       <p>
+       <div id="container" style="width: 500px; height: 400px">
+       <script>
+       anychart.onDocumentReady(function() {
+         anychart.data.loadCsvFile("data.csv", function (data) {
+           // create the chart
+           chart = anychart.scatter();
+           // assign the data to a series
+           var series1 = chart.marker(data);
+           // set title
+           chart.title("Sequence Mutations");
+           // set axes titles 
+           chart.xAxis().title("Time (MY)");
+           chart.yAxis().title("Mutations (%)");
+           // draw chart
+           chart.container("container").draw();
+         });
+       })
+       </script>
+       </div>
+
+
+    </BODY>
+
+</HTML>

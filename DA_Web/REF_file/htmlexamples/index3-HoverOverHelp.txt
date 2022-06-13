@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<HTML>
+
+  <HEAD>
+       <TITLE>Hover Help</TITLE>
+  </HEAD>
+
+    <BODY>
+
+       Here are 3 hover-over examples using the HTML 5 &lt;dfn&gt; tag: <BR>
+
+       <p>
+       Using &lt;dfn&gt;: I am a <dfn  title="A delightful course in computational witchcraft">MSc</dfn> Student at Imperial
+
+       <p>
+       Using &lt;span&gt;: I am a <span  title="A delightful course in computational witchcraft">MSc</span> Student at Imperial
+
+       <p>
+       Using &lt;abr&gt;: I am a <abbr title="A delightful course in computational witchcraft">MSc</abbr> Student at Imperial
+
+       <p>
+       Perhap using &lt;abr&gt; is best
+    </BODY>
+
+</HTML>

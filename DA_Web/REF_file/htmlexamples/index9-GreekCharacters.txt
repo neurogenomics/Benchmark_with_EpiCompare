@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<HTML>
+
+  <HEAD>
+       <TITLE>Special Characters</TITLE>
+  </HEAD>
+
+    <BODY>
+
+<!--- Here is my project title --->
+
+<CENTER>
+<!--- 1em is 16px --->
+<FONT size="6em">
+Dynamic Analysis of Proteins 
+</FONT>
+<BR>
+<FONT size="3em">
+Harry Potter
+</FONT>
+</CENTER>
+
+<!--- Here is the drop down main menu --->
+
+    <style>
+/* Style The Dropdown Button */
+.dropbtn {
+    background-color: #0060ff;
+    color: #ffffff;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 900;
+    border: none;
+    cursor: pointer;
+}
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFDDDD;
+    min-width: 160px;
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #aa0000}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+#    background-color: #3e8e41;
+    background-color: #3e8e41;
+}
+</style><!--- Here are the top menu items -->
+  </head>
+  <body>
+    <div id="navbar">
+      <table cellspacing="0" cellpadding="0" border="0" bgcolor="#0060ff" width="100%">
+        <tbody>
+          <tr>
+
+            <td>
+              <div class="dropdown"> <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                  <a href="index.html">Home</a>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="dropdown"> <button class="dropbtn">Method</button>
+                <div class="dropdown-content">
+                  <a href="item1.html" target="_blank">Item1</a>
+                  <a href="item2.html" target="_blank">Item2</a>
+              </div>
+            </td>
+            <td>
+
+            <td>
+              <div class="dropdown"> <button class="dropbtn">Results</button>
+                <div class="dropdown-content">
+                  <a href="item1.html" target="_blank">Item1</a>
+                  <a href="item2.html" target="_blank">Item2</a>
+              </div>
+            </td>
+            <td>
+
+
+            <td>
+              <div class="dropdown"> <button class="dropbtn">Conclusions</button>
+                <div class="dropdown-content">
+                  <a href="item1.html" target="_blank">Item1</a>
+                  <a href="item2.html" target="_blank">Item2</a>
+              </div>
+            </td>
+            <td>
+
+            <td>
+              <div class="dropdown"> <button class="dropbtn">References</button>
+                <div class="dropdown-content">
+                  <a href="item1.html" target="_blank">Item1</a>
+                  <a href="item2.html" target="_blank">Item2</a>
+              </div>
+            </td>
+            <td>
+
+       </tr>
+        </tbody>
+      </table>
+    </div>
+    
+<!--- End of Drop Down menu --->
+
+
+<p>
+       alpha, beta: &alpha; &beta; and using unicode &#x03B1; &#x03B2; <BR>
+       Subscript: Haemoglobin<SUB>&#x03B1;</SUB> <BR>
+       Superscript: 10<SUP>(&Phi; + &#x03B1;)</SUP> <BR>
+
+
+<p>
+       More details here: <a href="https://www.w3schools.com/charsets/ref_utf_greek.asp
+">https://www.w3schools.com/charsets/ref_utf_greek.asp</a>
+       <p>
+
+    </BODY>
+
+</HTML>

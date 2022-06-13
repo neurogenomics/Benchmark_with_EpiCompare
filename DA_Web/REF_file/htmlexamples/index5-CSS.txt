@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<HTML>
+
+  <HEAD>
+       <TITLE>CSS Example</TITLE>
+       <!--- This is a Comment: Import Style Sheet file --->
+       <LINK type="text/css" rel="stylesheet" href="css/style.css">
+       <!--- This is a Comment: Define a CSS internally --->
+       <STYLE>
+         body {background-color: white; margin: 20px;}
+         hown {color: maroon; margin-left: 40px; font-size: 36px;}
+
+       </STYLE>
+  </HEAD>
+
+    <BODY>
+
+       We have applied, from style.css,  &lt;h1&gt; to <h1>TEXT</h1><br>
+       We have applied, from style.css,  &lt;h2&gt; to <h2>TEXT</h2><br>
+       We have applied, internally,      &lt;hown&gt; to <hown>TEXT</hown><br>
+    </BODY>
+
+</HTML>

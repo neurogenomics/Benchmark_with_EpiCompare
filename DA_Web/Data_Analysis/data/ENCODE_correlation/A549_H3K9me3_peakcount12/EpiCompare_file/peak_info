@@ -1,0 +1,3 @@
+"Sample"	"PeakN before tidy"	"Blacklisted peaks removed (%)"	"Non-standard peaks removed (%)"	"PeakN after tidy"
+"1"	"H3K4me3_ENLabG38_E10"	19871	0.0554	0.0956	19841
+"2"	"H3K4me3_ENLabG38_E12"	22275	0.0449	0.0853	22246

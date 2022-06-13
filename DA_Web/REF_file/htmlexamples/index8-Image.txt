@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<HTML>
+
+  <HEAD>
+       <TITLE>Image Example</TITLE>
+  </HEAD>
+
+    <BODY>
+
+
+<!--- Here is my project title --->
+
+<CENTER>
+<!--- 1em is 16px --->
+<FONT size="6em">
+Dynamic Analysis of Proteins 
+</FONT>
+<BR>
+<FONT size="3em">
+Harry Potter
+</FONT>
+</CENTER>
+
+<!--- Here is the drop down main menu read from file menus.html--->
+
+<!--#include Virtual="menus.shtml" --> 
+
+
+<!--- Here is main body of text --->
+
+       Here is the image at 500 pixels size<br>
+       <img src="images/molecule.jpg" ALT="Haemoglobin" Title="Haemoglobin" style="width:500px">
+       <p>
+
+       Here is the image with hover-over links<br>
+       <img src="images/molecule.jpg" ALT="Haemoglobin" width="500px" usemap="#workmap">
+       <map name="workmap">
+         <area shape="rect"   coords="0,0,250,250"   alt="something1" href="something1.html">
+         <area shape="rect"   coords="0,250,250,500" alt="something2" href="something3.html">
+         <area shape="circle" coords="400,400,100"   alt="something3" href="something3.html">
+      </map>
+
+    </BODY>
+
+</HTML>

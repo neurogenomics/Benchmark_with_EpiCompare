@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>Data Analysis Web Xindong Sun</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
+  </head>
+
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header" class="alt">
+        <p style="text-align: left">
+          <img src="figrues/IMP_ML_W_N_CLEAR-SPACE.png" alt="" width="250" />
+        </p>
+        <h1>Integrative Analysis and Benchmark of CUT&RUN Chromatin Profiling Strategy</h1>
+        <p>
+          <b>
+            <font size="6">
+              Xindong Sun <br />
+            </font>
+            <font size="5">
+              Supervised by Brian Schilder & Dr Nathan Skene <br />
+            </font>
+            UKDRI, Department of Brain Sciences, <br />
+            Faculty of Medicine, Imperial College London
+          </b>
+        </p>
+      </header>
+
+      <!-- Nav -->
+      <nav id="nav">
+        <ul>
+          <li>
+            <a href="#Lay Summary" class="active"> <b>Home</b></a>
+          </li>
+          <li>
+            <a href="#Introduction"> <b>Introduction</b></a>
+          </li>
+          
+          <li>
+            <a href="#Methods"><b>Methods</b></a>
+          </li>
+          
+          <li>
+            <a href="#Results"><b>Results</b></a>
+          </li>
+          <li>
+            <a href="#Discussion"><b>Discussion</b></a>
+          </li>
+          <li>
+            <a href="#References"><b>References</b></a>
+          </li>
+          <li>
+            <a href="#Supplementary"> <b>Supplementary</b></a>
+          </li>
+        </ul>
+      </nav>
+      
+      
+
+      
+      <!-- Main -->
+      <div id="main">
+
+        <!-- Ethics Statement -->
+        <section id="Ethics Statement" class="main special">
+          <div class="spotlight">
+            <div class="content">
+              <header class="major">
+                <h2>Ethics Statement</h2>
+              </header>
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  This data analysis project mainly analyses the histone profile of the model cell line K562. As K562 are not human primary cell lines, both the supervisor and the student have confirmed that irrespective of a requirement for ethical approval, the project does not have potentially challenging ethical issues (e.g. consideration of different ethnic groups) as such.  
+                </font> 
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Acknowledgements -->
+        <section id="Acknowledgements" class="main special">
+          <div class="spotlight">
+            <div class="content">
+              <header class="major">
+                <h2>Acknowledgements</h2>
+              </header>
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  I would like to express my thanks to my supervisor Dr Nathan Skene for his kind host and supervision during the project. Thanks also to Brian Schilder and Sera Choi for their generous support in the computation work. I would particularly like to thank Yi Yang for providing the precious data. Thank you all.  
+                </font> 
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lay Summary -->
+        <section id="Lay Summary" class="main special">
+          <div class="spotlight">
+            <div class="content">
+              <header class="major">
+                <h2>Lay Summary</h2>
+              </header>
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Cells in the human body number in the trillions and all carry the identical genome. Beyond the primary sequence of the genome, epigenetic modifications regulate the expression of different genes and give birth to cells of all shapes and sizes. In cells, DNA is coiled many times around proteins called histones. Modifications on these histones could regulate the expression of certain genes, for instance, by affecting the nearby DNA regulatory regions which do not code any protein but monitor certain gene expression. Dysregulation of these histone modifications, however, is connected with various diseases. Thus, mapping these modifications to the specific genome region is imperative in understanding their role in disease development. 
+                </font> 
+              </p>
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Histone modifications were originally profiled with a technique called chromatin immunoprecipitation (ChIP), yet it is lagged due to various problems such as the requirement of large numbers of cell input and low signal-to-noise ratio. In 2017, Skene and Henikoff have come up with a new epigenetic profiling method called Cleavage Under Targets & Release Using Nuclease (CUT&RUN), which overcomes some of the problems of ChIP. Though they have claimed the superiority of this method in mapping transcriptional factors binding regions, the performance of this new method has not been benchmarked (comparison with the standard references) in profiling histone modification in K562 cell line (a model cell line of human lymphoblasts) yet. 
+                </font> 
+              </p>
+
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  A preliminary benchmark of CUT&RUN of such histone modifications was performed by Yang from the neurogenomics lab. Nevertheless, such benchmark of CUT&RUN against the de facto golden standard ChIP-seq reference, the Encyclopedia of DNA Elements (ENCODE), lacks a baseline for a robust comparison. As a follow-up, this study examined the inherent robustness of the ENCODE ChIP-seq reference datasets first and set the inherent overlap as a baseline for CUT&RUN benchmark. It is revealed that the overlap between ENCODE references was comparatively low, and few histone modifications profiled with CUT&RUN were consistent with the references. These results throw light on the future benchmarking and technical optimization of new epigenetic profiling strategies.
+                </font> 
+              </p>
+
+              
+            </div>
+          </div>
+        </section>
+
+        <!-- Abstract -->
+        <section id="Abstract" class="main special">
+          <div class="spotlight">
+            <div class="content">
+              <header class="major">
+                <h2>Abstract</h2>
+              </header>
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Genome-wide epigenetic profiles are originally carried out with chromatin immunoprecipitation followed by next generation sequencing (ChIP-seq) to understand the regulatory mechanism of gene expression. As an emerging alternative to ChIP-seq, the Cleavage Under Targets & Release Using Nuclease (CUT&RUN), as performed in situ, has shown a high-resolution chromatin mapping with low cell input. Nevertheless, an integrative analysis and benchmarking against the published ChIP-seq datasets are not yet performed. Here, the performance of CUT&RUN was tested on 11 histone modifications of the K562 cell line against the de facto golden standard ChIP-seq datasets, the Encyclopedia of DNA Elements (ENCODE). However, an unexpected and partially modification-dependent low reproducibility was revealed between the ENCODE datasets, indicating the inherent inconsistency of the reference ChIP-seq datasets. By filtering out the unconvincing references, data derived from CUT&RUN were shown to have little overlap with ENCODE datasets on most of the histone modifications. This study analyses and benchmarks CUT&RUN against the ChIP-seq reference datasets, setting the cornerstone for future epigenetic profiling and technique optimization.
+                </font> 
+              </p>
+              
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  <b>Keywords:</b> Epigenomics,  chromatin immunoprecipitation and next generation sequencing (ChIP-seq), post-translational modifications (PTMs), Cleavage Under Targets & Release Using Nuclease (CUT&RUN), Encyclopedia of DNA Elements (ENCODE), peaks
+                </font> 
+              </p>
+          
+              
+              <ul class="actions special">
+                <li>
+                  <a href="#Introduction" class="button">Introduction</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        
+
+        <!-- Introduction -->
+        <section id="Introduction" class="main special">
+          <div class="spotlight">
+            <div class="content">
+              <header class="major">
+                <h2>Introduction</h2>
+              </header>
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Human genome has been completely sequenced for more than two decades <a href="https://www.nature.com/articles/35057062"  target="_blank">(1)</a>, laying a solid foundation for the subsequent biomedical research <a href="https://www.nature.com/articles/nature09792"  target="_blank">(2)</a>. The preservation of the primary sequence among all human cell types raises an intriguing question on how the identical genome copies give rise to more than 200 different types of human cells identified so far. Beyond the order of ATGC nucleotides, a plethora of evidence has been found on the spatial- and temporal-specific regulatory effect of epigenome on gene expression, revealing a “second dimension to the genome” <a href="https://www.cell.com/cell/fulltext/S0092-8674(13)01148-3?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867413011483%3Fshowall%3Dtrue"  target="_blank">(3)</a>. While much emphasis has been placed on profiling the gene expression dynamics on pathways and networks from the perspective of systems biology <a href="https://www.science.org/doi/10.1126/science.1171347?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed" target="_blank" >(4)</a>, the cis-regulatory elements remain uncharted for a comprehensive epigenomic landscape <a href="https://www.nature.com/articles/nature09906" target="_blank" >(5)</a>. 
+                </font> 
+              </p>
+
+
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Given the dominance of chromatin dynamics in controlling DNA accessibility and mediating regulatory signals, a genome-wide chromatin profile is the premise of a systematic map of the cis-regulatory elements <a href="https://www.nature.com/articles/nature09906"  target="_blank">(5)</a>. Specifically, there is overwhelming evidence indicating the close correlation between histone post-translational modifications (PTMs) <a href="#figure1"><b>(Figure 1)</b></a> and the activity of promoters, enhancers <a href="https://www.nature.com/articles/ng1966"  target="_blank">(6)</a>, regulator binding, transcription initiation <a href="https://www.nature.com/articles/nature06008"  target="_blank">(7)</a>, and repression as well <a href="https://www.cell.com/cell/fulltext/S0092-8674(07)00600-9?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867407006009%3Fshowall%3Dtrue"  target="_blank">(8)</a>. Activity of these cis-regulatory elements could be further tuned by the orchestration of multiple histone modifications <a href="https://www.nature.com/articles/nbt.1662"  target="_blank">(9)</a>. Disharmony of these histone modifications, however, plays a significant role in disease pathogenesis. For instance, H3K27ac and H3K9ac are highly cell type-specific histone H3 modifications and are preferential marks of active regulatory regions, namely, promoters and enhancers <a href="https://www.nature.com/articles/nature07829"  target="_blank">(10)</a><a href="https://www.cell.com/cell/fulltext/S0092-8674(05)00039-5?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867405000395%3Fshowall%3Dtrue"  target="_blank">(11)</a>.  Gains of these histone modifications were linked to transcription, chromatin and disease pathways in Alzheimer's disease (AD) <a href="https://www.nature.com/articles/s41588-020-0696-0"  target="_blank">(12)</a>. Given the inherent heterogeneity in disease organs and tissues, an integrative cell type-specific epigenomic annotation is thus imperative in deciphering the disease pathogenesis.   
+                </font> 
+              </p><br>
+
+
+
+              <img src="figrues/histone_modfications.jpeg" alt="Histone post-translational modifications (PTMs)" id="figure1"> <br><br>
+										<figcaption><b>Figure 1:</b> Histone post-translational modifications (PTMs). Figure adapted from <a href="https://www.sciencedirect.com/science/article/pii/B9780128142592000145" target="_blank">Sharda et al, 2019</a>.</figcaption> <br><br>
+
+            <p style="text-indent:2em;" align="left">
+              <font size="5">
+              Profiling of histone modifications is most commonly carried out with chromatin immunoprecipitation (ChIP) <a href="https://www.pnas.org/doi/abs/10.1073/pnas.82.19.6470"  target="_blank">(13)</a>, followed by next generation sequencing (ChIP-seq). In the ChIP-seq protocol, sample cells are first cross-linked with formaldehyde. Chromatin is then fragmented and solubilized, where an antibody is added to bind and precipitate the targeted chromatin. DNA is then extracted from the recovered antibody-bound chromatin for sequencing. Nevertheless, ChIP-seq and its recent variations <a href="https://www.cell.com/cell/fulltext/S0092-8674(11)01351-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867411013511%3Fshowall%3Dtrue"  target="_blank">(14)</a><a href="https://www.nature.com/articles/nmeth.2766"  target="_blank">(15)</a> were reported to lag owing to the low signal-to-noise ratio and epitope masking due to cross-linking, and the demand of a considerable amount of cell samples due to their low yields <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1316064110?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed"  target="_blank">(16)</a><a href="https://academic.oup.com/bfg/article/17/2/138/4364835?login=false"  target="_blank">(17)</a>. To overcome these problems, an in situ method termed “Cleavage Under Targets & Release Using Nuclease (CUT&RUN)” was proposed by Skene and Henikoff in 2017 to map the protein-DNA interaction <a href="https://elifesciences.org/articles/21856"  target="_blank">(18)</a><a href="https://www.nature.com/articles/nprot.2018.015"  target="_blank">(19)</a> <a href="#figure2"><b>(Figure 2)</b></a>. In CUT&RUN, the endo-exonuclease Micrococcal Nuclease (MNase) is tethered to the targeted protein in situ by the antibody and the chimeric fusion with Protein A (pA-MN). The targeted protein-DNA complexes are then cleaved by MNase (calcium-controlled activity) and released into the supernatant, with DNA fragments extracted and sequenced. 
+              </font> 
+            </p><br>
+                    
+              <img src="figrues/cutandrun_sketch.png" alt="Schematic diagram of the CUT&RUN strategy" id="figure2"  height="450px"> 
+              <figcaption><b>Figure 2:</b> Schematic diagram of the CUT&RUN strategy. CUT&RUN is an epigenomic profiling strategy, where antibody-targeted controlled cleavage by micrococcal nuclease (MNase) releases specific protein-DNA complexes into the supernatant for following paired-end Dna sequencing.Figure adapted from <a href="https://elifesciences.org/articles/21856" target="_blank">Skene and Henikoff, 2017</a>.</figcaption> <br><br>
+                    
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  In mapping the transcriptional factors (TFs) binding sites, Skene and Henikoff have reported a high resolution, low background noise with the requirement of only one tenth sequencing depth as ChIP-seq for the CUT&RUN strategy <a href="https://elifesciences.org/articles/21856"  target="_blank">(18)</a>. Yet the performance of this novel alternative to ChIP is not further explored in profiling histone modifications. A preliminary benchmark of CUT&RUN strategy in histone profiling was performed by Yang <a href=""  target="_blank">(20)</a> from the neurogenomics lab. Nevertheless, such benchmark of CUT&RUN against the de facto golden standard ChIP-seq reference, the Encyclopedia of DNA Elements (ENCODE), lacks a baseline for a robust comparison. Here, the inherent overlaps between the ENCODE references were first tested and set as the baseline for an integrative analysis and benchmark of CUT&RUN in chromatin profiling. 
+                </font> 
+              </p>
+              
+              <ul class="actions special">
+                <li>
+                  <a href="#Methods" class="button">Methods</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Methods -->
+        <section id="Methods" class="main special">
+          <header class="major">
+            <h2>Methods</h2>
+          </header>
+          <ul class="statistics">
+            <li class="style1">
+              <span class="icon solid fa-code-branch"></span>
+              <strong>Samples</strong>  <a href="#Sample">preparation and sequencing </a>
+            </li>
+            <li class="style2">
+              <span class="icon fa-folder-open"></span>
+              <strong>Sequence data</strong>  <a href="#Sequencedata">process with nf-core/cutandrun pipeline </a> 
+            </li>
+            <li class="style3">
+              <span class="icon solid fa-signal"></span>
+              
+              <strong>Peaks</strong>  <a href="#Peaks">comparison and functional analysis with EpiCompare</a>
+            </li>
+          </ul>
+          <p style="text-indent:2em;" align="left" id="Sample">
+            <font size="5">
+              For the data collection, 11 PTMs were tested on the human lymphoblastoid cell line K-562 with modified CUT&RUN protocol <a href="https://www.nature.com/articles/nprot.2018.015"  target="_blank">(19)</a> for efficient isolation of the targeted nuclei. The digested DNA fragments were then amplified with PCR with their size distribution checked. These fragments were then sequenced with pair-end Illumina sequencing protocol. Libraries were pooled to equally represent the desired final library size range. All these referred wet lab works were performed by Yang from the neurogenomics lab and were detailed in her thesis <a href=""  target="_blank">(20)</a>. 
+            </font> 
+          </p>
+
+          <p style="text-indent:2em;" align="left" id="Sequencedata">
+            <font size="5">
+              A standardised pipeline for processing the CUT&RUN sequence was proposed by Cheshire and West <a href="https://zenodo.org/record/6624266"  target="_blank">(21)</a>. This nextflow-based <a href="https://www.nature.com/articles/nbt.3820"  target="_blank">(22)</a> nf-core/cutandrun pipeline was then slightly modified and used for analysing and interpreting the sequenced CUT&RUN data on Imperial's High Performance Computing (HPC). Briefly, in the nf-core/cutandrun pipeline, the raw CUT&RUN sequencing reads were first trimmed with the low-quality reads and adaptors removed. The trimmed FastQ files were aligned to human genome assembly GRCh38 (hg38) with Bowtie2 <a href="https://www.nature.com/articles/nmeth.1923?ref=https://githubhelp.com"  target="_blank">(23)</a>. Potential PCR duplicates were then removed. Enriched genomic regions (termed “peaks”) were called (filtered) by SEACR (Sparse Enrichment Analysis for CUT&RUN, v1.4) in a stringent manner with a previously optimised cut-off (with a false discovery rate at 1X10-2) <a href="http://biorxiv.org/lookup/doi/10.1101/2022.03.30.486382"  target="_blank">(24)</a> to reduce the false-positive peaks. (click <a href="data/multiqc_report.html"  target="_blank">MultiQC</a> to see MultiQC report) 
+            </font> 
+          </p>
+
+          <p style="text-indent:2em;" align="left" id="Peaks">
+            <font size="5">
+              The ChIP-seq derived datasets by the Encyclopedia of DNA Elements (ENCODE) consortium have been referred to as the de facto gold standard for the profiling of multiple epigenetic modifications. To further benchmark the CUT&RUN data against the ENCODE data, the peak overlap between the ENCODE files on the experiment level: with ENCODE data from different experiments, indicating the potential outcome difference between different protocols in sample procession and downstream analysis; and replicates level: biological (isogenic) and technical (pseudoreplicate) replicates, indicating the potential variation in the specific experiment. The overlap between the different ENCODE files for the same histone modification was referred to as the baseline for evaluating the performance of CUT&RUN. The CUT&RUN data were then benchmarked against the corresponding ENCODE reference. Peak overlap between the ENCODE references and CUT&RUN data was calculated by EpiCompare, an R package developed by <a href="https://neurogenomics.github.io/EpiCompare/"  target="_blank">Choi et al., 2022</a> from the <a href="https://www.neurogenomics.co.uk/"  target="_blank">neurogenomics lab</a>. In EpiCompare, peaks are then mapped to their proximal genes with ChIPseeker, v1.32.0 <a href="https://academic.oup.com/bioinformatics/article/31/14/2382/255379"  target="_blank">(25)</a>. Additionally, peaks are assigned and annotated to the  ChromHMM-derived chromatin states <a href="https://www.nature.com/articles/nprot.2017.124"  target="_blank">(26)</a> with genomation, v1.28.0 <a href="https://academic.oup.com/bioinformatics/article/31/7/1127/181034"  target="_blank">(27)</a>. Further functional annotation was performed and visualized with clusterProfiler <a href="https://reader.elsevier.com/reader/sd/pii/S2666675821000667?token=D4D31AFBB55BEA172A8EAEDCA33DA54FDCA40E7BF015D8D57FDC515D681A00718426FEB7288E0D350B72E8F2B6BBCEA6&originRegion=eu-west-1&originCreation=20220609215731"  target="_blank">(28)</a> for gene ontology (GO) enrichment analysis <a href="https://www.nature.com/articles/s41598-018-23395-2"  target="_blank">(29)</a> and Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway analysis <a href="https://academic.oup.com/nar/article/44/D1/D457/2502600"  target="_blank">(30)</a>. The EpiCompare used here is v1.0.0 with the parameters set as: genome_build = "hg38”, blacklist = hg38_blacklist <a href="https://www.nature.com/articles/s41598-019-45839-z"  target="_blank">(31)</a>, chromHMM_annotation = "K562". 
+            </font> 
+          </p>
+
+          <p style="text-indent:2em;" align="left">
+            <font size="5">
+              <b>Code and data availability: </b> <a href="https://yezhengstat.github.io/CUTTag_tutorial"  target="_blank">Bash scripts</a>  for no-core/cutandrun pipeline. <a href="https://neurogenomics.github.io/EpiCompare/"  target="_blank">Template R script</a> for genome-wide histone modification comparison with EpiCompare. <a href="https://neurogenomics.github.io/CUTandRUN_EpiCompare"  target="_blank">Detailed R scripts and markdowns</a> for data load and EpiComapre comparison.
+            </font> 
+          </p>
+
+          <footer class="major">
+            <ul class="actions special">
+              <li><a href="#Results" class="button">Results</a></li>
+            </ul>
+          </footer>
+        </section>
+
+        <!-- Results -->
+        <section id="Results" class="main special">
+          <header class="major">
+            <h2>Results</h2>
+            
+            <p style="text-indent:2em;" align="left">
+              <font size="5">
+                The raw sequencing data of both ChIP-seq and CUT&RUN were processed with a standard pipeline respectively. Fragments were aligned to the reference genome, uncovering the “peaks” (enriched genomic regions). The overlaps of peaks in the de facto golden standard ChIP-seq reference, the ENCODE, were first tested to 1) construct a standard pipeline for benchmarking the alternative epigenomic profiling strategy; 2) examine the inherent reproducibility and reliability of the reference; and 3) set a comparable baseline for CUT&RUN benchmarking. Both inter- (profiling of the same histone modifications across different ENCODE experiments) and intra- (biological and technical replicates, also different ENCODE annotation and genome assembly versions) experiment overlaps were compared. Due to the limited numbers of ENCODE experiments in histone modification of K562 cell lines, the inter-experiment reproducibility of histone modification ENCODE references were first examined on A549 cell lines (human lung carcinoma epithelial cells). The number of peaks identified on A549 H3K4me3 is consistent across a series of ENCODE experiments, and this is also the case for A549 H3K9me3 <a href="#figure3"><b>(Figure 3A, 3B)</b></a>. Similarly, the narrow distribution of peak width indicates the consistency of peak width across different ENCODE experiments for both A549 H3K4me3 and A549 H3K9me3 <a href="#figure3"><b>(Figure 3C, 3D)</b></a>. Interestingly, though the pairwise peak overlap of A549 H3K4me3 shows an overall high correlation, the pairwise peak overlap of A549 H3K9me3 is comparatively low <a href="#figure4"><b>(Figure 4)</b></a>, implying the inherent reproducibility and reliability of the golden standard ENCODE references may not be as robust as expected. 
+              </font> 
+            </p>
+            
+            <img src="data/A549_peakinfo.png" alt="A549_peakinfo" id="figure3" width="900px" > 
+            <figcaption><b>Figure 3:</b> Peak numbers and peak width distribution of ENCODE A549 H3K4me3 and H3K9me3. 
+              <b>A:</b> Peak numbers of ENCODE A549 H3K4me3,
+              <b>B:</b> Peak numbers ENCODE A549 H3K9me3,
+              <b>C:</b> Peak width distribution of ENCODE A549 H3K4me3,
+              <b>D:</b> Peak width distribution of ENCODE A549 H3K9me3.
+            
+            </figcaption> <br><br>
+
+            <figure id="figure4">
+            <!-- A549_H3K4me3 -->
+              <div id="A549_H3K4me3">
+                <iframe
+                  align="center"
+                  width="100%"
+                  height="650"
+                  src="data/ENCODE_correlation/A549_H3K4me3_ExperimentSeries/EpiCompare_file/samples_percent_overlap.html"
+                  frameborder="no"
+                  border="0"
+                  marginwidth="0"
+                  marginheight="0"
+                  scrolling="no"
+                ></iframe>
+              </div><br>
+
+            <!-- A549_H3K9me3 -->
+              <div id="A549_H3K9me3">
+                <iframe
+                align="center"
+                width="100%"
+                height="660"
+                src="data/ENCODE_correlation/A549_H3K9me3_Experimentseries/EpiCompare_file/samples_percent_overlap.html"
+                frameborder="no"
+                border="0"
+                marginwidth="0"
+                marginheight="0"
+                scrolling="no"
+              ></iframe>
+              </div>
+            </figure> <br>
+            <figcaption><b>Figure 4:</b> Peak overlap of ENCODE ChIP-seq datasets on A549. Peak overlap is calculated into z-score, taking the Y-axis as reference. Namely, [Samples in x-axis of heatmap] peaks in [Samples in y-axis of heatmap] peaks
+              <b>Top:</b> ENCODE A549 H3K4me3;
+              <b>Bottom:</b> ENCODE A549 H3K9me3.
+            
+            </figcaption> <br><br>
+         
+            
+            <p style="text-indent:2em;" align="left">
+              <font size="5">
+                To further examine the ENCODE reference consistency on the intra-experiment level (also inter-experiment), and to set a comparable baseline for benchmarking, most of the available ENCODE references of 11 K562 histone modifications (all the histone modifications mapped with CUT&RUN) were first compared. For modifications with multiple available ENCODE experiments  (H3K4me1, H3K9ac, H3K27me3 and H3K36me3), variations in peak number and peak width are non-negligible (Supplementary figure <a href="#S1"><b>S1</b></a>, <a href="#S2"><b>S2</b></a>). Differences in peak number, in turn, affect the calculation of z-score for peak overlap, even though H3K27me3 shows a comparatively high overlap (<a href="#figure5"><b>Figure 5</b></a> Top; see overlap for <a href="data/ENCODE_correlation/K562_H3K4me1/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K4me1</b></a>, <a href="data/ENCODE_correlation/K562_H3K9ac/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K9ac</b></a> and <a href="data/ENCODE_correlation/K562_H3K36me3/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K36me3</b></a>). Intriguingly, similar to the results in A549, K562 H3K4me3 shows a high peak overlap (as well as the peak number and peak width) across 4 available ENCODE experiments, while K562 H3K9me3 shows a comparatively low peak overlap within the only one available ENCODE experiment (significant variation in peak number and peak width) (<a href="#figure5"><b>Figure 5</b></a> Middle and Bottom). The intra-experiment ENCODE consistency was further checked on the left K562 histone modifications. Similarly, except for H3K4me2 and H3K27ac, most of the isogenic (biological) replicates within ENCODE experiments do not have a high overlap with each other (see in 
+                
+                <a href="data/ENCODE_correlation/K562_H3K4me2/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K4me2</b></a>,
+                <a href="data/ENCODE_correlation/K562_H3K9me1/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K9me1</b></a>,
+                <a href="data/ENCODE_correlation/K562_H3K27ac/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K4me2</b></a>,
+                <a href="data/ENCODE_correlation/K562_H3K27ac/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K79me2</b></a>,
+                <a href="data/ENCODE_correlation/K562_H4K20me1/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H4K20me1</b></a>
+
+
+                
+                
+                
+                ). 
+              </font> 
+            </p>
+
+
+
+            
+
+            <figure id="figure5">
+              <!-- K562_H3K27me3 -->
+                <div id="K562_H3K27me3">
+                  <iframe
+                    align="center"
+                    width="100%"
+                    height="650"
+                    src="data/ENCODE_correlation/K562_H3K27me3/EpiCompare_file/samples_percent_overlap.html"
+                    frameborder="no"
+                    border="0"
+                    marginwidth="0"
+                    marginheight="0"
+                    scrolling="no"
+                  ></iframe>
+                </div><br>
+  
+              <!-- K562_H3K4me3 -->
+              <div id="K562_H3K4me3">
+                <iframe
+                  align="center"
+                  width="100%"
+                  height="650"
+                  src="data/ENCODE_correlation/K562_H3K4me3/EpiCompare_file/samples_percent_overlap.html"
+                  frameborder="no"
+                  border="0"
+                  marginwidth="0"
+                  marginheight="0"
+                  scrolling="no"
+                ></iframe>
+              </div><br>
+
+              <!-- K562_H3K9me3 -->
+              <div id="K562_H3K4me3">
+                <iframe
+                  align="center"
+                  width="80%"
+                  height="600"
+                  src="data/ENCODE_correlation/K562_H3K9me3/EpiCompare_file/samples_percent_overlap.html"
+                  frameborder="no"
+                  border="0"
+                  marginwidth="0"
+                  marginheight="0"
+                  scrolling="no"
+                ></iframe>
+              </div><br>
+
+              <figcaption><b>Figure 5:</b> Peak overlap of ENCODE ChIP-seq datasets in K562 cell line.<br>
+                <b>Top:</b> ENCODE K562 H3K27me3;
+                <b>Middle:</b> ENCODE K562 H3K4me3;
+                <b>Bottom:</b> ENCODE K562 H3K9me3.
+              </figcaption> <br><br>
+
+
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Taking the inherent overlap of ENCODE as a baseline, the CUT&RUN data were then benchmarked against ENCODE references. Considering the one-to-many relation in peak matching, precision and recall were defined as the proportion of CUT&RUN peaks in ENCODE reference peaks (row ENCODE in overlap heatmap), and the proportion of ENCODE reference peaks captured by CUT&RUN (column ENCODE in overlap heatmap), respectively. Of note, here the CUT&RUN peaks were mainly benchmarked against the 4 ENCODE references with high reproducibility and reliability (H3K4me2, H3K4me3, H3K27ac and H3K27me3), given that the rest were less comparable (all the comparisons are available at CUT&RUN GitHub repository). Peak comparison of CUT&RUN H3K4me2 with ENCODE reference shows a precision of 19% and a recall of 46%, and they are lower compared to the ENCODE baseline overlap over 80%, and this is also the case for H3K27ac  <a href="#figure6"><b>(Figure 6)</b></a>  (K562 <a href="data/cutandrun_EpiCompare_hg38/H3K4me2/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K4me2 ENCODE</b></a>, <a href="data/ENCODE_correlation/K562_H3K27ac/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K27ac ENCODE</b></a>). Of note, CUT&RUN peaks show a very low precision and recall (both less than 0.5%) given the high ENCODE baseline overlap in H3K4me3, while in H3K27me3, CUT&RUN peaks show a comparatively high overlap (precision ~35% and recall ~80%) <a href="#figure6"><b>(Figure 6)</b></a>  with the ENCODE references  (K562 <a href="data/ENCODE_correlation/K562_H3K4me3/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K4me3 ENCODE</b></a>, <a href="data/ENCODE_correlation/K562_H3K27me3/EpiCompare_file/samples_percent_overlap.html" target="_blank"><b>H3K27me3 ENCODE</b></a>). 
+                </font> 
+              </p>
+
+
+
+              <figure id="figure6">
+                <!-- C&R K562_H3K4me2 -->
+                  <div id="C&R_K562_H3K4me2">
+                    <iframe
+                      align="center"
+                      width="60%"
+                      height="450"
+                      src="data/cutandrun_EpiCompare_hg38/H3K4me2/EpiCompare_file/samples_percent_overlap.html"
+                      frameborder="no"
+                      border="0"
+                      marginwidth="0"
+                      marginheight="0"
+                      scrolling="no"
+                    ></iframe>
+                  </div><br>
+    
+          
+              <!-- C&R K562_H3K27ac -->
+                <div id="C&R_K562_H3K27ac">
+                  <iframe
+                    align="center"
+                    width="60%"
+                      height="450"
+                    src="data/cutandrun_EpiCompare_hg38/H3K27ac/EpiCompare_file/samples_percent_overlap.html"
+                    frameborder="no"
+                    border="0"
+                    marginwidth="0"
+                    marginheight="0"
+                    scrolling="no"
+                  ></iframe>
+                </div><br>
+
+
+        
+                <!-- C&R K562_H3K4me3 -->
+                  <div id="C&R_K562_H3K4me3">
+                    <iframe
+                      align="center"
+                      width="60%"
+                      height="450"
+                      src="data/cutandrun_EpiCompare_hg38/H3K4me3/EpiCompare_file/samples_percent_overlap.html"
+                      frameborder="no"
+                      border="0"
+                      marginwidth="0"
+                      marginheight="0"
+                      scrolling="no"
+                    ></iframe>
+                  </div><br>
+
+
+             
+                <!-- C&R K562_H3K27me3 -->
+                  <div id="C&R_K562_H3K27me3">
+                    <iframe
+                      align="center"
+                      width="80%"
+                      height="550"
+                      src="data/cutandrun_EpiCompare_hg38/H3K27me3/EpiCompare_file/samples_percent_overlap.html"
+                      frameborder="no"
+                      border="0"
+                      marginwidth="0"
+                      marginheight="0"
+                      scrolling="no"
+                    ></iframe>
+                  </div><br>
+  
+                <figcaption><b>Figure 6:</b> Benchmark of CUT&RUN against ENCODE ChIP-seq references. Overlaps of peaks are shown in z-score.  <br>
+                  <b>Top:</b> H3K4me2;
+                  <b>Second Top:</b> H3K27ac;
+                  <b>Second Bottom:</b> H3K4me3.
+                  <b>Bottom:</b> H3K27me3.
+                </figcaption> <br><br>
+
+
+
+                <p style="text-indent:2em;" align="left">
+                  <font size="5">
+                    For the chromatin functional analysis, both ENCODE and CUT&RUN peaks are assigned and annotated into different chromatin states. In the aforementioned 4 reproducible ENCODE references, peaks were finely categorized into the chromatin states as reported in the literature (see ENCODE ChromHMM 
+                    <a href="data/ENCODE_correlation/K562_H3K4me2/EpiCompare_file/samples_chromHMM.html" target="_blank"><b>H3K4me2</b></a>,
+                    <a href="data/ENCODE_correlation/K562_H3K4me3/EpiCompare_file/samples_chromHMM.html" target="_blank"><b>H3K4me3</b></a>,
+                    <a href="data/ENCODE_correlation/K562_H3K27ac/EpiCompare_file/samples_chromHMM.html" target="_blank"><b>H3K27ac</b></a>,
+                    <a href="data/ENCODE_correlation/K562_H3K27me3/EpiCompare_file/samples_chromHMM.html" target="_blank"><b>H3K27me3</b></a>
+                    )  <a href="#ST1"><b>(Supplementary table 1)</b></a>. Nevertheless, CUT&RUN peaks were mostly allocated to the heterochromatin regions, except for the H3K27me3 (see CUT&RUN ChromHMM 
+                    <a href="data/cutandrun_EpiCompare_hg38/H3K4me2/EpiCompare_file/samples_chromHMM.html"><b>H3K4me2</b></a>,
+                    <a href="data/cutandrun_EpiCompare_hg38/H3K4me3/EpiCompare_file/samples_chromHMM.html" target="_blank"><b>H3K4me3</b></a>,
+                    <a href="data/cutandrun_EpiCompare_hg38/H3K27ac/EpiCompare_file/samples_chromHMM.html" target="_blank"><b>H3K27ac</b></a>,
+                    <a href="data/cutandrun_EpiCompare_hg38/H3K27me3/EpiCompare_file/samples_chromHMM.html" target="_blank"><b>H3K27me3</b></a>
+                  
+                    ). CUT&RUN H3K27me3 peaks were nicely annotated to the repressed and heterochromatin regions, consistent with the literature <a href="#figure7"><b>(Figure 7)</b></a>. Similar results were also found in genomic annotation, KEGG and GO analysis (see Supplementary figure <a href="#S3"><b>S3</b></a>, <a href="#S4"><b>S4</b></a> and <a href="#S5"><b>S5</b></a>). In general, similar to the variation observed in ChIP-seq (ENCODE files), these facts indicate that the reproducibility and reliability of the CUT&RUN histone profiling strategy may vary according to the type of modification.  
+                  </font> 
+                </p>
+
+                <figure id="figure7">
+                  <!-- K562_ChomHMM_H3K27me3 -->
+                    <div id="K562_ChomHMM_H3K27me3">
+                      <iframe
+                        align="center"
+                        width="100%"
+                        height="650"
+                        src="data/cutandrun_EpiCompare_hg38/H3K27me3/EpiCompare_file/samples_chromHMM.html"
+                        frameborder="no"
+                        border="0"
+                        marginwidth="0"
+                        marginheight="0"
+                        scrolling="no"
+                      ></iframe>
+                    </div>
+      
+                  </figure>
+                  <figcaption><b>Figure 7:</b> Chromatin annotation of K562 H3K27me3 CUT&RUN and ENCODE ChIP-seq reference peaks.</figcaption> <br><br>
+
+               
+
+          </header>
+          <footer class="major">
+            <ul class="actions special">
+              <li><a href="#Discussion" class="button">Discussion</a></li>
+            </ul>
+          </footer>
+        </section>
+
+
+
+
+
+
+
+        <!-- Discussion -->
+        <section id="Discussion" class="main special">
+          <header class="major">
+            <h2>Discussion</h2>
+            <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Here an integrative analysis and benchmark of CUT&RUN chromatin profiling strategy were conducted against the ENCODE ChIP-seq datasets. The inherent consistency of ENCODE ChIP-seq datasets was first tested and set as a baseline for the benchmark. Unexpectedly, it is found that for some of the histone modifications, the variation in peak overlap of inter- and intra-experiment ENCODE datasets is non-negligible, doubting the reliability of the ENCODE ChIP-seq references. Further benchmark of CUT&RUN data was then carried out against robust (high peak overlap) ENCODE references. Except for H3K27me3, CUT&RUN profiled a quite different histone modification landscape compared to the ENCODE references in peak overlap and functional annotation, indicating the reproducibility and reliability of the CUT&RUN strategy in profiling histone modification may be dependent on the type of modification. 
+                </font> 
+              </p>
+
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  For years, ENCODE datasets generated by ChIP-seq have served as the golden standard references for epigenetic profiling <a href="https://www.nature.com/articles/s41588-020-0610-9"  target="_blank">(32)</a>. Multiple emerging alternatives to ChIP-seq are preferentially benchmarked against the ENCODE references to test their reliability. For instance, Hu from neurogenomics lab has benchmarked another enzyme tethering strategy, CUT&Tag (Cleavage Under Targets & Tagmentation), against ENCODE for H3K27ac, and reported an up to 50% peak recovery <a href="http://biorxiv.org/lookup/doi/10.1101/2022.03.30.486382"  target="_blank">(24)</a>. Surprisingly, by comparing the pairwise peak overlap between ENCODE datasets, it is noticed that the inherent reproducibility and reliability of ENCODE dataset are not as robust as expected. The non-negligible irreproducibility of the ENCODE datasets causes further uncertainty in CUT&RUN benchmarking when taken as the references. To further reveal the performance of CUT&RUN (also other emerging epigenetic profiling methods), the generated peaks should be compared to 1) peaks generated by other similar enzyme tethering methods (such as CUT&Tag); 2) peaks generated by non-enzyme tethering methods; and finally 3) multiple ENCODE reference datasets. Also, a statistical model should be constructed to evaluate the significance of both pairwise and overall peak overlap statistically. 
+                </font> 
+              </p>
+
+
+              <p style="text-indent:2em;" align="left">
+                <font size="5">
+                  Given the fact that ChIP-seq (ENCODE references) and CUT&RUN strategy are both immuno methods, and their robustness might be partially modification-dependent, the specificity of the primary antibody (most of the primary antibodies used in CUT&RUN were same as those used in ENCODE ChIP-seq) requires further examination. Nevertheless, irrespective of problems with ENCODE datasets, CUT&RUN still profiles quite different peaks compared to ENCODE reference. Of note, the aforementioned benchmark was all conducted with limited CUT&RUN data with similar experiment settings and processed with the same pipeline. To further consolidate these results, improvements should be made in experiment design, CUT&RUN protocol and data process pipeline. For the experiment design, both biological and technical replicates should be included for each histone modification to reveal the intra-experiment reproducibility of CUT&RUN. As an emerging method, although CUT&RUN has shown good performance in mapping transcriptional factors, many steps of the original CUT&RUN protocol require further optimization. In CUT&Tag, Hu has shown that experiment settings such as antibody dilution ratio, DNA extraction methods, PCR cycle number may all affect the final output <a href="http://biorxiv.org/lookup/doi/10.1101/2022.03.30.486382"  target="_blank">(24)</a>. 
+                </font> 
+              </p>
+
+
+
+          </header>
+          <footer class="major">
+            <ul class="actions special">
+              <li>
+                <a href="#References" class="button">References</a>
+              </li>
+            </ul>
+          </footer>
+        </section>
+
+
+
+        <!-- References -->
+        <section id="References" class="main special" >
+          <div class="spotlight">
+            <div class="content" >
+              <header class="major">
+                <h2>References</h2>
+              </header>
+              <p align="left">
+                1. International Human Genome Sequencing Consortium, Whitehead Institute for Biomedical Research, Center for Genome Research:, Lander ES, Linton LM, Birren B, Nusbaum C, et al. Initial sequencing and analysis of the human genome. Nature. 2001 Feb 15;409(6822):860–921. <br>
+2. Lander ES. Initial impact of the sequencing of the human genome. Nature. 2011 Feb;470(7333):187–97.<br>
+3. Rivera CM, Ren B. Mapping Human Epigenomes. Cell. 2013 Sep 26;155(1):39–55.<br>
+4. Kim HD, Shay T, O’Shea EK, Regev A. Transcriptional Regulatory Circuits: Predicting Numbers from Alphabets. Science. 2009 Jul 24;325(5939):429–32.<br>
+
+5. Ernst J, Kheradpour P, Mikkelsen TS, Shoresh N, Ward LD, Epstein CB, et al. Systematic analysis of chromatin state dynamics in nine human cell types. Nature. 2011 May 5;473(7345):43–9.<br>
+6. Heintzman ND, Stuart RK, Hon G, Fu Y, Ching CW, Hawkins RD, et al. Distinct and predictive chromatin signatures of transcriptional promoters and enhancers in the human genome. Nat Genet. 2007 Mar;39(3):311–8.<br>
+7. Mikkelsen TS, Ku M, Jaffe DB, Issac B, Lieberman E, Giannoukos G, et al. Genome-wide maps of chromatin state in pluripotent and lineage-committed cells. Nature. 2007 Aug;448(7153):553–60.<br>
+8. Barski A, Cuddapah S, Cui K, Roh TY, Schones DE, Wang Z, et al. High-Resolution Profiling of Histone Methylations in the Human Genome. Cell. 2007 May;129(4):823–37.<br>
+9. Ernst J, Kellis M. Discovery and characterization of chromatin states for systematic annotation of the human genome. Nat Biotechnol. 2010 Aug;28(8):817–25.<br>
+10. Heintzman ND, Hon GC, Hawkins RD, Kheradpour P, Stark A, Harp LF, et al. Histone modifications at human enhancers reflect global cell-type-specific gene expression. Nature. 2009 May;459(7243):108–12.<br>
+
+                
+11. Bernstein BE, Kamal M, Lindblad-Toh K, Bekiranov S, Bailey DK, Huebert DJ, et al. Genomic Maps and Comparative Analysis of Histone Modifications in Human and Mouse. Cell. 2005 Jan;120(2):169–81.<br>
+12. Nativio R, Lan Y, Donahue G, Sidoli S, Berson A, Srinivasan AR, et al. An integrated multi-omics approach identifies epigenetic alterations associated with Alzheimer’s disease. Nat Genet. 2020 Oct;52(10):1024–35.<br>
+13. Solomon MJ, Varshavsky A. Formaldehyde-mediated DNA-protein crosslinking: a probe for in vivo chromatin structures. Proc Natl Acad Sci. 1985 Oct;82(19):6470–4.<br>
+14. Rhee HS, Pugh BF. Comprehensive Genome-wide Protein-DNA Interactions Detected at Single-Nucleotide Resolution. Cell. 2011 Dec;147(6):1408–19.<br>
+15. Kasinathan S, Orsi GA, Zentner GE, Ahmad K, Henikoff S. High-resolution mapping of transcription factor binding sites on native chromatin. Nat Methods. 2014 Feb;11(2):203–9.<br>
+16. Teytelman L, Thurtle DM, Rine J, van Oudenaarden A. Highly expressed loci are vulnerable to misleading ChIP localization of multiple unrelated proteins. Proc Natl Acad Sci U S A. 2013 Nov 12;110(46):18602–7.<br>
+17. Policastro RA, Zentner GE. Enzymatic methods for genome-wide profiling of protein binding sites. Brief Funct Genomics. 2018 Mar 1;17(2):138–45.<br>
+18. Skene PJ, Henikoff S. An efficient targeted nuclease strategy for high-resolution mapping of DNA binding sites [Internet]. eLife. eLife Sciences Publications Limited; 2017 [cited 2022 Apr 7]. Available from: https://elifesciences.org/articles/21856/figures<br>
+19. Skene PJ, Henikoff JG, Henikoff S. Targeted in situ genome-wide profiling with high efficiency for low cell numbers. Nat Protoc. 2018 May;13(5):1006–19.<br>
+20. Yang Y. Benchmarking of CUT&RUN to profile histone post- translational modifications in K562 cell line. :26.<br>
+21. Cheshire C, charlotte-west, bot  nf core, Ladd D, Fields C, Patel H, et al. nf-core/cutandrun: nf-core/cutandrun v2.0 Copper Cobra [Internet]. Zenodo; 2022 [cited 2022 Jun 9]. Available from: https://zenodo.org/record/6624266<br>
+
+22. Di Tommaso P, Chatzou M, Floden EW, Barja PP, Palumbo E, Notredame C. Nextflow enables reproducible computational workflows. Nat Biotechnol. 2017 Apr 11;35(4):316–9.<br>
+23. Langmead B, Salzberg SL. Fast gapped-read alignment with Bowtie 2. Nat Methods. 2012 Apr;9(4):357–9.<br>
+24. Hu D, Abbasova L, Schilder BM, Nott A, Skene NG, Marzi SJ. CUT&Tag recovers up to half of ENCODE ChIP-seq peaks [Internet]. Genomics; 2022 Mar [cited 2022 Apr 7]. Available from: http://biorxiv.org/lookup/doi/10.1101/2022.03.30.486382<br>
+25. Yu G, Wang LG, He QY. ChIPseeker: an R/Bioconductor package for ChIP peak annotation, comparison and visualization. Bioinformatics. 2015 Jul 15;31(14):2382–3.<br>
+26. Ernst J, Kellis M. Chromatin-state discovery and genome annotation with ChromHMM. Nat Protoc. 2017 Dec;12(12):2478–92.<br>
+27. Akalin A, Franke V, Vlahovi ek K, Mason CE, Schubeler D. genomation: a toolkit to summarize, annotate and visualize genomic intervals. Bioinformatics. 2015 Apr 1;31(7):1127–9.<br>
+
+28. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data | Elsevier Enhanced Reader [Internet]. [cited 2022 Jun 9].<br>  
+29. Tomczak A, Mortensen JM, Winnenburg R, Liu C, Alessi DT, Swamy V, et al. Interpretation of biological experiments changes with evolution of the Gene Ontology and its annotations. Sci Rep. 2018 Dec;8(1):5115.<br>
+30. Kanehisa M, Sato Y, Kawashima M, Furumichi M, Tanabe M. KEGG as a reference resource for gene and protein annotation. Nucleic Acids Res. 2016 Jan 4;44(D1):D457–62.<br>
+31. Amemiya HM, Kundaje A, Boyle AP. The ENCODE Blacklist: Identification of Problematic Regions of the Genome. Sci Rep. 2019 Dec;9(1):9354.<br>
+32. Bryois J, Skene NG, Hansen TF, Kogelman LJA, Watson HJ, Liu Z, et al. Genetic identification of cell types underlying brain complex traits yields insights into the etiology of Parkinson’s disease. Nat Genet. 2020 May;52(5):482–93.<br>
+33. Wang S, Meyer DH, Schumacher B. H3K4me2 regulates the recovery of protein biosynthesis and homeostasis following DNA damage. Nat Struct Mol Biol. 2020 Dec;27(12):1165–77.<br>
+34. Guenther MG, Levine SS, Boyer LA, Jaenisch R, Young RA. A Chromatin Landmark and Transcription Initiation at Most Promoters in Human Cells. Cell. 2007 Jul;130(1):77–88.<br>
+35. Rivera C, Saavedra F, Alvarez F, Díaz-Celis C, Ugalde V, Li J, et al. Methylation of histone H3 lysine 9 occurs during translation. Nucleic Acids Res. 2015 Oct 30;43(19):9097–106.<br>
+36. Nicetto D, Zaret K. Role of H3K9me3 Heterochromatin in Cell Identity Establishment and Maintenance. Curr Opin Genet Dev. 2019 Apr;55:1–10.<br>
+37. Li T, Liu Q, Garza N, Kornblau S, Jin VX. Integrative analysis reveals functional and regulatory roles of H3K79me2 in mediating alternative splicing. Genome Med. 2018 Dec;10(1):30.<br>
+38. Shoaib M, Chen Q, Shi X, Nair N, Prasanna C, Yang R, et al. Histone H4 lysine 20 mono-methylation directly facilitates chromatin openness and promotes transcription of housekeeping genes. Nat Commun. 2021 Dec;12(1):4800.<br>
+              </p>
+                
+                  
+              <ul class="actions special">
+                <li>
+                  <a href="#Lay Summary" class="button primary">BACK TO TOP</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
+
+      <!-- Supplementary -->
+      <section id="Supplementary" class="main special">
+        <div class="spotlight">
+          <div class="content">
+            <header class="major">
+              <h2>Supplementary</h2>
+            </header>
+           
+           <!-- Supplementary table 1 -->
+									<section>
+										<div class="table-wrapper" id="ST1" >
+											<table >
+												<thead text-align:center>
+													<tr>
+														<th>Histone modifications</th>
+														<th>Description</th>
+														<th>Annotation</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>H3K4me1</td>
+														<td>Histone H3 lysine 4 mono-methylation</td>
+														<td>preferentially associated with enhancers (
+                              <a href="https://www.nature.com/articles/ng1966"  target="_blank">6</a>,
+                              <a href="https://www.nature.com/articles/s41588-020-0610-9"  target="_blank">33</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(07)00681-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867407006812%3Fshowall%3Dtrue"  target="_blank">34</a>)</td>
+													</tr>
+													
+                          <tr>
+														<td>H3K4me2</td>
+														<td>Histone H4 lysine 4 di-methylation</td>
+														<td>associated with promoters and enhancers (
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(07)00600-9?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867407006009%3Fshowall%3Dtrue"  target="_blank">8</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(05)00039-5?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867405000395%3Fshowall%3Dtrue"  target="_blank">11</a>,
+                              <a href="https://www.nature.com/articles/s41588-020-0610-9"  target="_blank">33</a>)</td>
+													</tr>
+
+                          <tr>
+														<td>H3K4me3</td>
+														<td>Histone H4 lysine 4 tri-methylation</td>
+														<td>associated with promoters (
+                              <a href="https://www.nature.com/articles/nature06008"  target="_blank">7</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(05)00039-5?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867405000395%3Fshowall%3Dtrue"  target="_blank">11</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(07)00681-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867407006812%3Fshowall%3Dtrue"  target="_blank">34</a>)</td>
+													</tr>
+                          
+                          <tr>
+														<td>H3K9ac</td>
+														<td>Histone H3 lysine 9 acetylation</td>
+														<td>associated with active regulatory regions (
+                              <a href="https://www.nature.com/articles/nature07829"  target="_blank">10</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(05)00039-5?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867405000395%3Fshowall%3Dtrue"  target="_blank">11</a>)</td>
+													</tr>
+
+                          <tr>
+														<td>H3K9me1</td>
+														<td>Histone H3 lysine 9 mono-methylation</td>
+														<td>associated with functional heterochromatin (<a href="https://academic.oup.com/nar/article/43/19/9097/2528197?login=false"  target="_blank">35</a>)</td>
+													</tr>
+
+                          <tr>
+														<td>H3K9me3</td>
+														<td>Histone H3 lysine 9 tri-methylation</td>
+														<td>associated with heterochromatin (<a href="https://www.sciencedirect.com/science/article/abs/pii/S0959437X19300127?via%3Dihub"  target="_blank">36</a>)</td>
+													</tr>
+
+                          <tr>
+														<td>H3K27ac</td>
+														<td>Histone H3 lysine 27 acetylation</td>
+														<td>associated with active regulatory regions (
+                              <a href="https://www.nature.com/articles/nature07829"  target="_blank">10</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(05)00039-5?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867405000395%3Fshowall%3Dtrue"  target="_blank">11</a>)</td>
+													</tr>
+
+                          <tr>
+														<td>H3K27me3</td>
+														<td>Histone H3 lysine 27 tri-methylation</td>
+														<td>associated with polycomb-repressed regions (
+                              <a href="https://www.nature.com/articles/nature06008"  target="_blank">7</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(07)00600-9?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867407006009%3Fshowall%3Dtrue"  target="_blank">8</a>)</td>
+													</tr>
+
+                          <tr>
+														<td>H3K36me3</td>
+														<td>Histone H3 lysine 36 tri-methylation</td>
+														<td>associated with transcribed regions (
+                              <a href="https://www.nature.com/articles/nature06008"  target="_blank">7</a>,
+                              <a href="https://www.cell.com/cell/fulltext/S0092-8674(07)00600-9?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867407006009%3Fshowall%3Dtrue"  target="_blank">8</a>,
+                              <a href=""  target="_blank">15</a>)</td>
+													</tr>
+
+                          <tr>
+														<td>H3K79me2</td>
+														<td>Histone H3 lysine 79 di-methylation</td>
+														<td>associated with intergenic regions (<a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0538-1"  target="_blank">37</a>)</td>
+													</tr>
+                          
+                          <tr>
+														<td>H4K20me1</td>
+														<td>Histone H4 lysine 20 mono-methylation</td>
+														<td>associated with transcribed regions (<a href="https://www.nature.com/articles/s41467-021-25051-2"  target="_blank">38</a>)</td>
+													</tr>
+
+
+												</tbody>
+												
+											</table>
+                      <figcaption><b>Supplementary Table 1:</b> Chromatin annotation of histone post-translational modifications.</figcaption> <br><br>
+										</div>
+           
+           
+
+           
+           
+           
+            <img src="figrues/S1.png" alt="Peak number of ENCODE H3K4me1, H3K9ac, H3K27me3 and H3K36me3" id="S1"  height="600px"> <br><br>
+            <figcaption><b>Supplementary figure S1:</b> Peak number of ENCODE K562 H3K4me1, H3K9ac, H3K27me3 and H3K36me3.<br>
+              <b>A:</b> H3K4me1, 
+              <b>B:</b> H3K9ac, 
+              <b>C:</b> H3K27me3, 
+              <b>D:</b> H3K36me3.
+
+            </figcaption> <br><br>
+           
+            <img src="figrues/S2.png" alt="Peak width distribution of ENCODE H3K4me1, H3K9ac, H3K27me3 and H3K36me3" id="S2"  height="600px"> <br><br>
+            <figcaption><b>Supplementary figure S2:</b> Peak width distribution of ENCODE H3K4me1, H3K9ac, H3K27me3 and H3K36me3.<br>
+              <b>A:</b> H3K4me1, 
+              <b>B:</b> H3K9ac, 
+              <b>C:</b> H3K27me3, 
+              <b>D:</b> H3K36me3.
+            </figcaption> <br><br>
+            
+            <img src="figrues/S3.png" alt="Peak width distribution of ENCODE H3K4me1, H3K9ac, H3K27me3 and H3K36me3" id="S3"  height="600px"> <br>
+            <figcaption><b>Supplementary figure S3:</b> Genomic annotation of CUT&RUN and ENCODE reference. <br>
+              <b>A:</b> H3K4me2, 
+              <b>B:</b> H3K9ac, 
+              <b>C:</b> H3K27ac, 
+              <b>D:</b> H3K27me3.
+            
+            </figcaption> <br><br>
+
+            <img src="figrues/S4.png" alt="Peak width distribution of ENCODE H3K4me1, H3K9ac, H3K27me3 and H3K36me3" id="S4"  height="700px"> <br><br>
+            <figcaption><b>Supplementary figure S4:</b> KEGG analysis of CUT&RUN and ENCODE reference.
+              <b>A:</b> H3K4me2, 
+              <b>B:</b> H3K9ac, 
+              <b>C:</b> H3K27ac, 
+              <b>D:</b> H3K27me3.
+            </figcaption> <br><br>
+
+            <img src="figrues/S5.png" alt="Peak width distribution of ENCODE H3K4me1, H3K9ac, H3K27me3 and H3K36me3" id="S5"  height="700px"> <br><br>
+            <figcaption><b>Supplementary figure S5:</b> GO analysis of CUT&RUN and ENCODE reference.
+              <b>A:</b> H3K4me2, 
+              <b>B:</b> H3K9ac, 
+              <b>C:</b> H3K27ac, 
+              <b>D:</b> H3K27me3.</figcaption> <br><br>
+
+           
+           
+            <ul class="actions special">
+              <li>
+                <a href="#Lay Summary" class="button primary">BACK TO TOP</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      
+      </div>
+      
+
+      </section>
+      <!-- Footer -->
+      <footer id="footer">
+        <section>
+          <h2>Xindong Sun</h2>
+          <dl class="alt">
+            <dt>Address</dt>
+            <dd>Sir Ernst Chain Building, 7 Imperial College Rd, Kensington, London SW7 2AZ, United Kingdom</dd>
+            <dt>Phone</dt>
+            <dd>(+44) 0753 6128 699 </dd>
+            <dt>Email</dt>
+            <dd><a href="#xindong.sun21@imperial.ac.uk">xindong.sun21@imperial.ac.uk</a></dd>
+          </dl>
+          
+        </section>
+        <p class="copyright">
+          &copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.
+        </p>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

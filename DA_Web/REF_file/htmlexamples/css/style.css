@@ -1,0 +1,23 @@
+
+
+body  {
+background: #F4F4F4;
+margin: 20;
+}
+
+h1 {
+color: #869843; 
+font-size:24px; 
+font-family: "Arial Narrow", "Myriad Pro"; 
+font-weight: normal;
+whitespaces: nowrap
+}
+
+h2 {
+color: #882222;
+font-size:24px;
+font-family: "Courier";
+font-weight: normal;
+}
+
+
