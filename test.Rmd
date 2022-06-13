@@ -712,6 +712,54 @@ EpiCompare(peakfiles = peaklist,
 
 
 
+### Peaks information in cutandrun (top001) and ENCODE
+```{r}
+library(EpiCompare)
+
+H3K4me1_ENCODE_1 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K4me1_ENCFF159VKJ_1.bed", as = "GRanges")
+H3K4me1_ENCODE_2 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K4me1_ENCFF759NWD_2.bed", as = "GRanges")
+
+H3K4me2_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K4me2_ENCFF118PIE.bed", as = "GRanges")
+
+H3K4me3_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K4me3_ENCFF616DLO.bed", as = "GRanges")
+
+H3K9ac_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K9ac_ENCFF558JOB.bed", as = "GRanges")
+
+H3K9me1_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K9me1_ENCFF285EKW.bed", as = "GRanges")
+
+H3K9me3_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K9me3_ENCFF371GMJ.bed", as = "GRanges")
+
+H3K27ac_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K27ac_ENCFF038DDS.bed", as = "GRanges")
+
+H3K27me3_ENCODE_1 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K27me3_ENCFF031FSF_1.bed", as = "GRanges")
+H3K27me3_ENCODE_2 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K27me3_ENCFF049HUP_2.bed", as = "GRanges")
+
+H3K36me3_ENCODE_1 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K36me3_ENCFF631VWP_1.bed", as = "GRanges")
+H3K36me3_ENCODE_2 <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K36me3_ENCFF053DAC_2.bed", as = "GRanges")
+
+H3K79me2_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H3K79me2_ENCFF212PQN.bed", as = "GRanges")
+H4K20me1_ENCODE <- ChIPseeker::readPeakFile("/Users/apple/Downloads/cutandrun/ENCODE_ref/H4K20me1_ENCFF909RKY.bed", as = "GRanges")
 
 
+peaklist <- list(H3K4me1_ENCODE_1,H3K4me1_ENCODE_2,H3K4me2_ENCODE,H3K4me3_ENCODE,H3K9ac_ENCODE,H3K9me1_ENCODE,H3K9me3_ENCODE,H3K27ac_ENCODE,H3K27me3_ENCODE_1,H3K27me3_ENCODE_2,H3K36me3_ENCODE_1,H3K36me3_ENCODE_2,H3K79me2_ENCODE,H4K20me1_ENCODE)
+names(peaklist) <- c("H3K4me1_ENCODE_1","H3K4me1_ENCODE_2","H3K4me2_ENCODE","H3K4me3_ENCODE","H3K9ac_ENCODE","H3K9me1_ENCODE","H3K9me3_ENCODE","H3K27ac_ENCODE","H3K27me3_ENCODE_1","H3K27me3_ENCODE_2","H3K36me3_ENCODE_1","H3K36me3_ENCODE_2","H3K79me2_ENCODE","H4K20me1_ENCODE")
+ENCODE <- list("H4K20me1_ENCODE" = H4K20me1_ENCODE)
+data(hg38_blacklist)
+EpiCompare(peakfiles = peaklist,
+           genome_build = "hg38",
+           blacklist = hg38_blacklist,
+           picard_files = list(),
+           reference = ENCODE,
+           upset_plot = TRUE,
+           stat_plot = TRUE,
+           chromHMM_plot = TRUE,
+           chromHMM_annotation = "K562",
+           chipseeker_plot = TRUE,
+           enrichment_plot = TRUE,
+           tss_plot = TRUE,
+           interact = TRUE,
+           save_output = TRUE,
+           output_dir = "/Users/apple/Downloads/cutandrun/peaksinfo/encodeinfo")
+
+```
 
