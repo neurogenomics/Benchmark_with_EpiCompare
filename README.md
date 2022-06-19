@@ -1,6 +1,6 @@
 # CUTandRUN_EpiCompare
 CUT&amp;RUN EpiCompare reports by Xindong; 
-See [final web report](https://neurogenomics.github.io/DA_Web/Data_Analysis/Data_Analysis_Xindong.html), or at [MSc course server](http://msc.bc.ic.ac.uk/~xs221/DA_Web/Data_Analysis/Data_Analysis_Xindong.html)(with Imperial login)
+See [final web report](https://neurogenomics.github.io/CUTandRUN_EpiCompare/DA_Web/Data_Analysis/Data_Analysis_Xindong.html), or at [MSc course server](http://msc.bc.ic.ac.uk/~xs221/DA_Web/Data_Analysis/Data_Analysis_Xindong.html)(with Imperial login)
 
 ### ENCODE correlation bewteen experiments and replicates: 
 Annotation: H3K4me3_EN4G38_E1_IRpseudo123 <br>
