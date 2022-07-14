@@ -1,0 +1,16 @@
+"Sample"	"PeakN before tidy"	"Blacklisted peaks removed (%)"	"Non-standard peaks removed (%)"	"PeakN after tidy"
+"1"	"H3K27ac_K562_E1_IRpseudo12"	51343	0	0	51343
+"2"	"H3K27ac_K562_E1_IRpseudo1"	60106	0	0	60106
+"3"	"H3K27ac_K562_E1_IRpseudo2"	38164	0	0	38164
+"4"	"H3K27ac_K562_E1_IR12"	44703	0	0	44703
+"5"	"H3K27ac_A549_E1_IRpseudo123"	75735	0	0	75735
+"6"	"H3K27ac_A549_E1_IRpseudo1"	61581	0	0	61581
+"7"	"H3K27ac_A549_E1_IRpseudo2"	54591	0	0	54591
+"8"	"H3K27ac_A549_E1_IRpseudo3"	59691	0	0	59691
+"9"	"H3K27ac_A549_E1_IR123"	62700	0	0	62700
+"10"	"H3K27ac_A549_E2_IRpseudo12"	47542	0	0	47542
+"11"	"H3K27ac_A549_E2_IR12"	34144	0	0	34144
+"12"	"H3K27ac_H9_E1_IRpseudo12"	220653	0	0	220653
+"13"	"H3K27ac_H9_E1_IRpseudo1"	174234	0	0	174234
+"14"	"H3K27ac_H9_E1_IRpseudo2"	148705	0	0	148705
+"15"	"H3K27ac_H9_E2_IRpseudo12"	17418	0	0	17418
