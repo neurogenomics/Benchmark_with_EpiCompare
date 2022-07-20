@@ -1,0 +1,11 @@
+"Sample"	"PeakN before tidy"	"Blacklisted peaks removed (%)"	"Non-standard peaks removed (%)"	"PeakN after tidy"
+"1"	"H3K4me1_A549_E1"	124322	0	0	124322
+"2"	"H3K4me1_A549_E2"	130082	0	0	130082
+"3"	"H3K4me3_A549_E1"	27884	0	0	27884
+"4"	"H3K4me3_A549_E2"	32532	0	0	32532
+"5"	"H3K9ac_A549_E1"	47957	0	0	47957
+"6"	"H3K27ac_A549_E1"	75735	0	0	75735
+"7"	"H3K27ac_A549_E2"	47542	0	0	47542
+"8"	"H3K27me3_A549_E1"	139963	0	0	139963
+"9"	"H3K27me3_A549_E2"	172278	0	0	172278
+"10"	"H3K36me3_A549_E1"	136039	0	0	136039

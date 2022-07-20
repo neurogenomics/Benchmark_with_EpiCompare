@@ -1,0 +1,52 @@
+---
+title: "Peak_Number_Plot"
+output: html_document
+date: "2022-07-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("dplyr")
+library("ggplot2")
+library("RCurl")
+```
+
+```{r echo=FALSE}
+#try to get data directly from github, column unmacth 
+H3K4me1_url <- getURL("https://github.com/neurogenomics/CUTandRUN_EpiCompare/blob/master/ENCODE_correlation/H3K4me1/EpiCompare_file/peak_inf")
+H3K4me1_PeakN <- read.table(text = H3K4me1_url, header = TRUE)
+```
+
+```{r}
+#read peak number (after tidy)
+H3K4me1_PeakN <- read.table("/Users/xindong/Downloads/Data_Analysis/cutandrun/ENCODE_correlation/H3K4me1/EpiCompare_file/peak_info")
+
+#extract experiment name
+for (i in 1:length(H3K4me1_PeakN$Sample)){
+    H3K4me1_PeakN$Mod_Cell_Exp[i] <- gsub(paste("_",tail(strsplit(H3K4me1_PeakN$Sample[i],"_")[[1]],1),sep = ""), '', H3K4me1_PeakN$Sample[i])
+}
+
+#extract sample name, peak number and experiment name
+H3K4me1_PeakN <- H3K4me1_PeakN[,c(1,5,6)]
+
+H3K4me1_PeakN$Mod_Cell_Exp <- factor(H3K4me1_PeakN$Mod_Cell_Exp, levels = c(unique(H3K4me1_PeakN$Mod_Cell_Exp)))
+
+Plot_H3K4me1 <- ggplot(H3K4me1_PeakN,aes(x=Mod_Cell_Exp,y=PeakN.after.tidy))+ 
+    stat_boxplot()+ 
+    geom_boxplot(size=0.5,fill="white",outlier.fill="white",outlier.color="white")+ 
+    geom_jitter(aes(),width = 0,size=0.5)+ 
+    ggtitle("Peak number varaition")+ 
+    expand_limits(y = 0)+
+    theme_bw()+
+    theme(legend.position="none", 
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())+
+    ylab("Peak Number")
+
+show(Plot_H3K4me1)
+
+```
+
