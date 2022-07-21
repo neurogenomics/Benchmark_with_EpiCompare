@@ -10,31 +10,32 @@ for (i in 1:length(ENCODE_info$Histone_modifications)){
 #names(ENCODE_info)
 
 ENCODE_info_short <- ENCODE_info[,c("Histone_PTMs", "Read_depth", "Histone_modifications")]
-ENCODE_info_H3K4me1 <- ENCODE_info_short[ENCODE_info_short$Histone_PTMs == "H3K4me1",]
+ENCODE_info_H3K36me3 <- ENCODE_info_short[ENCODE_info_short$Histone_PTMs == "H3K36me3",]
 
 #read peak number (after tidy)
-H3K4me1_PeakN <- read.table("/Users/xindong/Downloads/Data_Analysis/cutandrun/ENCODE_correlation/H3K4me1/EpiCompare_file/peak_info")
+H3K36me3_PeakN <- read.table("/Users/xindong/Downloads/Data_Analysis/cutandrun/ENCODE_correlation/H3K36me3/EpiCompare_file/peak_info")
 
 #extract experiment name
-for (i in 1:length(H3K4me1_PeakN$Sample)){
-    H3K4me1_PeakN$Mod_Cell_Exp[i] <- gsub(paste("_",tail(strsplit(H3K4me1_PeakN$Sample[i],"_")[[1]],1),sep = ""), '', H3K4me1_PeakN$Sample[i])
+for (i in 1:length(H3K36me3_PeakN$Sample)){
+    H3K36me3_PeakN$Mod_Cell_Exp[i] <- gsub(paste("_",tail(strsplit(H3K36me3_PeakN$Sample[i],"_")[[1]],1),sep = ""), '', H3K36me3_PeakN$Sample[i])
 }
 
 #extract sample name, peak number and experiment name
-H3K4me1_PeakN <- H3K4me1_PeakN[,c(1,5,6)]
+H3K36me3_PeakN <- H3K36me3_PeakN[,c(1,5,6)]
 
-for (i in 1:length(H3K4me1_PeakN$Sample)){
-    H3K4me1_PeakN$Read_depth[i] <- ENCODE_info_H3K4me1$Read_depth[ENCODE_info_H3K4me1$Histone_modifications == H3K4me1_PeakN$Mod_Cell_Exp[i]]
+for (i in 1:length(H3K36me3_PeakN$Sample)){
+    H3K36me3_PeakN$Read_depth[i] <- ENCODE_info_H3K36me3$Read_depth[ENCODE_info_H3K36me3$Histone_modifications == H3K36me3_PeakN$Mod_Cell_Exp[i]]
 }
-H3K4me1_PeakN$Mod_Cell_Exp <- factor(H3K4me1_PeakN$Mod_Cell_Exp, levels = c(unique(H3K4me1_PeakN$Mod_Cell_Exp)))
+H3K36me3_PeakN$Mod_Cell_Exp <- factor(H3K36me3_PeakN$Mod_Cell_Exp, levels = c(unique(H3K36me3_PeakN$Mod_Cell_Exp)))
 
+ENCODE_info_H3K36me3$Histone_modifications <- factor(ENCODE_info_H3K36me3$Histone_modifications, levels = c(ENCODE_info_H3K36me3$Histone_modifications))
 
 #Plot peak number along with read depth
 
 grid.newpage()
 
 # two plots
-p2 <- ggplot(c, aes(x = Histone_modifications,y = Read_depth)) + 
+p2 <- ggplot(ENCODE_info_H3K36me3, aes(x = Histone_modifications,y = Read_depth)) + 
     expand_limits(y = 0) +
     geom_point(shape = 15, size = 4) +
     theme_bw() +
@@ -44,11 +45,13 @@ p2 <- ggplot(c, aes(x = Histone_modifications,y = Read_depth)) +
           panel.grid.minor = element_blank()) +
     ylab("Read Depth (Average Number of Total Aligned Reads Passing QC)")
 
-p1 <- ggplot(H3K4me1_PeakN,aes(x=Mod_Cell_Exp,y=PeakN.after.tidy))+ 
+show(p2)
+
+p1 <- ggplot(H3K36me3_PeakN,aes(x=Mod_Cell_Exp,y=PeakN.after.tidy))+ 
     stat_boxplot()+ 
     geom_boxplot(size=0.5,fill="white",outlier.fill="white",outlier.color="white")+ 
-    geom_jitter(aes(),width = 0,size=0.5)+ 
-    ggtitle("Put title here")+ 
+    geom_jitter(aes(),width = 0,size=1.5)+ 
+    ggtitle("Peak Number & Read Depth - H3K36me3")+ 
     expand_limits(y = 0)+
     theme_bw()+
     theme(legend.position="none", 
@@ -58,7 +61,7 @@ p1 <- ggplot(H3K4me1_PeakN,aes(x=Mod_Cell_Exp,y=PeakN.after.tidy))+
     ylab("Peak Number") 
 
 show(p1)
-show(p2)
+
 
 # extract gtable
 g1 <- ggplot_gtable(ggplot_build(p1))
@@ -82,7 +85,7 @@ g <- gtable_add_grob(g, ax, pp$t, length(g$widths) - 1, pp$b)
 # draw it
 grid.draw(g)
 
-
+#PeakN_ReadDepth_H3K36me3
 
 
 
