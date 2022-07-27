@@ -1,0 +1,192 @@
+Index,Experiment_description,Warning,Replicate_1,Replicate_2,Replicate_3,Read_Depth,Peak_Number,Histone_Modification,Cell_Line,Experiment,Lab
+H3K4me1_K562_E1,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K4me1
+Lab: Peggy Farnham, USC
+Project: ENCODE
+Experiment Series: ENCSR730LLQ",Insufficient read depth; Control insufficient read depth,6656715,17449919,NA,12.053317,112.834,H3K4me1,K562,E1,"Peggy Farnham, USC"
+H3K4me1_K562_E2,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K4me1
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Reference Epigenome: ENCSR532GIR, ENCSR612NLL
+Experiment Series: ENCSR730LLQ",Insufficient read depth; Control insufficient read depth,9397237,8138614,52910769,23.48220667,95.383,H3K4me1,K562,E2,"Bradley Bernstein, Broad"
+H3K4me1_A549_E1,"Histone ChIP-seq in A549
+Homo sapiens A549
+Target: H3K4me1
+Lab: Tim Reddy, Duke
+Project: GGR
+Treatment Time Series: ENCSR180FFI",,37532109,33974840,29478870,33.66193967,124.322,H3K4me1,A549,E1,"Tim Reddy, Duke"
+H3K4me1_A549_E2,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 0.02% ethanol for 1 hour
+Target: H3K4me1
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 0.02 percent ethanol (CHEBI:16236) for 1 hour
+Reference Epigenome: ENCSR706RZK, ENCSR797CXN",,63712790,11267446,NA,37.490118,130.082,H3K4me1,A549,E2,"Bradley Bernstein, Broad"
+H3K4me3_K562_E1,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K4me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Reference Epigenome: ENCSR612NLL
+Experiment Series: ENCSR064CWP",,28163254,26717178,NA,27.440216,21.146,H3K4me3,K562,E1,"Bradley Bernstein, Broad"
+H3K4me3_K562_E2,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K4me3
+Lab: Peggy Farnham, USC
+Project: ENCODE
+Experiment Series: ENCSR064CWP",,11131721,17482549,NA,14.307135,23.132,H3K4me3,K562,E2,"Peggy Farnham, USC"
+H3K4me3_K562_E3,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K4me3
+Lab: John Stamatoyannopoulos, UW
+Project: ENCODE
+Experiment Series: ENCSR064CWP
+candidate Cis-Regulatory Elements (cCREs): SCREEN",,13676488,12527720,NA,13.102104,29.544,H3K4me3,K562,E3,"Stamatoyannopoulos, UW"
+H3K4me3_K562_E4,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K4me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Reference Epigenome: ENCSR532GIR
+Experiment Series: ENCSR064CWP", Insufficient read depth,6873902,11454698,NA,12.601251,43.357,H3K4me3,K562,E4,"Bradley Bernstein, Broad"
+H3K4me3_A549_E1,"Histone ChIP-seq in A549
+Homo sapiens A549
+Target: H3K4me3
+Lab: Tim Reddy, Duke
+Project: GGR
+Treatment Time Series: ENCSR342NKR",,38415792,26481258,28130612,31.00922067,27.884,H3K4me3,A549,E1,"Tim Reddy, Duke"
+H3K4me3_A549_E2,"Histone ChIP-seq in A549
+Homo sapiens A549
+Target: H3K4me3
+Lab: John Stamatoyannopoulos, UW
+Project: ENCODE
+Reference Epigenome: ENCSR809EFN
+candidate Cis-Regulatory Elements (cCREs): SCREEN",,13591011,12766478,NA,13.1787445,32.532,H3K4me3,A549,E2,"John Stamatoyannopoulos, UW"
+H3K4me3_A549_E3,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 100 nM dexamethasone (agonist) for 1 hour
+Target: H3K4me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 100 nM dexamethasone (CHEBI:41879) for 1 hour
+Reference Epigenome: ENCSR568MFY
+candidate Cis-Regulatory Elements (cCREs): SCREEN",Poor library complexity; Severe bottlenecking,22890711,13138761,,18.014736,48.704,H3K4me3,A549,E3,"Bradley Bernstein, Broad"
+H3K4me3_A549_E4,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 100 nM dexamethasone (agonist) for 1 hour
+Target: H3K4me3
+Lab: Tim Reddy, Duke
+Project: GGR
+Treatment: 100 nM dexamethasone (CHEBI:41879) for 1 hour
+Treatment Time Series: ENCSR342NKR",,21164291,24045553,32355119,25.85498767,27.944,H3K4me3,A549,E4,"Tim Reddy, Duke"
+H3K9ac_K562_E1,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K9ac
+Lab: Peggy Farnham, USC
+Project: ENCODE
+Experiment Series: ENCSR277GDU",,12504523,23561939,NA,18.033231,120.499,H3K9ac,K562,E1,"Peggy Farnham, USC"
+H3K9ac_K562_E2,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K9ac
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Reference Epigenome: ENCSR532GIR
+Experiment Series: ENCSR277GDU",Insufficient read depth;,13361217,8702063,NA,11.03164,38.252,H3K9ac,K562,E2,"Bradley Bernstein, Broad"
+H3K9ac_A549_E1,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 0.02% ethanol for 1 hour
+Target: H3K9ac
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 0.02 percent ethanol (CHEBI:16236) for 1 hour
+Reference Epigenome: ENCSR706RZK",Insufficient read depth; Poor library complexity; Severe bottlenecking,34504813,7213651,NA,20.859232,47.957,H3K9ac,A549,E1,"Bradley Bernstein, Broad"
+H3K27ac_K562_E1,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K27ac
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Reference Epigenome: ENCSR612NLL, ENCSR532GIR
+candidate Cis-Regulatory Elements (cCREs): SCREEN",Extremely low read depth,10668892,4917355,NA,7.7931235,51.343,H3K27ac,K562,E1,"Bradley Bernstein, Broad"
+H3K27ac_A549_E1,"Histone ChIP-seq in A549
+Homo sapiens A549
+Target: H3K27ac
+Lab: Tim Reddy, Duke
+Project: GGR",,84069067,77912176,47192213,69.72448533,129.753,H3K27ac,A549,E1,"Tim Reddy, Duke"
+H3K27ac_A549_E2,"Histone ChIP-seq in A549
+Homo sapiens A549
+Target: H3K27ac
+Lab: Tim Reddy, Duke
+Project: GGR
+Treatment Time Series: ENCSR375BQN",,38299477,27117539,29503577,31.64019767,73.235,H3K27ac,A549,E2,"Tim Reddy, Duke"
+H3K27ac_A549_E3,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 0.02% ethanol for 1 hour
+Target: H3K27ac
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 0.02 percent ethanol (CHEBI:16236) for 1 hour
+Reference Epigenome: ENCSR706RZK, ENCSR797CXN
+candidate Cis-Regulatory Elements (cCREs): SCREEN",,26929230,15303526,,21.116378,48.528,H3K27ac,A549,E3,"Bradley Bernstein, Broad"
+H3K27ac_A549_E4,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 100 nM dexamethasone (agonist) for 1 hour
+Target: H3K27ac
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 100 nM dexamethasone (CHEBI:41879) for 1 hour
+Reference Epigenome: ENCSR568MFY
+candidate Cis-Regulatory Elements (cCREs): SCREEN",,27318667,19261746,,23.2902065,47.542,H3K27ac,A549,E4,"Bradley Bernstein, Broad"
+H3K27me3_K562_E1,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K27me3
+Lab: Peggy Farnham, USC
+Project: ENCODE
+Reference Epigenome: ENCSR612NLL
+Experiment Series: ENCSR617WDP",Insufficient read depth; Control insufficient read depth,12736085,21061179,NA,16.898632,145.139,H3K27me3,K562,E1,"Peggy Farnham, USC"
+H3K27me3_K562_E2,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K27me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Reference Epigenome: ENCSR532GIR
+Experiment Series: ENCSR617WDP",Insufficient read depth; Control insufficient read depth,67387628,7006490,9282332,27.89215,119.855,H3K27me3,K562,E2,"Bradley Bernstein, Broad"
+H3K27me3_A549_E1,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 100 nM dexamethasone (agonist) for 1 hour
+Target: H3K27me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 100 nM dexamethasone (CHEBI:41879) for 1 hour
+Reference Epigenome: ENCSR568MFY",Insufficient read depth,21502319,25407026,NA,23.4546725,139.963,H3K27me3,A549,E1,"Bradley Bernstein, Broad"
+H3K27me3_A549_E2,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 0.02% ethanol for 1 hour
+Target: H3K27me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 0.02 percent ethanol (CHEBI:16236) for 1 hour
+Reference Epigenome: ENCSR706RZK, ENCSR797CXN",Insufficient read depth,92239250,15568075,NA,53.9036625,172.278,H3K27me3,A549,E2,"Bradley Bernstein, Broad"
+H3K36me3_K562_E1,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K36me3
+Lab: John Stamatoyannopoulos, UW
+Project: ENCODE
+Experiment Series: ENCSR703ADQ
+Reference Epigenome: ENCSR612NLL",Control insufficient read depth; Insufficient read depth,12155869,13760542,NA,12.9582055,74.176,H3K36me3,K562,E1,"John Stamatoyannopoulos, UW"
+H3K36me3_K562_E2,"Histone ChIP-seq in K562
+Homo sapiens K562
+Target: H3K36me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Reference Epigenome: ENCSR532GIR
+Experiment Series: ENCSR703ADQ",Control insufficient read depth; Insufficient read depth,9248324,6079003,54458628,23.261985,161.791,H3K36me3,K562,E2,"Bradley Bernstein, Broad"
+H3K36me3_A549_E1,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 0.02% ethanol for 1 hour
+Target: H3K36me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 0.02 percent ethanol (CHEBI:16236) for 1 hour
+Reference Epigenome: ENCSR706RZK, ENCSR797CXN",Insufficient read depth,102944212,10748481,NA,56.8463465,136.039,H3K36me3,A549,E1,"Bradley Bernstein, Broad"
+H3K36me3_A549_E2,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 100 nM dexamethasone (agonist) for 1 hour
+Target: H3K36me3
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 100 nM dexamethasone (CHEBI:41879) for 1 hour
+Reference Epigenome: ENCSR568MFY",Insufficient read depth,24194941,26608800,NA,25.4018705,91.433,H3K36me3,A549,E2,"Bradley Bernstein, Broad"
