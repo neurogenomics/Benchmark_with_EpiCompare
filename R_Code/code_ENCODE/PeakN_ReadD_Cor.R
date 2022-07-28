@@ -18,10 +18,10 @@
 
 library(ggplot2)
 library(ggrepel)
-remove(P1)
-ENCODE <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/ENCODE_info_ALL_0726.csv", header = TRUE, sep = ",")
+# remove(P1)
+ENCODE_info <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/info_ENCODE/ENCODE_info_ALL_0728.csv", header = TRUE, sep = ",")
 
-P1 <- ggplot(ENCODE, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modification)) +
+p_peakN_readD <- ggplot(ENCODE_info, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modification)) +
     geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
     # theme_classic() +
     facet_grid(Histone_Modification~Cell_Line,margins=TRUE) +
@@ -34,8 +34,48 @@ P1 <- ggplot(ENCODE, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modific
         y = "Peak Number & Read Depth Correlation"
         )
 
-show(P1)   
+show(p_peakN_readD)   
  
+remove(p_peakN_readD_all)
+p_peakN_readD_all <- ggplot(ENCODE_info, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modification)) +
+    geom_point(size = 4,colour="black",shape=21,alpha=0.8) +
+    # theme_classic() +
+    # facet_grid(Histone_Modification~Cell_Line,margins=TRUE) +
+    labs(
+        title = "Peak Number & Read Depth Correlation",
+        subtitle = "A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Read Depth (million)",
+        y = "Peak Number & Read Depth Correlation"
+    )
+
+p_peakN_readD_all <- p_peakN_readD_all + geom_smooth(mapping = aes(x = Read_Depth, y = Peak_Number, fill = NULL), method="lm", color="red", linetype=2, show.legend = FALSE)
+
+show(p_peakN_readD_all)   
+
+
+
+p_peakN <- ggplot(ENCODE_info, aes(x = Experiment, y = Peak_Number, fill = Histone_Modification)) +
+    geom_bar(stat = 'identity', position = 'dodge') +
+    facet_grid(Histone_Modification~Cell_Line,margins=FALSE) +
+    labs(
+        title = "Peak Number",
+        subtitle = "A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Experiment",
+        y = "Peak Number (thousand)"
+    )
+
+
+show(p_peakN) 
+
+
+
+
+
+
 
 # P1 + 
 #     scale_x_continuous(

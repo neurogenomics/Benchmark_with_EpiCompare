@@ -24,7 +24,14 @@ Target: H3K4me1
 Lab: Bradley Bernstein, Broad
 Project: ENCODE
 Treatment: 0.02 percent ethanol (CHEBI:16236) for 1 hour
-Reference Epigenome: ENCSR706RZK, ENCSR797CXN",,63712790,11267446,NA,37.490118,130.082,H3K4me1,A549,E2,"Bradley Bernstein, Broad"
+Reference Epigenome: ENCSR706RZK, ENCSR797CXN",Insufficient read depth,63712790,11267446,NA,37.490118,130.082,H3K4me1,A549,E2,"Bradley Bernstein, Broad"
+H3K4me1_A549_E3,"Histone ChIP-seq in A549
+Homo sapiens A549 treated with 100 nM dexamethasone (agonist) for 1 hour
+Target: H3K4me1
+Lab: Bradley Bernstein, Broad
+Project: ENCODE
+Treatment: 100 nM dexamethasone (CHEBI:41879) for 1 hour
+Reference Epigenome: ENCSR568MFY",Insufficient read depth,29240623,25748949,,27.494786,118.71,H3K4me1,A549,E3,"Bradley Bernstein, Broad"
 H3K4me3_K562_E1,"Histone ChIP-seq in K562
 Homo sapiens K562
 Target: H3K4me3
@@ -51,7 +58,7 @@ Target: H3K4me3
 Lab: Bradley Bernstein, Broad
 Project: ENCODE
 Reference Epigenome: ENCSR532GIR
-Experiment Series: ENCSR064CWP", Insufficient read depth,6873902,11454698,NA,12.601251,43.357,H3K4me3,K562,E4,"Bradley Bernstein, Broad"
+Experiment Series: ENCSR064CWP",Insufficient read depth,6873902,11454698,NA,12.601251,43.357,H3K4me3,K562,E4,"Bradley Bernstein, Broad"
 H3K4me3_A549_E1,"Histone ChIP-seq in A549
 Homo sapiens A549
 Target: H3K4me3

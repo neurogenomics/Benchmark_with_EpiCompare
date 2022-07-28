@@ -14,8 +14,8 @@ library(reshape2)
 library(ggplot2)
 library(ggrepel)
 
-data(hg38_blacklist)
-ENCODE <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/ENCODE_info_ALL_0726.csv", header = TRUE, sep = ",")
+# data(hg38_blacklist)
+ENCODE <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/info_ENCODE/ENCODE_info_ALL_0727.csv", header = TRUE, sep = ",")
 ```
 
 #Pairwise comparison function
@@ -47,6 +47,167 @@ calculate_overlap <- function(peaklist,
     
     return(overlap_matrix)
 }
+```
+
+
+##H3K4me1
+##K562, 2 experiments from 2 labs
+##A549, 3 experiments from 2 labs
+```{r}
+H3K4me1_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF540NGG/@@download/ENCFF540NGG.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E1_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF236GZL/@@download/ENCFF236GZL.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E1_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF247KOA/@@download/ENCFF247KOA.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF965TUI/@@download/ENCFF965TUI.bed.gz", format = "narrowPeak")
+
+
+H3K4me1_K562_E2_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF617BGN/@@download/ENCFF617BGN.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E2_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF573AQP/@@download/ENCFF573AQP.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E2_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF553IZN/@@download/ENCFF553IZN.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E2_IRpseudo3 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF324RWP/@@download/ENCFF324RWP.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E2_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF135ZLM/@@download/ENCFF135ZLM.bed.gz", format = "narrowPeak")
+
+
+H3K4me1_A549_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF594YDK/@@download/ENCFF594YDK.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E1_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF527VIE/@@download/ENCFF527VIE.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E1_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF934RSS/@@download/ENCFF934RSS.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E1_IRpseudo3 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF899JLY/@@download/ENCFF899JLY.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E1_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF966DXR/@@download/ENCFF966DXR.bed.gz", format = "narrowPeak")
+
+
+H3K4me1_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF116HIQ/@@download/ENCFF116HIQ.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E2_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF470ZPR/@@download/ENCFF470ZPR.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E2_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF099UFX/@@download/ENCFF099UFX.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF537NQH/@@download/ENCFF537NQH.bed.gz", format = "narrowPeak")
+
+
+H3K4me1_A549_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF344DAB/@@download/ENCFF344DAB.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E3_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF566XZC/@@download/ENCFF566XZC.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E3_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF626PAC/@@download/ENCFF626PAC.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E3_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF094DNG/@@download/ENCFF094DNG.bed.gz", format = "narrowPeak")
+
+
+Peak_list_H3K4me1 <- list(H3K4me1_K562_E1_IRpseudo12,H3K4me1_K562_E1_IRpseudo1,H3K4me1_K562_E1_IRpseudo2,H3K4me1_K562_E1_IR12,H3K4me1_K562_E2_IRpseudo123,H3K4me1_K562_E2_IRpseudo1,H3K4me1_K562_E2_IRpseudo2,H3K4me1_K562_E2_IRpseudo3,H3K4me1_K562_E2_IR123,H3K4me1_A549_E1_IRpseudo123,H3K4me1_A549_E1_IRpseudo1,H3K4me1_A549_E1_IRpseudo2,H3K4me1_A549_E1_IRpseudo3,H3K4me1_A549_E1_IR123,H3K4me1_A549_E2_IRpseudo12,H3K4me1_A549_E2_IRpseudo1,H3K4me1_A549_E2_IRpseudo2,H3K4me1_A549_E2_IR12,H3K4me1_A549_E3_IRpseudo12,H3K4me1_A549_E3_IRpseudo1,H3K4me1_A549_E3_IRpseudo2,H3K4me1_A549_E3_IR12)
+
+names(Peak_list_H3K4me1) <- c("H3K4me1_K562_E1_IRpseudo12","H3K4me1_K562_E1_IRpseudo1","H3K4me1_K562_E1_IRpseudo2","H3K4me1_K562_E1_IR12","H3K4me1_K562_E2_IRpseudo123","H3K4me1_K562_E2_IRpseudo1","H3K4me1_K562_E2_IRpseudo2","H3K4me1_K562_E2_IRpseudo3","H3K4me1_K562_E2_IR123","H3K4me1_A549_E1_IRpseudo123","H3K4me1_A549_E1_IRpseudo1","H3K4me1_A549_E1_IRpseudo2","H3K4me1_A549_E1_IRpseudo3","H3K4me1_A549_E1_IR123","H3K4me1_A549_E2_IRpseudo12","H3K4me1_A549_E2_IRpseudo1","H3K4me1_A549_E2_IRpseudo2","H3K4me1_A549_E2_IR12","H3K4me1_A549_E3_IRpseudo12","H3K4me1_A549_E3_IRpseudo1","H3K4me1_A549_E3_IRpseudo2","H3K4me1_A549_E3_IR12")
+```
+
+```{r}
+# remove(mtrx_H3K4me1_K562)
+# mtrx_H3K4me1 <- calculate_overlap(Peak_list_H3K4me1)
+# write.csv(mtrx_H3K4me1, file = "/Users/xindong/Downloads/Data_Analysis/cutandrun/data_ENCODE_overlap_matrix/matrix_H3K4me1.csv")
+# heatmap <- overlap_heatmap(Peak_list_H3K4me1)
+# show(heatmap)
+mtrx_H3K4me1 <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/data_ENCODE_overlap_matrix/matrix_H3K4me1.csv", header = TRUE)
+rownames(mtrx_H3K4me1) <- mtrx_H3K4me1[,1]
+mtrx_H3K4me1 <- mtrx_H3K4me1[,-1]
+# kkk <- data.frame(colnames(mtrx_H3K4me1))
+
+REP_H3K4me1 <- as.data.frame(matrix(nrow=0,ncol=5))
+names(REP_H3K4me1) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+# range of each experiment 
+# K562: E1 c(1,4); E2 c(5,9)
+# A549: E1 c(10,14); E2 c(15,18), E3 c(19,22) 
+rg_list_H3K4me1 <- list(c(1,4),c(5,9),c(10,14),c(15,18),c(19,22)) 
+
+#in-lab replicates
+for (rg in rg_list_H3K4me1){
+    for (index_col in (rg[1]+1):rg[2]){
+        for (index_row in rg[1]:(index_col - 1)){
+            comparison_names <- paste(colnames(mtrx_H3K4me1)[index_col],rownames(mtrx_H3K4me1)[index_row],sep = "_in_")
+            REP_H3K4me1[comparison_names,"Recall"] <- mtrx_H3K4me1[index_row,index_col]
+            REP_H3K4me1[comparison_names,"Precision"] <- mtrx_H3K4me1[index_col,index_row]
+            REP_H3K4me1[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][1]
+            REP_H3K4me1[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][2]
+            REP_H3K4me1[comparison_names,"Experiment"] <- strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][3]
+        }
+    }
+}
+
+REP_H3K4me1$F1_Score <- 2 * REP_H3K4me1$Precision * REP_H3K4me1$Recall / (REP_H3K4me1$Precision + REP_H3K4me1$Recall)
+
+
+#reshape the long data
+rshape_REP_H3K4me1 <- melt(REP_H3K4me1, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_REP_H3K4me1)[4] <- "Cor_type"
+colnames(rshape_REP_H3K4me1)[5] <- "Data"
+
+P_inlab <- ggplot(rshape_REP_H3K4me1, aes(x = Cor_type, y = Data, fill = Cell_Line)) +
+    geom_boxplot() +
+    geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=TRUE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Correlation of in-lab replicates",
+        subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Peak Overlap (%)"
+    )
+
+show(P_inlab) 
+
+
+#inter-lab replicates
+# K562: E1 c(1,4); E2 c(5,9)
+# A549: E1 c(10,14); E2 c(15,18), E3 c(19,22) 
+
+rg_inter_lab_H3K4me1 <- list(c(1,4,5,9),
+                             c(10,14,15,18),c(10,14,19,22),
+                             c(15,18,19,22)
+)
+
+#inter-lab replicates
+EXP_H3K4me1 <- as.data.frame(matrix(nrow=0,ncol=5))
+names(EXP_H3K4me1) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+for (rg in rg_inter_lab_H3K4me1){
+    
+    for (index_col in (rg[1]):rg[2]){
+        
+        for (index_row in rg[3]:rg[4]){
+            comparison_names <- paste(colnames(mtrx_H3K4me1)[index_col],rownames(mtrx_H3K4me1)[index_row],sep = "_in_")
+            EXP_H3K4me1[comparison_names,"Recall"] <- mtrx_H3K4me1[index_row,index_col]
+            EXP_H3K4me1[comparison_names,"Precision"] <- mtrx_H3K4me1[index_col,index_row]
+            
+            EXP_H3K4me1[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][1]
+            EXP_H3K4me1[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][2]
+            exp_compare <- paste(strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][3],strsplit(colnames(mtrx_H3K4me1)[index_row],split ="_")[[1]][3],sep = "_in_")
+            
+            EXP_H3K4me1[comparison_names,"Experiment"] <- exp_compare
+        }
+    }
+}
+
+# check frequence
+# as.data.frame(table(EXP_H3K4me1$Experiment))
+EXP_H3K4me1$F1_Score <- 2 * EXP_H3K4me1$Precision * EXP_H3K4me1$Recall / (EXP_H3K4me1$Precision + EXP_H3K4me1$Recall)
+
+#reshape the long data
+rshape_EXP_H3K4me1 <- melt(EXP_H3K4me1, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_EXP_H3K4me1)[4] <- "Cor_type"
+colnames(rshape_EXP_H3K4me1)[5] <- "Data"
+
+P_interlab <- ggplot(rshape_EXP_H3K4me1, aes(x = Cor_type, y = Data, fill = Cell_Line)) +
+    geom_boxplot() +
+    geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=FALSE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Correlation of in-lab replicates",
+        subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Peak Overlap (%)"
+    )
+
+show(P_interlab) 
 ```
 
 
@@ -227,6 +388,148 @@ P_interlab <- ggplot(rshape_EXP_H3K4me3, aes(x = Cor_type, y = Data, fill = Cell
     )
 
 show(P_interlab) 
+
+```
+
+##H3K9ac
+##K562, 2 experiments from 2 labs
+##A549, 1 experiments from 1 lab
+```{r}
+H3K9ac_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF148UQI/@@download/ENCFF148UQI.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E1_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF568DJI/@@download/ENCFF568DJI.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E1_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF882KNK/@@download/ENCFF882KNK.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF451CEN/@@download/ENCFF451CEN.bed.gz", format = "narrowPeak")
+
+H3K9ac_K562_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF891CHI/@@download/ENCFF891CHI.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E2_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF789NDS/@@download/ENCFF789NDS.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E2_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF485EUA/@@download/ENCFF485EUA.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF666PTK/@@download/ENCFF666PTK.bed.gz", format = "narrowPeak")
+
+
+H3K9ac_A549_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF350BNS/@@download/ENCFF350BNS.bed.gz", format = "narrowPeak")
+H3K9ac_A549_E1_IRpseudo1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF985ZTF/@@download/ENCFF985ZTF.bed.gz", format = "narrowPeak")
+H3K9ac_A549_E1_IRpseudo2 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF984PPY/@@download/ENCFF984PPY.bed.gz", format = "narrowPeak")
+H3K9ac_A549_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF948TJU/@@download/ENCFF948TJU.bed.gz", format = "narrowPeak")
+
+Peak_list_H3K9ac <- list(H3K9ac_K562_E1_IRpseudo12,H3K9ac_K562_E1_IRpseudo1,H3K9ac_K562_E1_IRpseudo2,H3K9ac_K562_E1_IR12,H3K9ac_K562_E2_IRpseudo12,H3K9ac_K562_E2_IRpseudo1,H3K9ac_K562_E2_IRpseudo2,H3K9ac_K562_E2_IR12,H3K9ac_A549_E1_IRpseudo12,H3K9ac_A549_E1_IRpseudo1,H3K9ac_A549_E1_IRpseudo2,H3K9ac_A549_E1_IR12)
+
+names(Peak_list_H3K9ac) <- c("H3K9ac_K562_E1_IRpseudo12","H3K9ac_K562_E1_IRpseudo1","H3K9ac_K562_E1_IRpseudo2","H3K9ac_K562_E1_IR12","H3K9ac_K562_E2_IRpseudo12","H3K9ac_K562_E2_IRpseudo1","H3K9ac_K562_E2_IRpseudo2","H3K9ac_K562_E2_IR12","H3K9ac_A549_E1_IRpseudo12","H3K9ac_A549_E1_IRpseudo1","H3K9ac_A549_E1_IRpseudo2","H3K9ac_A549_E1_IR12")
+
+```
+
+```{r}
+# mtrx_H3K9ac <- calculate_overlap(Peak_list_H3K9ac)
+# 
+# write.csv(mtrx_H3K9ac, file = "/Users/xindong/Downloads/Data_Analysis/cutandrun/data_ENCODE_overlap_matrix/matrix_H3K9ac.csv")
+# 
+# heatmap <- overlap_heatmap(Peak_list_H3K9ac)
+# show(heatmap)
+mtrx_H3K9ac <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/data_ENCODE_overlap_matrix/matrix_H3K9ac.csv", header = TRUE)
+rownames(mtrx_H3K9ac) <- mtrx_H3K9ac[,1]
+mtrx_H3K9ac <- mtrx_H3K9ac[,-1]
+# remove(REP_H3K9ac)
+# kkk <- data.frame(colnames(mtrx_H3K9ac))
+REP_H3K9ac <- as.data.frame(matrix(nrow=0,ncol=5))
+names(REP_H3K9ac) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+# range of each experiment 
+# K562: E1 c(1,4); E2 c(5,8)
+# A549: E1 c(9,12)
+rg_list_H3K9ac <- list(c(1,4),c(5,8),c(9,12) ) 
+
+#in-lab replicates
+for (rg in rg_list_H3K9ac){
+    for (index_col in (rg[1]+1):rg[2]){
+        for (index_row in rg[1]:(index_col - 1)){
+            comparison_names <- paste(colnames(mtrx_H3K9ac)[index_col],rownames(mtrx_H3K9ac)[index_row],sep = "_in_")
+            REP_H3K9ac[comparison_names,"Recall"] <- mtrx_H3K9ac[index_row,index_col]
+            REP_H3K9ac[comparison_names,"Precision"] <- mtrx_H3K9ac[index_col,index_row]
+            REP_H3K9ac[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K9ac)[index_col],split ="_")[[1]][1]
+            REP_H3K9ac[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K9ac)[index_col],split ="_")[[1]][2]
+            REP_H3K9ac[comparison_names,"Experiment"] <- strsplit(colnames(mtrx_H3K9ac)[index_col],split ="_")[[1]][3]
+        }
+    }
+}
+
+REP_H3K9ac$F1_Score <- 2 * REP_H3K9ac$Precision * REP_H3K9ac$Recall / (REP_H3K9ac$Precision + REP_H3K9ac$Recall)
+
+
+#reshape the long data
+rshape_REP_H3K9ac <- melt(REP_H3K9ac, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_REP_H3K9ac)[4] <- "Cor_type"
+colnames(rshape_REP_H3K9ac)[5] <- "Data"
+
+P_inlab <- ggplot(rshape_REP_H3K9ac, aes(x = Cor_type, y = Data, fill = Cell_Line)) +
+    geom_boxplot() +
+    geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=TRUE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Correlation of in-lab replicates",
+        subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Peak Overlap (%)"
+    )
+
+show(P_inlab) 
+# range of each experiment 
+# K562: E1 c(1,4); E2 c(5,8)
+# A549: E1 c(9,12)
+rg_inter_lab_H3K9ac <- list(c(1,4,5,8))
+
+#inter-lab replicates
+EXP_H3K9ac <- as.data.frame(matrix(nrow=0,ncol=5))
+names(EXP_H3K9ac) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+for (rg in rg_inter_lab_H3K9ac){
+    
+    for (index_col in (rg[1]):rg[2]){
+        
+        for (index_row in rg[3]:rg[4]){
+            comparison_names <- paste(colnames(mtrx_H3K9ac)[index_col],rownames(mtrx_H3K9ac)[index_row],sep = "_in_")
+            EXP_H3K9ac[comparison_names,"Recall"] <- mtrx_H3K9ac[index_row,index_col]
+            EXP_H3K9ac[comparison_names,"Precision"] <- mtrx_H3K9ac[index_col,index_row]
+            
+            EXP_H3K9ac[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K9ac)[index_col],split ="_")[[1]][1]
+            EXP_H3K9ac[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K9ac)[index_col],split ="_")[[1]][2]
+            exp_compare <- paste(strsplit(colnames(mtrx_H3K9ac)[index_col],split ="_")[[1]][3],strsplit(colnames(mtrx_H3K9ac)[index_row],split ="_")[[1]][3],sep = "_in_")
+            
+            EXP_H3K9ac[comparison_names,"Experiment"] <- exp_compare
+        }
+    }
+}
+
+# check frequence
+# as.data.frame(table(EXP_H3K9ac$Experiment))
+EXP_H3K9ac$F1_Score <- 2 * EXP_H3K9ac$Precision * EXP_H3K9ac$Recall / (EXP_H3K9ac$Precision + EXP_H3K9ac$Recall)
+
+#reshape the long data
+rshape_EXP_H3K9ac <- melt(EXP_H3K9ac, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_EXP_H3K9ac)[4] <- "Cor_type"
+colnames(rshape_EXP_H3K9ac)[5] <- "Data"
+
+P_interlab <- ggplot(rshape_EXP_H3K9ac, aes(x = Cor_type, y = Data, fill = Cell_Line)) +
+    geom_boxplot() +
+    geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=FALSE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Correlation of in-lab replicates",
+        subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Peak Overlap (%)"
+    )
+
+show(P_interlab) 
+
 
 ```
 
@@ -690,7 +993,216 @@ show(P_interlab)
 ```
 
 
+#Pseudoreplicate and Replicate 
+```{r}
+H3K4me1_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF540NGG/@@download/ENCFF540NGG.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF965TUI/@@download/ENCFF965TUI.bed.gz", format = "narrowPeak")
 
+H3K4me1_K562_E2_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF617BGN/@@download/ENCFF617BGN.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E2_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF135ZLM/@@download/ENCFF135ZLM.bed.gz", format = "narrowPeak")
+
+H3K4me1_A549_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF594YDK/@@download/ENCFF594YDK.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E1_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF966DXR/@@download/ENCFF966DXR.bed.gz", format = "narrowPeak")
+
+H3K4me1_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF116HIQ/@@download/ENCFF116HIQ.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF537NQH/@@download/ENCFF537NQH.bed.gz", format = "narrowPeak")
+
+H3K4me1_A549_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF344DAB/@@download/ENCFF344DAB.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E3_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF094DNG/@@download/ENCFF094DNG.bed.gz", format = "narrowPeak")
+
+
+H3K4me3_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF885FQN/@@download/ENCFF885FQN.bed.gz", format = "narrowPeak")
+H3K4me3_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF403DTU/@@download/ENCFF403DTU.bed.gz", format = "narrowPeak")
+
+H3K4me3_K562_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF122CSI/@@download/ENCFF122CSI.bed.gz", format = "narrowPeak")
+H3K4me3_K562_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF246IEW/@@download/ENCFF246IEW.bed.gz", format = "narrowPeak")
+
+H3K4me3_K562_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF313FYW/@@download/ENCFF313FYW.bed.gz", format = "narrowPeak")
+H3K4me3_K562_E3_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF706WUF/@@download/ENCFF706WUF.bed.gz", format = "narrowPeak")
+
+H3K4me3_K562_E4_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF689QIJ/@@download/ENCFF689QIJ.bed.gz", format = "narrowPeak")
+H3K4me3_K562_E4_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF937XKN/@@download/ENCFF937XKN.bed.gz", format = "narrowPeak")
+
+H3K4me3_A549_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF535EYL/@@download/ENCFF535EYL.bed.gz", format = "narrowPeak")
+H3K4me3_A549_E1_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF933ONG/@@download/ENCFF933ONG.bed.gz", format = "narrowPeak")
+
+H3K4me3_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF361TGO/@@download/ENCFF361TGO.bed.gz", format = "narrowPeak")
+H3K4me3_A549_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF048XCK/@@download/ENCFF048XCK.bed.gz", format = "narrowPeak")
+
+H3K4me3_A549_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF244LVG/@@download/ENCFF244LVG.bed.gz", format = "narrowPeak")
+H3K4me3_A549_E3_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF269PMT/@@download/ENCFF269PMT.bed.gz", format = "narrowPeak")
+
+H3K4me3_A549_E4_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF958EXL/@@download/ENCFF958EXL.bed.gz", format = "narrowPeak")
+H3K4me3_A549_E4_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF337QER/@@download/ENCFF337QER.bed.gz", format = "narrowPeak")
+
+H3K9ac_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF148UQI/@@download/ENCFF148UQI.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF451CEN/@@download/ENCFF451CEN.bed.gz", format = "narrowPeak")
+
+H3K9ac_K562_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF891CHI/@@download/ENCFF891CHI.bed.gz", format = "narrowPeak")
+H3K9ac_K562_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF666PTK/@@download/ENCFF666PTK.bed.gz", format = "narrowPeak")
+
+H3K9ac_A549_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF350BNS/@@download/ENCFF350BNS.bed.gz", format = "narrowPeak")
+H3K9ac_A549_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF948TJU/@@download/ENCFF948TJU.bed.gz", format = "narrowPeak")
+
+
+H3K27me3_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF801AHF/@@download/ENCFF801AHF.bed.gz", format = "narrowPeak")
+H3K27me3_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF795ZOS/@@download/ENCFF795ZOS.bed.gz", format = "narrowPeak")
+
+H3K27me3_K562_E2_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF323WOT/@@download/ENCFF323WOT.bed.gz", format = "narrowPeak")
+H3K27me3_K562_E2_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF509EWI/@@download/ENCFF509EWI.bed.gz", format = "narrowPeak")
+
+H3K27me3_A549_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF522WJJ/@@download/ENCFF522WJJ.bed.gz", format = "narrowPeak")
+H3K27me3_A549_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF218OLP/@@download/ENCFF218OLP.bed.gz", format = "narrowPeak")
+
+H3K27me3_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF684ZZH/@@download/ENCFF684ZZH.bed.gz", format = "narrowPeak")
+H3K27me3_A549_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF103IZD/@@download/ENCFF103IZD.bed.gz", format = "narrowPeak")
+
+
+H3K27ac_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF864OSZ/@@download/ENCFF864OSZ.bed.gz", format = "narrowPeak")
+H3K27ac_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF439SDV/@@download/ENCFF439SDV.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF747IZX/@@download/ENCFF747IZX.bed.gz", format = "narrowPeak")
+H3K27ac_A549_E1_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF130XKG/@@download/ENCFF130XKG.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E2_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF918FET/@@download/ENCFF918FET.bed.gz", format = "narrowPeak")
+H3K27ac_A549_E2_IR123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF660AJK/@@download/ENCFF660AJK.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF443MVY/@@download/ENCFF443MVY.bed.gz", format = "narrowPeak")
+H3K27ac_A549_E3_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF401ODR/@@download/ENCFF401ODR.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E4_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF035VXU/@@download/ENCFF035VXU.bed.gz", format = "narrowPeak")
+H3K27ac_A549_E4_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF673GIV/@@download/ENCFF673GIV.bed.gz", format = "narrowPeak")
+
+H3K36me3_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF901ACN/@@download/ENCFF901ACN.bed.gz", format = "narrowPeak")
+H3K36me3_K562_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF561OUZ/@@download/ENCFF561OUZ.bed.gz", format = "narrowPeak")
+
+H3K36me3_K562_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF035WTT/@@download/ENCFF035WTT.bed.gz", format = "narrowPeak")
+H3K36me3_K562_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF520LHY/@@download/ENCFF520LHY.bed.gz", format = "narrowPeak")
+
+H3K36me3_A549_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF584FSY/@@download/ENCFF584FSY.bed.gz", format = "narrowPeak")
+H3K36me3_A549_E1_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF944TFP/@@download/ENCFF944TFP.bed.gz", format = "narrowPeak")
+
+H3K36me3_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF127LEC/@@download/ENCFF127LEC.bed.gz", format = "narrowPeak")
+H3K36me3_A549_E2_IR12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF479OUD/@@download/ENCFF479OUD.bed.gz", format = "narrowPeak")
+
+cor_type_rep_peak_list <- list(H3K4me1_K562_E1_IRpseudo12,H3K4me1_K562_E1_IR12,
+                               H3K4me1_K562_E2_IRpseudo123,H3K4me1_K562_E2_IR123,
+                               H3K4me1_A549_E1_IRpseudo123,H3K4me1_A549_E1_IR123,
+                               H3K4me1_A549_E2_IRpseudo12,H3K4me1_A549_E2_IR12,
+                               H3K4me1_A549_E3_IRpseudo12,H3K4me1_A549_E3_IR12,
+                               H3K4me3_K562_E1_IRpseudo12,H3K4me3_K562_E1_IR12,
+                               H3K4me3_K562_E2_IRpseudo12,H3K4me3_K562_E2_IR12,
+                               H3K4me3_K562_E3_IRpseudo12,H3K4me3_K562_E3_IR12,
+                               H3K4me3_K562_E4_IRpseudo12,H3K4me3_K562_E4_IR12,
+                               H3K4me3_A549_E1_IRpseudo123,H3K4me3_A549_E1_IR123,
+                               H3K4me3_A549_E2_IRpseudo12,H3K4me3_A549_E2_IR12,
+                               H3K4me3_A549_E3_IRpseudo12,H3K4me3_A549_E3_IR12,
+                               H3K4me3_A549_E4_IRpseudo123,H3K4me3_A549_E4_IR123,
+                               H3K9ac_K562_E1_IRpseudo12,H3K9ac_K562_E1_IR12,
+                               H3K9ac_K562_E2_IRpseudo12,H3K9ac_K562_E2_IR12,
+                               H3K9ac_A549_E1_IRpseudo12,H3K9ac_A549_E1_IR12,
+                               H3K27me3_K562_E1_IRpseudo12,H3K27me3_K562_E1_IR12,
+                               H3K27me3_K562_E2_IRpseudo123,H3K27me3_K562_E2_IR123,
+                               H3K27me3_A549_E1_IRpseudo12,H3K27me3_A549_E1_IR12,
+                               H3K27me3_A549_E2_IRpseudo12,H3K27me3_A549_E2_IR12,
+                               H3K27ac_K562_E1_IRpseudo12,H3K27ac_K562_E1_IR12,
+                               H3K27ac_A549_E1_IRpseudo123,H3K27ac_A549_E1_IR123,
+                               H3K27ac_A549_E2_IRpseudo123,H3K27ac_A549_E2_IR123,
+                               H3K27ac_A549_E3_IRpseudo12,H3K27ac_A549_E3_IR12,
+                               H3K27ac_A549_E4_IRpseudo12,H3K27ac_A549_E4_IR12,
+                               H3K36me3_K562_E1_IRpseudo12,H3K36me3_K562_E1_IR12,
+                               H3K36me3_K562_E2_IRpseudo12,H3K36me3_K562_E2_IR12,
+                               H3K36me3_A549_E1_IRpseudo12,H3K36me3_A549_E1_IR12,
+                               H3K36me3_A549_E2_IRpseudo12,H3K36me3_A549_E2_IR12
+)
+
+names(cor_type_rep_peak_list) <- c("H3K4me1_K562_E1_IRpseudo12","H3K4me1_K562_E1_IR12",
+                                   "H3K4me1_K562_E2_IRpseudo123","H3K4me1_K562_E2_IR123",
+                                   "H3K4me1_A549_E1_IRpseudo123","H3K4me1_A549_E1_IR123",
+                                   "H3K4me1_A549_E2_IRpseudo12","H3K4me1_A549_E2_IR12",
+                                   "H3K4me1_A549_E3_IRpseudo12","H3K4me1_A549_E3_IR12",
+                                   "H3K4me3_K562_E1_IRpseudo12","H3K4me3_K562_E1_IR12",
+                                   "H3K4me3_K562_E2_IRpseudo12","H3K4me3_K562_E2_IR12",
+                                   "H3K4me3_K562_E3_IRpseudo12","H3K4me3_K562_E3_IR12",
+                                   "H3K4me3_K562_E4_IRpseudo12","H3K4me3_K562_E4_IR12",
+                                   "H3K4me3_A549_E1_IRpseudo123","H3K4me3_A549_E1_IR123",
+                                   "H3K4me3_A549_E2_IRpseudo12","H3K4me3_A549_E2_IR12",
+                                   "H3K4me3_A549_E3_IRpseudo12","H3K4me3_A549_E3_IR12",
+                                   "H3K4me3_A549_E4_IRpseudo123","H3K4me3_A549_E4_IR123",
+                                   "H3K9ac_K562_E1_IRpseudo12","H3K9ac_K562_E1_IR12",
+                                   "H3K9ac_K562_E2_IRpseudo12","H3K9ac_K562_E2_IR12",
+                                   "H3K9ac_A549_E1_IRpseudo12","H3K9ac_A549_E1_IR12",
+                                   "H3K27me3_K562_E1_IRpseudo12","H3K27me3_K562_E1_IR12",
+                                   "H3K27me3_K562_E2_IRpseudo123","H3K27me3_K562_E2_IR123",
+                                   "H3K27me3_A549_E1_IRpseudo12","H3K27me3_A549_E1_IR12",
+                                   "H3K27me3_A549_E2_IRpseudo12","H3K27me3_A549_E2_IR12",
+                                   "H3K27ac_K562_E1_IRpseudo12","H3K27ac_K562_E1_IR12",
+                                   "H3K27ac_A549_E1_IRpseudo123","H3K27ac_A549_E1_IR123",
+                                   "H3K27ac_A549_E2_IRpseudo123","H3K27ac_A549_E2_IR123",
+                                   "H3K27ac_A549_E3_IRpseudo12","H3K27ac_A549_E3_IR12",
+                                   "H3K27ac_A549_E4_IRpseudo12","H3K27ac_A549_E4_IR12",
+                                   "H3K36me3_K562_E1_IRpseudo12","H3K36me3_K562_E1_IR12",
+                                   "H3K36me3_K562_E2_IRpseudo12","H3K36me3_K562_E2_IR12",
+                                   "H3K36me3_A549_E1_IRpseudo12","H3K36me3_A549_E1_IR12",
+                                   "H3K36me3_A549_E2_IRpseudo12","H3K36me3_A549_E2_IR12")
+
+```
+
+```{r}
+# mtrx_PseudoR_R <- calculate_overlap(cor_type_rep_peak_list)
+# 
+# write.csv(mtrx_PseudoR_R, file = "/Users/xindong/Downloads/Data_Analysis/cutandrun/data_ENCODE_overlap_matrix/mtrx_PseudoR_R.csv")
+# heatmap <- overlap_heatmap(cor_type_rep_peak_list)
+# 
+# show(heatmap)
+
+mtrx_PseudoR_R <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/data_ENCODE_overlap_matrix/mtrx_PseudoR_R.csv", header = TRUE)
+rownames(mtrx_PseudoR_R) <- mtrx_PseudoR_R[,1]
+mtrx_PseudoR_R <- mtrx_PseudoR_R[,-1]
+# kkk <- data.frame(colnames(mtrx_PseudoR_R))
+
+REP_PseudoR_R <- as.data.frame(matrix(nrow=0,ncol=5))
+names(REP_PseudoR_R) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+# range of each experiment 
+rg_list_PseudoR_R <- seq(from = 2, to = length(mtrx_PseudoR_R), by = 2) 
+
+for (index_col in rg_list_PseudoR_R){
+    index_row = index_col - 1
+    comparison_names <- paste(colnames(mtrx_PseudoR_R)[index_row],rownames(mtrx_PseudoR_R)[index_col],sep = "_in_")
+    REP_PseudoR_R[comparison_names,"Precision"] <- mtrx_PseudoR_R[index_row,index_col]
+    REP_PseudoR_R[comparison_names,"Recall"] <- mtrx_PseudoR_R[index_col,index_row]
+    REP_PseudoR_R[comparison_names,"Modification"] <- strsplit(colnames(mtrx_PseudoR_R)[index_col],split ="_")[[1]][1]
+    REP_PseudoR_R[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_PseudoR_R)[index_col],split ="_")[[1]][2]
+    REP_PseudoR_R[comparison_names,"Experiment"] <- strsplit(colnames(mtrx_PseudoR_R)[index_col],split ="_")[[1]][3]
+}
+
+REP_PseudoR_R$F1_Score <- 2 * REP_PseudoR_R$Precision * REP_PseudoR_R$Recall / (REP_PseudoR_R$Precision + REP_PseudoR_R$Recall)
+
+
+#reshape the long data
+rshape_REP_PseudoR_R <- melt(REP_PseudoR_R, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_REP_PseudoR_R)[4] <- "Cor_type"
+colnames(rshape_REP_PseudoR_R)[5] <- "Data"
+
+P_inlab <- ggplot(rshape_REP_PseudoR_R, aes(x = Cor_type, y = Data, fill = Experiment)) +
+    geom_boxplot(mapping = aes(x = Cor_type, y = Data, fill = NULL)) +
+    geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
+    # theme_classic() +
+    facet_grid(Modification~Cell_Line, margins=TRUE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Correlation of in-lab replicates",
+        subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Peak Overlap (%)"
+    )
+
+show(P_inlab) 
+```
 
 
 
