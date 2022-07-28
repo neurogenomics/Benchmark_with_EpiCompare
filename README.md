@@ -1,5 +1,7 @@
-# CUTandRUN_EpiCompare
-CUT&amp;RUN EpiCompare reports by Xindong; 
+# ENCODE reproducibility, cutandrun & TIP-seq benchmark
+Xindong; 
+
+cutandrun report: 
 See [final web report](https://neurogenomics.github.io/CUTandRUN_EpiCompare/DA_Web/Data_Analysis/Data_Analysis_Xindong.html), or at [MSc course server](http://msc.bc.ic.ac.uk/~xs221/DA_Web/Data_Analysis/Data_Analysis_Xindong.html)(with Imperial login)
 
 ### ENCODE correlation bewteen experiments and replicates: 
