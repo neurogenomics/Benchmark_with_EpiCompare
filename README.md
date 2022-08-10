@@ -4,6 +4,9 @@ Xindong;
 cutandrun report: 
 See [final web report](https://neurogenomics.github.io/CUTandRUN_EpiCompare/DA_Web/Data_Analysis/Data_Analysis_Xindong.html), or at [MSc course server](http://msc.bc.ic.ac.uk/~xs221/DA_Web/Data_Analysis/Data_Analysis_Xindong.html)(with Imperial login)
 
+see updating [slides](https://docs.google.com/presentation/d/1RUutxp24KqfAtOKvWkCQTmH0ZVNXelx9vwVgdoKXpAU/edit?usp=sharing) of the progress
+see [notes](https://docs.google.com/document/d/11hHNdTwsNA4ggAtvPus_hpmdrkUIPJjVDAXd-HnrSdg/edit?usp=sharing) for information from literature 
+
 ### ENCODE correlation bewteen experiments and replicates: 
 Annotation: H3K4me3_EN4G38_E1_IRpseudo123 <br>
 PTM name;<br>
