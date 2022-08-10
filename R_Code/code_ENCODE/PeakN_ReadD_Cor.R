@@ -40,14 +40,14 @@ remove(p_peakN_readD_all)
 p_peakN_readD_all <- ggplot(ENCODE_info, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modification)) +
     geom_point(size = 4,colour="black",shape=21,alpha=0.8) +
     # theme_classic() +
-    # facet_grid(Histone_Modification~Cell_Line,margins=TRUE) +
+    facet_wrap(~Cell_Line) +
     labs(
         title = "Peak Number & Read Depth Correlation",
         subtitle = "A549 & K562",
         #tag = "",
         #caption = "",
         x = "Read Depth (million)",
-        y = "Peak Number & Read Depth Correlation"
+        y = "Peak Number (thousand)"
     )
 
 p_peakN_readD_all <- p_peakN_readD_all + geom_smooth(mapping = aes(x = Read_Depth, y = Peak_Number, fill = NULL), method="lm", color="red", linetype=2, show.legend = FALSE)
