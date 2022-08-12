@@ -15,7 +15,7 @@ library(ggplot2)
 library(ggrepel)
 
 # data(hg38_blacklist)
-ENCODE <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/info_ENCODE/ENCODE_info_ALL_0727.csv", header = TRUE, sep = ",")
+ENCODE <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/info_ENCODE/ENCODE_info_ALL_0728.csv", header = TRUE, sep = ",")
 ```
 
 #Pairwise comparison function
@@ -209,6 +209,82 @@ P_interlab <- ggplot(rshape_EXP_H3K4me1, aes(x = Cor_type, y = Data, fill = Cell
 
 show(P_interlab) 
 ```
+##pseudo only 
+```{r}
+H3K4me1_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF540NGG/@@download/ENCFF540NGG.bed.gz", format = "narrowPeak")
+H3K4me1_K562_E2_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF617BGN/@@download/ENCFF617BGN.bed.gz", format = "narrowPeak")
+
+H3K4me1_A549_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF594YDK/@@download/ENCFF594YDK.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF116HIQ/@@download/ENCFF116HIQ.bed.gz", format = "narrowPeak")
+H3K4me1_A549_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF344DAB/@@download/ENCFF344DAB.bed.gz", format = "narrowPeak")
+
+
+Peak_list_H3K4me1 <- list(H3K4me1_K562_E1_IRpseudo12,H3K4me1_K562_E2_IRpseudo123,H3K4me1_A549_E1_IRpseudo123,H3K4me1_A549_E2_IRpseudo12,H3K4me1_A549_E3_IRpseudo12)
+
+names(Peak_list_H3K4me1) <- c("H3K4me1_K562_E1_IRpseudo12","H3K4me1_K562_E2_IRpseudo123","H3K4me1_A549_E1_IRpseudo123","H3K4me1_A549_E2_IRpseudo12","H3K4me1_A549_E3_IRpseudo12")
+
+mtrx_H3K4me1 <- calculate_overlap(Peak_list_H3K4me1)
+
+# testfig <- EpiCompare::overlap_heatmap(Peak_list_H3K4me1)
+# show(testfig)
+
+#inter-lab replicates
+# K562: E1 c(1); E2 c(2)
+# A549: E1 c(3); E2 c(4), E3 c(5) 
+
+rg_inter_lab_H3K4me1 <- list(c(1,1,2,2),
+                             c(3,3,4,4),c(3,3,5,5),
+                             c(4,4,5,5)
+)
+
+#inter-lab replicates
+EXP_H3K4me1 <- as.data.frame(matrix(nrow=0,ncol=5))
+names(EXP_H3K4me1) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+for (rg in rg_inter_lab_H3K4me1){
+    
+    for (index_col in (rg[1]):rg[2]){
+        
+        for (index_row in rg[3]:rg[4]){
+            comparison_names <- paste(colnames(mtrx_H3K4me1)[index_col],rownames(mtrx_H3K4me1)[index_row],sep = "_in_")
+            EXP_H3K4me1[comparison_names,"Recall"] <- mtrx_H3K4me1[index_row,index_col]
+            EXP_H3K4me1[comparison_names,"Precision"] <- mtrx_H3K4me1[index_col,index_row]
+            
+            EXP_H3K4me1[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][1]
+            EXP_H3K4me1[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][2]
+            exp_compare <- paste(strsplit(colnames(mtrx_H3K4me1)[index_col],split ="_")[[1]][3],strsplit(colnames(mtrx_H3K4me1)[index_row],split ="_")[[1]][3],sep = " in ")
+            
+            EXP_H3K4me1[comparison_names,"Experiment"] <- exp_compare
+        }
+    }
+}
+
+# check frequence
+# as.data.frame(table(EXP_H3K4me1$Experiment))
+EXP_H3K4me1$F1_Score <- 2 * EXP_H3K4me1$Precision * EXP_H3K4me1$Recall / (EXP_H3K4me1$Precision + EXP_H3K4me1$Recall)
+
+#reshape the long data
+rshape_EXP_H3K4me1 <- melt(EXP_H3K4me1, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_EXP_H3K4me1)[4] <- "Cor_type"
+colnames(rshape_EXP_H3K4me1)[5] <- "Data"
+
+P_interlab <- ggplot(rshape_EXP_H3K4me1, aes(x = Cor_type, y = Data, fill = Cor_type)) +
+    geom_bar(stat = 'identity', position = 'dodge') +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=FALSE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Inter-lab Correlation",
+        # subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Percentage"
+    )
+
+show(P_interlab)
+```
 
 
 ##H3K4me3
@@ -391,6 +467,91 @@ show(P_interlab)
 
 ```
 
+##pseudo only 
+```{r}
+H3K4me3_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF885FQN/@@download/ENCFF885FQN.bed.gz", format = "narrowPeak")
+H3K4me3_K562_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF122CSI/@@download/ENCFF122CSI.bed.gz", format = "narrowPeak")
+H3K4me3_K562_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF313FYW/@@download/ENCFF313FYW.bed.gz", format = "narrowPeak")
+H3K4me3_K562_E4_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF689QIJ/@@download/ENCFF689QIJ.bed.gz", format = "narrowPeak")
+
+H3K4me3_A549_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF535EYL/@@download/ENCFF535EYL.bed.gz", format = "narrowPeak")
+H3K4me3_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF361TGO/@@download/ENCFF361TGO.bed.gz", format = "narrowPeak")
+H3K4me3_A549_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF244LVG/@@download/ENCFF244LVG.bed.gz", format = "narrowPeak")
+H3K4me3_A549_E4_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF958EXL/@@download/ENCFF958EXL.bed.gz", format = "narrowPeak")
+
+
+Peak_list_H3K4me3 <- list(H3K4me3_K562_E1_IRpseudo12,H3K4me3_K562_E2_IRpseudo12,H3K4me3_K562_E3_IRpseudo12,H3K4me3_K562_E4_IRpseudo12,H3K4me3_A549_E1_IRpseudo123,H3K4me3_A549_E2_IRpseudo12,H3K4me3_A549_E3_IRpseudo12,H3K4me3_A549_E4_IRpseudo123)
+
+names(Peak_list_H3K4me3) <- c("H3K4me3_K562_E1_IRpseudo12","H3K4me3_K562_E2_IRpseudo12","H3K4me3_K562_E3_IRpseudo12","H3K4me3_K562_E4_IRpseudo12","H3K4me3_A549_E1_IRpseudo123","H3K4me3_A549_E2_IRpseudo12","H3K4me3_A549_E3_IRpseudo12","H3K4me3_A549_E4_IRpseudo123")
+
+mtrx_H3K4me3 <- calculate_overlap(Peak_list_H3K4me3)
+
+testfig <- EpiCompare::overlap_heatmap(Peak_list_H3K4me3)
+show(testfig)
+
+#inter-lab replicates
+# K562: E1 c(1); E2 c(2); E3 c(3); E4 c(4)
+# A549: E1 c(5); E2 c(6); E3 c(7); E4 c(8)
+
+rg_inter_lab_H3K4me3 <- list(c(1,1,2,2),c(1,1,3,3),c(1,1,4,4),
+                             c(2,2,3,3),c(2,2,4,4),
+                             c(3,3,4,4),
+                             c(5,5,6,6),c(5,5,7,7),c(5,5,8,8),
+                             c(6,6,7,7),c(6,6,8,8),
+                             c(7,7,8,8)
+)
+
+#inter-lab replicates
+EXP_H3K4me3 <- as.data.frame(matrix(nrow=0,ncol=5))
+names(EXP_H3K4me3) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+for (rg in rg_inter_lab_H3K4me3){
+    
+    for (index_col in (rg[1]):rg[2]){
+        
+        for (index_row in rg[3]:rg[4]){
+            comparison_names <- paste(colnames(mtrx_H3K4me3)[index_col],rownames(mtrx_H3K4me3)[index_row],sep = "_in_")
+            EXP_H3K4me3[comparison_names,"Recall"] <- mtrx_H3K4me3[index_row,index_col]
+            EXP_H3K4me3[comparison_names,"Precision"] <- mtrx_H3K4me3[index_col,index_row]
+            
+            EXP_H3K4me3[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K4me3)[index_col],split ="_")[[1]][1]
+            EXP_H3K4me3[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K4me3)[index_col],split ="_")[[1]][2]
+            exp_compare <- paste(strsplit(colnames(mtrx_H3K4me3)[index_col],split ="_")[[1]][3],strsplit(colnames(mtrx_H3K4me3)[index_row],split ="_")[[1]][3],sep = " in ")
+            
+            EXP_H3K4me3[comparison_names,"Experiment"] <- exp_compare
+        }
+    }
+}
+
+# check frequence
+# as.data.frame(table(EXP_H3K4me3$Experiment))
+EXP_H3K4me3$F1_Score <- 2 * EXP_H3K4me3$Precision * EXP_H3K4me3$Recall / (EXP_H3K4me3$Precision + EXP_H3K4me3$Recall)
+
+#reshape the long data
+rshape_EXP_H3K4me3 <- melt(EXP_H3K4me3, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_EXP_H3K4me3)[4] <- "Cor_type"
+colnames(rshape_EXP_H3K4me3)[5] <- "Data"
+
+P_interlab <- ggplot(rshape_EXP_H3K4me3, aes(x = Cor_type, y = Data, fill = Cor_type)) +
+    geom_bar(stat = 'identity', position = 'dodge') +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=FALSE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Inter-lab Correlation",
+        # subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Percentage"
+    )
+
+show(P_interlab) 
+```
+
+
+
 ##H3K9ac
 ##K562, 2 experiments from 2 labs
 ##A549, 1 experiments from 1 lab
@@ -532,6 +693,12 @@ show(P_interlab)
 
 
 ```
+
+##pseudo only 
+```{r}
+
+```
+
 
 ##H3K27me3
 ##K562, 2 experiments from 2 labs
@@ -682,6 +849,84 @@ P_interlab <- ggplot(rshape_EXP_H3K27me3, aes(x = Cor_type, y = Data, fill = Cel
 
 show(P_interlab) 
 ```
+
+##pseudo only 
+```{r}
+H3K27me3_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF801AHF/@@download/ENCFF801AHF.bed.gz", format = "narrowPeak")
+
+H3K27me3_K562_E2_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF323WOT/@@download/ENCFF323WOT.bed.gz", format = "narrowPeak")
+
+H3K27me3_A549_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF522WJJ/@@download/ENCFF522WJJ.bed.gz", format = "narrowPeak")
+
+H3K27me3_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF684ZZH/@@download/ENCFF684ZZH.bed.gz", format = "narrowPeak")
+
+
+Peak_list_H3K27me3 <- list(H3K27me3_K562_E1_IRpseudo12,H3K27me3_K562_E2_IRpseudo123,H3K27me3_A549_E1_IRpseudo12,H3K27me3_A549_E2_IRpseudo12)
+
+names(Peak_list_H3K27me3) <- c("H3K27me3_K562_E1_IRpseudo12","H3K27me3_K562_E2_IRpseudo123","H3K27me3_A549_E1_IRpseudo12","H3K27me3_A549_E2_IRpseudo12")
+
+mtrx_H3K27me3 <- calculate_overlap(Peak_list_H3K27me3)
+
+testfig <- EpiCompare::overlap_heatmap(Peak_list_H3K27me3)
+show(testfig)
+
+#inter-lab replicates
+# K562: E1 c(1); E2 c(2);
+# A549: E1 c(3); E2 c(4);
+
+rg_inter_lab_H3K27me3 <- list(c(1,1,2,2),
+                              c(3,3,4,4)
+)
+
+#inter-lab replicates
+EXP_H3K27me3 <- as.data.frame(matrix(nrow=0,ncol=5))
+names(EXP_H3K27me3) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+for (rg in rg_inter_lab_H3K27me3){
+    
+    for (index_col in (rg[1]):rg[2]){
+        
+        for (index_row in rg[3]:rg[4]){
+            comparison_names <- paste(colnames(mtrx_H3K27me3)[index_col],rownames(mtrx_H3K27me3)[index_row],sep = "_in_")
+            EXP_H3K27me3[comparison_names,"Recall"] <- mtrx_H3K27me3[index_row,index_col]
+            EXP_H3K27me3[comparison_names,"Precision"] <- mtrx_H3K27me3[index_col,index_row]
+            
+            EXP_H3K27me3[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K27me3)[index_col],split ="_")[[1]][1]
+            EXP_H3K27me3[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K27me3)[index_col],split ="_")[[1]][2]
+            exp_compare <- paste(strsplit(colnames(mtrx_H3K27me3)[index_col],split ="_")[[1]][3],strsplit(colnames(mtrx_H3K27me3)[index_row],split ="_")[[1]][3],sep = " in ")
+            
+            EXP_H3K27me3[comparison_names,"Experiment"] <- exp_compare
+        }
+    }
+}
+
+# check frequence
+# as.data.frame(table(EXP_H3K27me3$Experiment))
+EXP_H3K27me3$F1_Score <- 2 * EXP_H3K27me3$Precision * EXP_H3K27me3$Recall / (EXP_H3K27me3$Precision + EXP_H3K27me3$Recall)
+
+#reshape the long data
+rshape_EXP_H3K27me3 <- melt(EXP_H3K27me3, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_EXP_H3K27me3)[4] <- "Cor_type"
+colnames(rshape_EXP_H3K27me3)[5] <- "Data"
+
+P_interlab <- ggplot(rshape_EXP_H3K27me3, aes(x = Cor_type, y = Data, fill = Cor_type)) +
+    geom_bar(stat = 'identity', position = 'dodge') +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=FALSE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Inter-lab Correlation",
+        # subtitle = "Cell Line: A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Percentage"
+    )
+
+show(P_interlab) 
+```
+
 
 ##H3K27ac
 ##K562, 1 experiments from 1 lab
@@ -840,6 +1085,86 @@ P_interlab <- ggplot(rshape_EXP_H3K27ac, aes(x = Cor_type, y = Data, fill = Cell
 show(P_interlab) 
 ```
 
+##pseudo only 
+```{r}
+H3K27ac_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF864OSZ/@@download/ENCFF864OSZ.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E1_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF747IZX/@@download/ENCFF747IZX.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E2_IRpseudo123 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF918FET/@@download/ENCFF918FET.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E3_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF443MVY/@@download/ENCFF443MVY.bed.gz", format = "narrowPeak")
+
+H3K27ac_A549_E4_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF035VXU/@@download/ENCFF035VXU.bed.gz", format = "narrowPeak")
+
+
+Peak_list_H3K27ac <- list(H3K27ac_K562_E1_IRpseudo12,H3K27ac_A549_E1_IRpseudo123,H3K27ac_A549_E2_IRpseudo123,H3K27ac_A549_E3_IRpseudo12,H3K27ac_A549_E4_IRpseudo12)
+
+names(Peak_list_H3K27ac) <- c("H3K27ac_K562_E1_IRpseudo12","H3K27ac_A549_E1_IRpseudo123","H3K27ac_A549_E2_IRpseudo123","H3K27ac_A549_E3_IRpseudo12","H3K27ac_A549_E4_IRpseudo12")
+
+mtrx_H3K27ac <- calculate_overlap(Peak_list_H3K27ac)
+
+testfig <- EpiCompare::overlap_heatmap(Peak_list_H3K27ac)
+show(testfig)
+
+#inter-lab replicates
+# K562: E1 c(1); 
+# A549: E1 c(2); E2 c(3); E3 c(4); E4 c(4);
+
+rg_inter_lab_H3K27ac <- list(c(2,2,3,3),c(2,2,4,4),c(2,2,5,5),
+                             c(3,3,4,4),c(3,3,5,5),
+                             c(4,4,5,5))
+
+#inter-lab replicates
+EXP_H3K27ac <- as.data.frame(matrix(nrow=0,ncol=5))
+names(EXP_H3K27ac) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+for (rg in rg_inter_lab_H3K27ac){
+    
+    for (index_col in (rg[1]):rg[2]){
+        
+        for (index_row in rg[3]:rg[4]){
+            comparison_names <- paste(colnames(mtrx_H3K27ac)[index_col],rownames(mtrx_H3K27ac)[index_row],sep = "_in_")
+            EXP_H3K27ac[comparison_names,"Recall"] <- mtrx_H3K27ac[index_row,index_col]
+            EXP_H3K27ac[comparison_names,"Precision"] <- mtrx_H3K27ac[index_col,index_row]
+            
+            EXP_H3K27ac[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K27ac)[index_col],split ="_")[[1]][1]
+            EXP_H3K27ac[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K27ac)[index_col],split ="_")[[1]][2]
+            exp_compare <- paste(strsplit(colnames(mtrx_H3K27ac)[index_col],split ="_")[[1]][3],strsplit(colnames(mtrx_H3K27ac)[index_row],split ="_")[[1]][3],sep = " in ")
+            
+            EXP_H3K27ac[comparison_names,"Experiment"] <- exp_compare
+        }
+    }
+}
+
+# check frequence
+# as.data.frame(table(EXP_H3K27ac$Experiment))
+EXP_H3K27ac$F1_Score <- 2 * EXP_H3K27ac$Precision * EXP_H3K27ac$Recall / (EXP_H3K27ac$Precision + EXP_H3K27ac$Recall)
+
+#reshape the long data
+rshape_EXP_H3K27ac <- melt(EXP_H3K27ac, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_EXP_H3K27ac)[4] <- "Cor_type"
+colnames(rshape_EXP_H3K27ac)[5] <- "Data"
+
+P_interlab <- ggplot(rshape_EXP_H3K27ac, aes(x = Cor_type, y = Data, fill = Cor_type)) +
+    geom_bar(stat = 'identity', position = 'dodge') +
+    # theme_classic() +
+    facet_wrap(~Experiment) +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Inter-lab Correlation",
+        subtitle = "A549",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Percentage"
+    )
+
+show(P_interlab) 
+```
+
+
 
 ##H3K36me3
 ##K562, 2 experiments from 2 labs
@@ -991,6 +1316,84 @@ show(P_interlab)
 
 
 ```
+
+##pseudo only 
+```{r}
+H3K36me3_K562_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF901ACN/@@download/ENCFF901ACN.bed.gz", format = "narrowPeak")
+
+H3K36me3_K562_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF035WTT/@@download/ENCFF035WTT.bed.gz", format = "narrowPeak")
+
+H3K36me3_A549_E1_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF584FSY/@@download/ENCFF584FSY.bed.gz", format = "narrowPeak")
+
+H3K36me3_A549_E2_IRpseudo12 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF127LEC/@@download/ENCFF127LEC.bed.gz", format = "narrowPeak")
+
+
+Peak_list_H3K36me3 <- list(H3K36me3_K562_E1_IRpseudo12,H3K36me3_K562_E2_IRpseudo12,H3K36me3_A549_E1_IRpseudo12,H3K36me3_A549_E2_IRpseudo12)
+
+names(Peak_list_H3K36me3) <- c("H3K36me3_K562_E1_IRpseudo12","H3K36me3_K562_E2_IRpseudo12","H3K36me3_A549_E1_IRpseudo12","H3K36me3_A549_E2_IRpseudo12")
+
+mtrx_H3K36me3 <- calculate_overlap(Peak_list_H3K36me3)
+
+testfig <- EpiCompare::overlap_heatmap(Peak_list_H3K36me3)
+show(testfig)
+
+#inter-lab replicates
+# K562: E1 c(1); E2 c(2);
+# A549: E1 c(3); E2 c(4); 
+
+rg_inter_lab_H3K36me3 <- list(c(1,1,2,2),
+                             c(3,3,4,4)
+)
+
+#inter-lab replicates
+EXP_H3K36me3 <- as.data.frame(matrix(nrow=0,ncol=5))
+names(EXP_H3K36me3) <- c("Precision","Recall","Modification","Cell_Line","Experiment")
+
+for (rg in rg_inter_lab_H3K36me3){
+    
+    for (index_col in (rg[1]):rg[2]){
+        
+        for (index_row in rg[3]:rg[4]){
+            comparison_names <- paste(colnames(mtrx_H3K36me3)[index_col],rownames(mtrx_H3K36me3)[index_row],sep = "_in_")
+            EXP_H3K36me3[comparison_names,"Recall"] <- mtrx_H3K36me3[index_row,index_col]
+            EXP_H3K36me3[comparison_names,"Precision"] <- mtrx_H3K36me3[index_col,index_row]
+            
+            EXP_H3K36me3[comparison_names,"Modification"] <- strsplit(colnames(mtrx_H3K36me3)[index_col],split ="_")[[1]][1]
+            EXP_H3K36me3[comparison_names,"Cell_Line"] <- strsplit(colnames(mtrx_H3K36me3)[index_col],split ="_")[[1]][2]
+            exp_compare <- paste(strsplit(colnames(mtrx_H3K36me3)[index_col],split ="_")[[1]][3],strsplit(colnames(mtrx_H3K36me3)[index_row],split ="_")[[1]][3],sep = " in ")
+            
+            EXP_H3K36me3[comparison_names,"Experiment"] <- exp_compare
+        }
+    }
+}
+
+# check frequence
+# as.data.frame(table(EXP_H3K36me3$Experiment))
+EXP_H3K36me3$F1_Score <- 2 * EXP_H3K36me3$Precision * EXP_H3K36me3$Recall / (EXP_H3K36me3$Precision + EXP_H3K36me3$Recall)
+
+#reshape the long data
+rshape_EXP_H3K36me3 <- melt(EXP_H3K36me3, id.vars = c("Modification","Cell_Line","Experiment"))
+colnames(rshape_EXP_H3K36me3)[4] <- "Cor_type"
+colnames(rshape_EXP_H3K36me3)[5] <- "Data"
+
+P_interlab <- ggplot(rshape_EXP_H3K36me3, aes(x = Cor_type, y = Data, fill = Cor_type)) +
+    geom_bar(stat = 'identity', position = 'dodge') +
+    # theme_classic() +
+    facet_grid(Experiment~Cell_Line, margins=FALSE, scales = "free_y") +
+    coord_cartesian(ylim = c(0, 100)) +
+    theme_bw() + 
+    labs(
+        title = "Inter-lab Correlation",
+        subtitle = "A549",
+        #tag = "",
+        #caption = "",
+        x = "Correlation Type",
+        y = "Percentage"
+    )
+
+show(P_interlab) 
+```
+
 
 
 #Pseudoreplicate and Replicate 
