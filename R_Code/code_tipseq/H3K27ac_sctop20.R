@@ -16,25 +16,25 @@ S_6_R1_Abcam_pA_Tn5_F10_P9 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads
 S_9_R1_Abcam_Tn5_F6_P7 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/H3K27ac/S_9_R1_Abcam_Tn5_F6_P7.peaks.bed.stringent.bed", as = "GRanges")
 S_11_R1_Abcam_Tn5_F10_P7 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/H3K27ac/S_11_R1_Abcam_Tn5_F10_P7..peaks.bed.stringent.bed", as = "GRanges")
 
-scTS_1_2_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_2_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_39_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_39_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_42_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_42_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_43_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_43_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_20_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_20_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_28_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_28_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_45_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_45_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_51_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_51_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
 scTS_1_56_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_56_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_57_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_57_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_60_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_60_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_61_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_61_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_63_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_63_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-scTS_1_77_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top10_reads/scTS_1_77_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
-
+scTS_1_59_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_59_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_65_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_65_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_67_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_67_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_70_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_70_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
+scTS_1_75_R1 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/sc/top20_reads/scTS_1_75_R1.seacr.peaks.bed.stringent.bed", as = "GRanges")
 
 ENCODE_Broad <- list("ENCODE_H3K27ac_Broad" = ENCODE_H3K27ac_Broad)
 
-peaklist <- list(scTS_1_77_R1,scTS_1_63_R1,scTS_1_61_R1,scTS_1_60_R1,scTS_1_57_R1,scTS_1_56_R1,scTS_1_43_R1,scTS_1_42_R1,scTS_1_39_R1,scTS_1_2_R1,
+peaklist <- list(scTS_1_75_R1,scTS_1_70_R1,scTS_1_67_R1,scTS_1_65_R1,scTS_1_59_R1,scTS_1_56_R1,scTS_1_51_R1,scTS_1_45_R1,scTS_1_28_R1,scTS_1_20_R1,
                  S_11_R1_Abcam_Tn5_F10_P7,S_9_R1_Abcam_Tn5_F6_P7,S_6_R1_Abcam_pA_Tn5_F10_P9,S_4_R1_Abcam_pA_Tn5_F10_P9,S_4_R1_Abcam_pA_Tn5_F10_P6,S_2_R1_Diagenode_pA_Tn5_F10_P9,S_1_R2_Abcam_pA_Tn5_F6_P9,S_1_R1_Abcam_pA_Tn5_F6_P9)
 
-names(peaklist) <- c("scTS_77","scTS_63","scTS_61","scTS_60","scTS_57","scTS_56","scTS_43","scTS_42","scTS_39","scTS_2",
+names(peaklist) <- c("scTS_1_75_R1","scTS_1_70_R1","scTS_1_67_R1","scTS_1_65_R1","scTS_1_59_R1","scTS_1_56_R1","scTS_1_51_R1","scTS_1_45_R1","scTS_1_28_R1","scTS_1_20_R1",
                      "S_11_R1_Abcam_Tn5_F10_P7","S_9_R1_Abcam_Tn5_F6_P7","S_6_R1_Abcam_pA_Tn5_F10_P9","S_4_R1_Abcam_pA_Tn5_F10_P9","S_4_R1_Abcam_pA_Tn5_F10_P6","S_2_R1_Diagenode_pA_Tn5_F10_P9","S_1_R2_Abcam_pA_Tn5_F6_P9","S_1_R1_Abcam_pA_Tn5_F6_P9")
+
 
 
 gc()
@@ -56,7 +56,4 @@ EpiCompare(peakfiles = peaklist,
            tss_plot = TRUE,
            interact = TRUE,
            save_output = TRUE,
-           output_dir = "/Users/xindong/Downloads/H3K27ac_sc")
-
-
-
+           output_dir = "/Users/xindong/Downloads/H3K27ac_sc_20")
