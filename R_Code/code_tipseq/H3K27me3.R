@@ -15,9 +15,23 @@ S_10_R1_Cell_Signaling_Tn5_F10_P7<- ChIPseeker::readPeakFile("/Users/xindong/Dow
 
 ENCODE_USC <- list("ENCODE_H3K27me3_USC" = ENCODE_H3K27me3_USC)
 
-peaklist <- list(S_10_R1_Cell_Signaling_Tn5_F10_P7,S_8_R1_Cell_Signaling_Tn5_F6_P7,S_5_R1_Cell_Signaling_pA_Tn5_F10_P6,S_3_R1_Cell_Signaling_pA_Tn5_F10_P9,cutandtag_withdup,cutandtag_dedup,cutandrun,ENCODE_Broad)
+peaklist <- list(S_8_R1_Cell_Signaling_Tn5_F6_P7,
+                 S_10_R1_Cell_Signaling_Tn5_F10_P7,
+                 S_3_R1_Cell_Signaling_pA_Tn5_F10_P9,
+                 S_5_R1_Cell_Signaling_pA_Tn5_F10_P6,
+                 cutandtag_withdup,
+                 cutandtag_dedup,
+                 cutandrun,
+                 ENCODE_Broad)
 
-names(peaklist) <- c("S_10_R1_Cell_Signaling_Tn5_F10_P7","S_8_R1_Cell_Signaling_Tn5_F6_P7","S_5_R1_Cell_Signaling_pA_Tn5_F10_P6","S_3_R1_Cell_Signaling_pA_Tn5_F10_P9","cutandtag_withdup","cutandtag_dedup","cutandrun","ENCODE_Broad")
+names(peaklist) <- c("H3K27me3_Cell_Signaling_Tn5_F6_P7_R1",
+                     "H3K27me3_Cell_Signaling_Tn5_F10_P7_R1",
+                     "H3K27me3_Cell_Signaling_pA_Tn5_F10_P9_R1",
+                     "H3K27me3_Cell_Signaling_pA_Tn5_F10_P6_R1",
+                     "cutandtag_withdup",
+                     "cutandtag_dedup",
+                     "cutandrun",
+                     "ENCODE_Broad")
 
 
 gc()

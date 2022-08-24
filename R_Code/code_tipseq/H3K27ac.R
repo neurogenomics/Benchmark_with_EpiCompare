@@ -14,14 +14,32 @@ S_4_R1_Abcam_pA_Tn5_F10_P6 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads
 S_4_R1_Abcam_pA_Tn5_F10_P9 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/H3K27ac/S_4_R1_Abcam_pA_Tn5_F10_P9.peaks.bed.stringent.bed", as = "GRanges")
 S_6_R1_Abcam_pA_Tn5_F10_P9 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/H3K27ac/S_6_R1_Abcam_pA_Tn5_F10_P9.peaks.bed.stringent.bed", as = "GRanges")
 S_9_R1_Abcam_Tn5_F6_P7 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/H3K27ac/S_9_R1_Abcam_Tn5_F6_P7.peaks.bed.stringent.bed", as = "GRanges")
-S_11_R1_Abcam_Tn5_F10_P7 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/H3K27ac/S_11_R1_Abcam_Tn5_F10_P7..peaks.bed.stringent.bed", as = "GRanges")
+S_11_R1_Abcam_Tn5_F10_P7 <- ChIPseeker::readPeakFile("/Users/xindong/Downloads/peakfiles/H3K27ac/S_11_R1_Abcam_Tn5_F10_P7.peaks.bed.stringent.bed", as = "GRanges")
 
 
 ENCODE_Broad <- list("ENCODE_H3K27ac_Broad" = ENCODE_H3K27ac_Broad)
 
-peaklist <- list(S_11_R1_Abcam_Tn5_F10_P7,S_9_R1_Abcam_Tn5_F6_P7,S_6_R1_Abcam_pA_Tn5_F10_P9,S_4_R1_Abcam_pA_Tn5_F10_P9,S_4_R1_Abcam_pA_Tn5_F10_P6,S_2_R1_Diagenode_pA_Tn5_F10_P9,S_1_R2_Abcam_pA_Tn5_F6_P9,S_1_R1_Abcam_pA_Tn5_F6_P9,cutandtag_withdup,cutandtag_dedup,cutandrun)
+peaklist <- list(S_2_R1_Diagenode_pA_Tn5_F10_P9,
+                 S_9_R1_Abcam_Tn5_F6_P7,
+                 S_11_R1_Abcam_Tn5_F10_P7,
+                 S_1_R2_Abcam_pA_Tn5_F6_P9,
+                 S_1_R1_Abcam_pA_Tn5_F6_P9,
+                 S_4_R1_Abcam_pA_Tn5_F10_P9,
+                 S_4_R1_Abcam_pA_Tn5_F10_P6,
+                 cutandtag_withdup,
+                 cutandtag_dedup,
+                 cutandrun)
 
-names(peaklist) <- c("S_11_R1_Abcam_Tn5_F10_P7","S_9_R1_Abcam_Tn5_F6_P7","S_6_R1_Abcam_pA_Tn5_F10_P9","S_4_R1_Abcam_pA_Tn5_F10_P9","S_4_R1_Abcam_pA_Tn5_F10_P6","S_2_R1_Diagenode_pA_Tn5_F10_P9","S_1_R2_Abcam_pA_Tn5_F6_P9","S_1_R1_Abcam_pA_Tn5_F6_P9","cutandtag_withdup","cutandtag_dedup","cutandrun")
+names(peaklist) <- c("H3K27ac_Diagenode_pA_Tn5_F10_P9_R1",
+                     "H3K27ac_Abcam_Tn5_F6_P7_R1",
+                     "H3K27ac_Abcam_Tn5_F10_P7_R1",
+                     "H3K27ac_Abcam_pA_Tn5_F6_P9_R2",
+                     "H3K27ac_Abcam_pA_Tn5_F6_P9_R1",
+                     "H3K27ac_Abcam_pA_Tn5_F10_P9_R1",
+                     "H3K27ac_Abcam_pA_Tn5_F10_P6_R1",
+                     "cutandtag_withdup",
+                     "cutandtag_dedup",
+                     "cutandrun")
 
 
 gc()
