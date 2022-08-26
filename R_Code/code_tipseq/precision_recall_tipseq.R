@@ -85,77 +85,78 @@ ac_overlap <- calculate_overlap_func(peaklist_ac)
 ## compare with reference 
 # bulk
 
-ac_bulk_ref <- as.data.frame(matrix(nrow=0,ncol=3))
-names(ac_bulk_ref) <- c("Sample","Precision","Recall")
+ac_bulkinref <- as.data.frame(matrix(nrow=0,ncol=3))
+names(ac_bulkinref) <- c("Sample","Precision","Recall")
 
 for (i in 2:11){
     index <- i-1
-    ac_bulk_ref[index,"Sample"] <- rownames(ac_overlap)[i]
-    ac_bulk_ref[index, "Recall"] <- round(ac_overlap[1,i],2)
-    ac_bulk_ref[index, "Precision"] <- round(ac_overlap[i,1],2)
+    ac_bulkinref[index,"Sample"] <- rownames(ac_overlap)[i]
+    ac_bulkinref[index, "Recall"] <- ac_overlap[1,i]
+    ac_bulkinref[index, "Precision"] <- ac_overlap[i,1]
 }
 
-ac_bulk_ref$F1_Score <- round(2 * ac_bulk_ref$Precision * ac_bulk_ref$Recall / (ac_bulk_ref$Precision + ac_bulk_ref$Recall),2)
+ac_bulkinref$F1_Score <- 2 * ac_bulkinref$Precision * ac_bulkinref$Recall / (ac_bulkinref$Precision + ac_bulkinref$Recall)
 
 # between tip seq samples
-inter_tipseq <- as.data.frame(matrix(nrow=0,ncol=3))
-names(inter_tipseq) <- c("Sample","Precision","Recall")
+ac_inter_tipseq <- as.data.frame(matrix(nrow=0,ncol=3))
+names(ac_inter_tipseq) <- c("Sample","Precision","Recall")
 
 remove(rg)
 rg <- c(5,11)
 for (index_col in (rg[1]+1):rg[2]){
     for (index_row in rg[1]:(index_col - 1)){
         comparison_names <- paste(colnames(ac_overlap)[index_col],rownames(ac_overlap)[index_row],sep = "_in_")
-        inter_tipseq[comparison_names,"Sample"] <- comparison_names
-        inter_tipseq[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
-        inter_tipseq[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
+        ac_inter_tipseq[comparison_names,"Sample"] <- comparison_names
+        ac_inter_tipseq[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
+        ac_inter_tipseq[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
     }
 }
+ac_inter_tipseq$F1_Score <- 2 * ac_inter_tipseq$Precision * ac_inter_tipseq$Recall / (ac_inter_tipseq$Precision + ac_inter_tipseq$Recall)
 
 # between tip seq and cut
-inter_cut_tip <- as.data.frame(matrix(nrow=0,ncol=3))
-names(inter_cut_tip) <- c("Sample","Precision","Recall")
+ac_tipincut <- as.data.frame(matrix(nrow=0,ncol=3))
+names(ac_tipincut) <- c("Sample","Precision","Recall")
 rg <- c(5,11,2,4)
 for (index_col in (rg[1]):rg[2]){
     for (index_row in rg[3]:rg[4]){
         comparison_names <- paste(colnames(ac_overlap)[index_col],rownames(ac_overlap)[index_row],sep = "_in_")
-        inter_cut_tip[comparison_names,"Sample"] <- comparison_names
-        inter_cut_tip[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
-        inter_cut_tip[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
+        ac_tipincut[comparison_names,"Sample"] <- comparison_names
+        ac_tipincut[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
+        ac_tipincut[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
     }
 }
+ac_tipincut$F1_Score <- 2 * ac_tipincut$Precision * ac_tipincut$Recall / (ac_tipincut$Precision + ac_tipincut$Recall)
 
 # inter single cell
-inter_tipseq_sc <- as.data.frame(matrix(nrow=0,ncol=3))
-names(inter_tipseq_sc) <- c("Sample","Precision","Recall")
+ac_inter_sc <- as.data.frame(matrix(nrow=0,ncol=3))
+names(ac_inter_sc) <- c("Sample","Precision","Recall")
 remove(rg)
 rg <- c(12,21)
 for (index_col in (rg[1]+1):rg[2]){
     for (index_row in rg[1]:(index_col - 1)){
         comparison_names <- paste(colnames(ac_overlap)[index_col],rownames(ac_overlap)[index_row],sep = "_in_")
-        inter_tipseq_sc[comparison_names,"Sample"] <- comparison_names
-        inter_tipseq_sc[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
-        inter_tipseq_sc[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
+        ac_inter_sc[comparison_names,"Sample"] <- comparison_names
+        ac_inter_sc[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
+        ac_inter_sc[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
     }
 }
+ac_inter_sc$F1_Score <- 2 * ac_inter_sc$Precision * ac_inter_sc$Recall / (ac_inter_sc$Precision + ac_inter_sc$Recall)
 
 
 # inter bulk and single tip seq
-inter_bulk_sc <- as.data.frame(matrix(nrow=0,ncol=3))
-names(inter_bulk_sc) <- c("Sample","Precision","Recall")
+ac_scinbulk <- as.data.frame(matrix(nrow=0,ncol=3))
+names(ac_scinbulk) <- c("Sample","Precision","Recall")
 remove(rg)
 rg <- c(12,21,5,11)
 for (index_col in (rg[1]):rg[2]){
     for (index_row in rg[3]:rg[4]){
         comparison_names <- paste(colnames(ac_overlap)[index_col],rownames(ac_overlap)[index_row],sep = "_in_")
-        inter_bulk_sc[comparison_names,"Sample"] <- comparison_names
-        inter_bulk_sc[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
-        inter_bulk_sc[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
+        ac_scinbulk[comparison_names,"Sample"] <- comparison_names
+        ac_scinbulk[comparison_names,"Recall"] <- ac_overlap[index_row,index_col]
+        ac_scinbulk[comparison_names,"Precision"] <- ac_overlap[index_col,index_row]
     }
 }
-
-
-
+ac_scinbulk$F1_Score <- 2 * ac_scinbulk$Precision * ac_scinbulk$Recall / (ac_scinbulk$Precision + ac_scinbulk$Recall)
 
 
 
@@ -193,17 +194,17 @@ me3_overlap <- calculate_overlap_func(peaklist_me3)
 ## compare with reference 
 # bulk
 
-me3_bulk_ref <- as.data.frame(matrix(nrow=0,ncol=3))
-names(me3_bulk_ref) <- c("Sample","Precision","Recall")
+me3_bulkinref <- as.data.frame(matrix(nrow=0,ncol=3))
+names(me3_bulkinref) <- c("Sample","Precision","Recall")
 
 for (i in 6:9){
     index <- i-5
-    me3_bulk_ref[index,"Sample"] <- rownames(ac_overlap)[i]
-    me3_bulk_ref[index, "Recall"] <- round(ac_overlap[1,i],2)
-    me3_bulk_ref[index, "Precision"] <- round(ac_overlap[i,1],2)
+    me3_bulkinref[index,"Sample"] <- rownames(ac_overlap)[i]
+    me3_bulkinref[index, "Recall"] <- ac_overlap[1,i]
+    me3_bulkinref[index, "Precision"] <- ac_overlap[i,1]
 }
 
-me3_bulk_ref$F1_Score <- round(2 * me3_bulk_ref$Precision * me3_bulk_ref$Recall / (me3_bulk_ref$Precision + me3_bulk_ref$Recall),2)
+me3_bulkinref$F1_Score <- 2 * me3_bulkinref$Precision * me3_bulkinref$Recall / (me3_bulkinref$Precision + me3_bulkinref$Recall)
 
 # between tip seq samples
 me3_inter_tipseq <- as.data.frame(matrix(nrow=0,ncol=3))
@@ -219,18 +220,21 @@ for (index_col in (rg[1]+1):rg[2]){
     }
 }
 
+me3_inter_tipseq$F1_Score <- 2 * me3_inter_tipseq$Precision * me3_inter_tipseq$Recall / (me3_inter_tipseq$Precision + me3_inter_tipseq$Recall)
+
 # between tip seq and cut
-me3_inter_cut_tip <- as.data.frame(matrix(nrow=0,ncol=3))
-names(me3_inter_cut_tip) <- c("Sample","Precision","Recall")
+me3_tipincut <- as.data.frame(matrix(nrow=0,ncol=3))
+names(me3_tipincut) <- c("Sample","Precision","Recall")
 rg <- c(6,9,3,5)
 for (index_col in (rg[1]):rg[2]){
     for (index_row in rg[3]:rg[4]){
         comparison_names <- paste(colnames(me3_overlap)[index_col],rownames(me3_overlap)[index_row],sep = "_in_")
-        me3_inter_cut_tip[comparison_names,"Sample"] <- comparison_names
-        me3_inter_cut_tip[comparison_names,"Recall"] <- me3_overlap[index_row,index_col]
-        me3_inter_cut_tip[comparison_names,"Precision"] <- me3_overlap[index_col,index_row]
+        me3_tipincut[comparison_names,"Sample"] <- comparison_names
+        me3_tipincut[comparison_names,"Recall"] <- me3_overlap[index_row,index_col]
+        me3_tipincut[comparison_names,"Precision"] <- me3_overlap[index_col,index_row]
     }
 }
+me3_tipincut$F1_Score <- 2 * me3_tipincut$Precision * me3_tipincut$Recall / (me3_tipincut$Precision + me3_tipincut$Recall)
 
 
 

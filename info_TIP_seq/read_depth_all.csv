@@ -1,0 +1,25 @@
+Sample,Unique_Pairs,Histone_Mark,Method
+H3K27ac_ENCODE_ Broad,7.7931235,H3K27ac,ENCODE
+H3K27me3_ENCODE_ Broad,8.144411,H3K27me3,ENCODE
+H3K27me3_USC_ Broad,16.898632,H3K27me3,ENCODE
+H3K27ac_Abcam_pA_Tn5_F10_P6_R1,9.29302,H3K27ac,Bulk TIP-seq
+H3K27ac_Abcam_pA_Tn5_F10_P9_R1,6.357208,H3K27ac,Bulk TIP-seq
+H3K27ac_Abcam_pA_Tn5_F6_P9_R1,2.483422,H3K27ac,Bulk TIP-seq
+H3K27ac_Abcam_pA_Tn5_F6_P9_R2,11.774281,H3K27ac,Bulk TIP-seq
+H3K27ac_Abcam_Tn5_F10_P7_R1,10.191174,H3K27ac,Bulk TIP-seq
+H3K27ac_Abcam_Tn5_F6_P7_R1,8.066128,H3K27ac,Bulk TIP-seq
+H3K27ac_Diagenode_pA_Tn5_F10_P9_R1,3.591333,H3K27ac,Bulk TIP-seq
+H3K27me3_Cell_Signaling_pA_Tn5_F10_P6_R1,2.29558,H3K27me3,Bulk TIP-seq
+H3K27me3_Cell_Signaling_pA_Tn5_F10_P9_R1,8.629223,H3K27me3,Bulk TIP-seq
+H3K27me3_Cell_Signaling_Tn5_F10_P7_R1,8.384157,H3K27me3,Bulk TIP-seq
+H3K27me3_Cell_Signaling_Tn5_F6_P7_R1,8.828021,H3K27me3,Bulk TIP-seq
+H3K27ac_scTIP_Top01,0.198306,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top02,0.183709,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top03,0.172687,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top04,0.163655,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top05,0.158696,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top06,0.151996,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top07,0.150826,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top08,0.146293,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top09,0.146063,H3K27ac,Single Cell TIP-seq
+H3K27ac_scTIP_Top10,0.144192,H3K27ac,Single Cell TIP-seq

@@ -19,7 +19,7 @@
 library(ggplot2)
 library(ggrepel)
 # remove(P1)
-ENCODE_info <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/info_ENCODE/ENCODE_info_ALL_0728.csv", header = TRUE, sep = ",")
+ENCODE_info <- read.csv("/Users/xindong/Downloads/TIP_git/info_ENCODE/ENCODE_info_ALL_0826.csv", header = TRUE, sep = ",")
 
 p_peakN_readD <- ggplot(ENCODE_info, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modification)) +
     geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
@@ -37,31 +37,33 @@ p_peakN_readD <- ggplot(ENCODE_info, aes(x = Read_Depth, y = Peak_Number, fill =
 show(p_peakN_readD)   
  
 remove(p_peakN_readD_all)
-p_peakN_readD_all <- ggplot(ENCODE_info, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modification)) +
-    geom_point(size = 4,colour="black",shape=21,alpha=0.8) +
+p_peakN_readD_all <- 
+    ggplot(ENCODE_info, aes(x = Read_Depth, y = Peak_Number, fill = Histone_Modification)) +
+    geom_point(aes(color = Histone_Modification), size = 4, alpha=0.8) +
+    geom_smooth(mapping = aes(x = Read_Depth, y = Peak_Number, fill = NULL), method="lm", color="steelblue", linetype=2, show.legend = FALSE) + 
     # theme_classic() +
-    facet_wrap(~Cell_Line) +
+    facet_wrap(~Cell_Line,scales="free_x") +
+    theme_light() + 
     labs(
-        title = "Peak Number & Read Depth Correlation",
-        subtitle = "A549 & K562",
+        # title = "Peak Number & Read Depth Correlation",
+        # subtitle = "A549 & K562",
         #tag = "",
         #caption = "",
         x = "Read Depth (million)",
         y = "Peak Number (thousand)"
     )
 
-p_peakN_readD_all <- p_peakN_readD_all + geom_smooth(mapping = aes(x = Read_Depth, y = Peak_Number, fill = NULL), method="lm", color="red", linetype=2, show.legend = FALSE)
 
 show(p_peakN_readD_all)   
 
 
 
 p_peakN <- ggplot(ENCODE_info, aes(x = Experiment, y = Peak_Number, fill = Histone_Modification)) +
-    geom_bar(stat = 'identity', position = 'dodge') +
+    geom_bar(stat = 'identity', position = 'dodge', width = 0.6) +
     facet_grid(Histone_Modification~Cell_Line,margins=FALSE) +
     labs(
-        title = "Peak Number",
-        subtitle = "A549 & K562",
+        # title = "Peak Number",
+        # subtitle = "A549 & K562",
         #tag = "",
         #caption = "",
         x = "Experiment",
