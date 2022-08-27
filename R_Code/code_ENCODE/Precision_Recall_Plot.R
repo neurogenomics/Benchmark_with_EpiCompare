@@ -1,17 +1,27 @@
 library(ggrepel)
 
 
-Precision_Recall_info <- read.csv("/Users/xindong/Downloads/Data_Analysis/cutandrun/ENCODE_info_Precision_Recall.csv", sep = ",", header = TRUE) 
+ENCODE_Precision_Recall_info <- read.csv("/Users/xindong/Downloads/TIP_git/info_ENCODE/ENCODE_info_Precision_Recall.csv", sep = ",", header = TRUE) 
 
-Precision_Recall_info$F1_Score <- (2 * Precision_Recall_info$Precision * Precision_Recall_info$Recall) / (Precision_Recall_info$Precision + Precision_Recall_info$Recall)
+# ENCODE_Precision_Recall_info$F1_Score <- round((2 * ENCODE_Precision_Recall_info$Precision * ENCODE_Precision_Recall_info$Recall) / (ENCODE_Precision_Recall_info$Precision + ENCODE_Precision_Recall_info$Recall),2)
+# 
+# for (i in 1:nrow(ENCODE_Precision_Recall_info)){
+#     ENCODE_Precision_Recall_info$Histone_Mark[i] <- strsplit(ENCODE_Precision_Recall_info$CellLine_Modif_Exp[i], "_")[[1]][2]
+# }
+# 
+# write.csv(ENCODE_Precision_Recall_info,"/Users/xindong/Downloads/TIP_git/info_ENCODE/ENCODE_info_Precision_Recall.csv")
 
 
-P1 <- ggplot(Precision_Recall_info, aes(x = Recall, y = Precision, fill = CellLine)) +
+
+
+
+P1 <- 
+    ggplot(ENCODE_Precision_Recall_info, aes(x = Recall, y = Precision, fill = CellLine)) +
     geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
     geom_text_repel(aes(Recall, Precision, label = CellLine_Modif_Exp)) +
     #geom_text_repel(aes(Recall, Precision, label = F1_Score)) +
     theme_classic()
-
+P1
 
 P1 + 
     scale_x_continuous(
@@ -43,7 +53,7 @@ write.xlsx(A549_PeakN, file = "A549_PeakN.xlsx", row.names = FALSE)
 
 
 remove(P2)
-P2 <- ggplot(Precision_Recall_info, aes(x = PeakN_Ratio, y = Recall, fill = CellLine)) +
+P2 <- ggplot(ENCODE_Precision_Recall_info, aes(x = PeakN_Ratio, y = Recall, fill = CellLine)) +
     geom_point(size = 2,colour="black",shape=21,alpha=0.8) +
     geom_text_repel(aes(PeakN_Ratio, Recall, label = CellLine_Modif_Exp)) +
     theme_classic()
@@ -68,7 +78,7 @@ P2 +
 
 
 remove(P3)
-P3 <- ggplot(Precision_Recall_info, aes(x = CellLine_Modif_Exp, y = F1_Score, fill = CellLine)) +
+P3 <- ggplot(ENCODE_Precision_Recall_info, aes(x = CellLine_Modif_Exp, y = F1_Score, fill = CellLine)) +
     geom_bar(stat = 'identity', position = 'dodge') +
     theme_classic()
 
@@ -87,7 +97,7 @@ P3 +
 
 # p + theme(axis.text.x = element_text(size = 15, family = "myFont", color = "green", face = "bold", vjust = 0.5, hjust = 0.5, angle = 45))
 
-Precision_Recall_info$CellLine_Modif_Exp <- factor(Precision_Recall_info$CellLine_Modif_Exp, levels = c("K562_H3K4me1_E1_E2","A549_H3K4me1_E1_E2", "K562_H3K4me3_E1_E2", "K562_H3K4me3_E1_E3", "K562_H3K4me3_E2_E3", "A549_H3K4me3_E1_E2", "K562_H3K9ac_E1_E2", "A549_H3K27ac_E1_E2", "K562_H3K27me3_E1_E2", "A549_H3K27me3_E1_E2", "K562_H3K36me3_E1_E2", "A549_H3K36me3_E1_E2"))
+ENCODE_Precision_Recall_info$CellLine_Modif_Exp <- factor(ENCODE_Precision_Recall_info$CellLine_Modif_Exp, levels = c("K562_H3K4me1_E1_E2","A549_H3K4me1_E1_E2", "K562_H3K4me3_E1_E2", "K562_H3K4me3_E1_E3", "K562_H3K4me3_E2_E3", "A549_H3K4me3_E1_E2", "K562_H3K9ac_E1_E2", "A549_H3K27ac_E1_E2", "K562_H3K27me3_E1_E2", "A549_H3K27me3_E1_E2", "K562_H3K36me3_E1_E2", "A549_H3K36me3_E1_E2"))
 
 
 

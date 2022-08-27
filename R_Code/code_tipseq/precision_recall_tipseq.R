@@ -1,5 +1,7 @@
 library(EpiCompare)
 library(ggplot2)
+library(reshape2)
+library(viridis)
 
 calculate_overlap_func <- function(peaklist,
                               interact=TRUE){
@@ -197,11 +199,11 @@ me3_overlap <- calculate_overlap_func(peaklist_me3)
 me3_bulkinref <- as.data.frame(matrix(nrow=0,ncol=3))
 names(me3_bulkinref) <- c("Sample","Precision","Recall")
 
-for (i in 6:9){
-    index <- i-5
-    me3_bulkinref[index,"Sample"] <- rownames(ac_overlap)[i]
-    me3_bulkinref[index, "Recall"] <- ac_overlap[1,i]
-    me3_bulkinref[index, "Precision"] <- ac_overlap[i,1]
+for (i in 2:9){
+    index <- i-1
+    me3_bulkinref[index,"Sample"] <- rownames(me3_overlap)[i]
+    me3_bulkinref[index, "Recall"] <- me3_overlap[1,i]
+    me3_bulkinref[index, "Precision"] <- me3_overlap[i,1]
 }
 
 me3_bulkinref$F1_Score <- 2 * me3_bulkinref$Precision * me3_bulkinref$Recall / (me3_bulkinref$Precision + me3_bulkinref$Recall)
@@ -236,5 +238,233 @@ for (index_col in (rg[1]):rg[2]){
 }
 me3_tipincut$F1_Score <- 2 * me3_tipincut$Precision * me3_tipincut$Recall / (me3_tipincut$Precision + me3_tipincut$Recall)
 
+
+# Plot
+
+# H3K27ac bulk in ref
+long_ac_bulkinref <- melt(ac_bulkinref, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_ac_bulkinref <- 
+    ggplot(long_ac_bulkinref, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_ac_bulkinref
+
+# H3K27me3 bulk in ref
+me3_bulkinref$Sample <- factor(me3_bulkinref$Sample,me3_bulkinref$Sample)
+
+long_me3_bulkinref <- melt(me3_bulkinref, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_me3_bulkinref <- 
+    ggplot(long_me3_bulkinref, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_me3_bulkinref
+
+
+
+# H3K27ac single cell and bulk
+long_ac_scinbulk <- melt(ac_scinbulk, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_ac_scinbulk <- 
+    ggplot(long_ac_scinbulk, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    # theme(axis.text = element_text(size = 15)) +
+    # theme(axis.title = element_text(size = 15)) +
+    # theme(plot.title = element_text(size = 20)) +
+    # theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_ac_scinbulk
+
+# H3K27ac inter bulk tip seq
+
+long_ac_inter_tipseq <- melt(ac_inter_tipseq, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_ac_inter_tipseq <- 
+    ggplot(long_ac_inter_tipseq, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    # theme(axis.text = element_text(size = 15)) +
+    # theme(axis.title = element_text(size = 15)) +
+    # theme(plot.title = element_text(size = 20)) +
+    # theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_ac_inter_tipseq
+
+# ac tip in cut
+long_ac_tipincut <- melt(ac_tipincut, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_ac_tipincut <- 
+    ggplot(long_ac_tipincut, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    # theme(axis.text = element_text(size = 15)) +
+    # theme(axis.title = element_text(size = 15)) +
+    # theme(plot.title = element_text(size = 20)) +
+    # theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_ac_tipincut
+
+# ac inter sc
+
+long_ac_inter_sc <- melt(ac_inter_sc, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_ac_inter_sc <- 
+    ggplot(long_ac_inter_sc, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    # theme(axis.text = element_text(size = 15)) +
+    # theme(axis.title = element_text(size = 15)) +
+    # theme(plot.title = element_text(size = 20)) +
+    # theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_ac_inter_sc
+
+# me3 inter tip
+
+long_me3_inter_tipseq <- melt(me3_inter_tipseq, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_me3_inter_tipseq <- 
+    ggplot(long_me3_inter_tipseq, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    # theme(axis.text = element_text(size = 15)) +
+    # theme(axis.title = element_text(size = 15)) +
+    # theme(plot.title = element_text(size = 20)) +
+    # theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_me3_inter_tipseq
+
+
+# me3 tip in cut
+
+
+long_me3_tipincut <- melt(me3_tipincut, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_me3_tipincut <- 
+    ggplot(long_me3_tipincut, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    # theme(axis.text = element_text(size = 15)) +
+    # theme(axis.title = element_text(size = 15)) +
+    # theme(plot.title = element_text(size = 20)) +
+    # theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_me3_tipincut
 
 
