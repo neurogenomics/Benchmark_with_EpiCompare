@@ -69,7 +69,7 @@ P_ENCODE_ac <-
         breaks = seq(0,100,20),
         expand = c(0,10)
     ) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1,vjust = 1)) +
     theme(axis.text = element_text(size = 15)) +
     theme(axis.title = element_text(size = 15)) +
     theme(plot.title = element_text(size = 20)) +
@@ -135,7 +135,7 @@ P_ENCODE_me3 <-
         breaks = seq(0,100,20),
         expand = c(0,10)
     ) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1,vjust = 1)) +
     theme(axis.text = element_text(size = 15)) +
     theme(axis.title = element_text(size = 15)) +
     theme(plot.title = element_text(size = 20)) +

@@ -84,6 +84,9 @@ ac_overlap <- calculate_overlap_func(peaklist_ac)
 # show(heatmap)
 # write.csv(ac_overlap,"/Users/xindong/Downloads/tip_seq/info_tip_seq/overlap_H3K27ac.csv", row.names = TRUE)
 
+ac_overlap <- read.csv("/Users/xindong/Downloads/tip_seq/info_tip_seq/overlap_H3K27ac.csv", header = TRUE)
+rownames(ac_overlap) <- ac_overlap[,1]
+ac_overlap <- ac_overlap[,-c(1)]
 ## compare with reference 
 # bulk
 
@@ -208,7 +211,7 @@ names(peaklist_me3) <- c("ENCODE_USC",
 me3_overlap <- calculate_overlap_func(peaklist_me3)
 # heatmap <- EpiCompare::overlap_heatmap(peaklist_me3)
 # show(heatmap)
-# write.csv(ac_overlap,"/Users/xindong/Downloads/tip_seq/info_tip_seq/overlap_H3K27me3.csv", row.names = TRUE)
+# write.csv(me3_overlap,"/Users/xindong/Downloads/tip_seq/info_tip_seq/overlap_H3K27me3.csv", row.names = TRUE)
 
 ## compare with reference 
 # bulk
@@ -274,7 +277,7 @@ P_ac_bulkinref <-
         breaks = seq(0,100,20),
         expand = c(0,10)
     ) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1,vjust = 1)) +
     theme(axis.text = element_text(size = 15)) +
     theme(axis.title = element_text(size = 15)) +
     theme(plot.title = element_text(size = 20)) +
@@ -284,6 +287,33 @@ P_ac_bulkinref <-
 
 
 P_ac_bulkinref
+
+# ac single cell in ref
+long_ac_scinref <- melt(ac_scinref, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_ac_scinref <- 
+    ggplot(long_ac_scinref, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_ac_scinref
 
 
 # H3K27ac single cell in bulk
@@ -333,7 +363,7 @@ P_me3_bulkinref <-
         breaks = seq(0,100,20),
         expand = c(0,10)
     ) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1,vjust = 1)) +
     theme(axis.text = element_text(size = 15)) +
     theme(axis.title = element_text(size = 15)) +
     theme(plot.title = element_text(size = 20)) +

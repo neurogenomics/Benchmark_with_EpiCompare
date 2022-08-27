@@ -68,7 +68,8 @@ df$tech <- factor(df$tech, levels = c("ENCODE", "CUT&RUN", "CUT&Tag", "TIP-seq")
 
 ### Create Boxplot ###
 remove(P)
-P <- ggplot(df, aes(x = sample, y = width)) + 
+P <- 
+    ggplot(df, aes(x = sample, y = width)) + 
     geom_boxplot(aes(color=tech), outlier.shape = NA) +
     scale_y_continuous(
         limits = quantile(df$width, c(0, 0.9))
@@ -77,8 +78,14 @@ P <- ggplot(df, aes(x = sample, y = width)) +
     theme_light() + 
     theme(legend.title = element_blank()) +
     # geom_point(aes(color=Category),size=0.01) +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
     # facet_grid(Histone_Mark~Fragmentation_Enzyme,margins=TRUE) +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
     labs(
         # title = "Fragments size distribution",
         # subtitle = "Bulk TIP-seq",
@@ -175,7 +182,13 @@ P <- ggplot(df, aes(x = sample, y = width)) +
     ) +
     # geom_violin(aes(color=sample)) +
     theme_light() + 
+    theme(axis.text.x = element_text(angle = 60, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
     theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
     # geom_point(aes(color=Category),size=0.01) +
     theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
     # facet_grid(Histone_Mark~Fragmentation_Enzyme,margins=TRUE) +
@@ -236,7 +249,13 @@ P <- ggplot(df, aes(x = sample, y = width)) +
     theme_light() + 
     theme(legend.title = element_blank()) +
     # geom_point(aes(color=Category),size=0.01) +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
     scale_y_continuous(
         limits=c(-50,450),
         breaks = seq(0,400,100),
@@ -273,12 +292,15 @@ P_frip <- ggplot(filtered_info_dup_bulk, aes(x=Sample, y=FRiP_Percent, fill=hist
     scale_y_continuous(
         limits=c(0,100),
         breaks = seq(0,100,20),
-        expand = c(0,10)
-    ) + 
+        expand = c(0,10)) + 
     theme_light() + 
-    # geom_point(aes(color=Category),size=0.01) +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
-    theme(legend.position='none') +
+    theme(axis.text.x = element_text(angle = 70, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
     # facet_grid(Histone_Mark~Fragmentation_Enzyme,margins=TRUE) +
     labs(
         # title = "Fragments size distribution",
@@ -297,19 +319,25 @@ show(P_frip)
 # duplication 
 
 # NFR 
-info_duplication_bulk$NRF <- round(info_duplication_bulk$NRF * 100, 2)
+info_duplication_bulk$NRF <- info_duplication_bulk$NRF * 100
 
-P_NRF <- ggplot(info_duplication_bulk, aes(x = Sample, y = NRF, fill = histone_mark)) + 
+P_NRF <- 
+    ggplot(info_duplication_bulk, aes(x = Sample, y = NRF, fill = histone_mark)) + 
     geom_bar(stat="identity", width = 0.6) + 
     theme_light() + 
     # geom_point(aes(color=Category),size=0.01) +
     # geom_text(aes(label=NRF), vjust=-1, size=3.5) + 
-    theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 70, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
     scale_y_continuous(
         limits=c(0,100),
         breaks = seq(0,100,20),
-        expand = c(0,10)
-    ) + 
+        expand = c(0,10)) + 
     # facet_grid(Histone_Mark~Fragmentation_Enzyme,margins=TRUE) +
     labs(
         # title = "Fragments size distribution",
@@ -325,12 +353,20 @@ show(P_NRF)
 # dup rate
 info_duplication_bulk$Duplication_rate <- round(info_duplication_bulk$Duplication_rate * 100, 2)
 info_duplication_bulk$fragmentation_time <- factor(info_duplication_bulk$fragmentation_time, levels = c("6 min", "10 min"))
-P_duprate_bulk <- ggplot(info_duplication_bulk, aes(x = Category, y = Duplication_rate, fill = histone_mark)) +
+
+P_duprate_bulk <- 
+    ggplot(info_duplication_bulk, aes(x = Sample, y = Duplication_rate, fill = histone_mark)) +
     geom_bar(stat = 'identity', position = 'dodge') +
     facet_grid(PCR_cycles~fragmentation_time,margins=FALSE) +
-    theme(legend.position='none') + 
+    theme(strip.text.x = element_text(size = 20)) + 
+    theme(strip.text.y = element_text(size = 20)) + 
     theme_light() + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 70, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
     labs(
         # title = "Peak Number",
         # subtitle = "A549 & K562",
@@ -351,11 +387,19 @@ longinfo_fragment_dup_bulk$Duplication_Type <- factor(longinfo_fragment_dup_bulk
 
 longinfo_fragment_dup_bulk$Dup_Numbers <- longinfo_fragment_dup_bulk$Numbers / 1000000
 
-P_duplication_bulk <- ggplot(longinfo_fragment_dup_bulk, aes(x = Sample, y = Dup_Numbers, group = Duplication_Type)) + 
+P_duplication_bulk <- 
+    ggplot(longinfo_fragment_dup_bulk, aes(x = Sample, y = Dup_Numbers, group = Duplication_Type)) + 
     geom_col(aes(fill=Duplication_Type)) + 
     facet_grid(PCR_cycles~fragmentation_time,margins=FALSE) + 
+    theme(strip.text.x = element_text(size = 10)) + 
+    theme(strip.text.y = element_text(size = 10)) + 
     theme_light() + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1)) + 
+    theme(axis.text.x = element_text(angle = 80, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 12)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
     labs(
         # title = "Duplication",
         # subtitle = "Bulk TIP-seq",
@@ -382,7 +426,11 @@ P_NRF <- ggplot(info_duplication_sc, aes(x = Sample, y = NRF)) +
     theme_light() + 
     # geom_point(aes(color=Category),size=0.01) +
     # geom_text(aes(label=NRF), vjust=-1, size=3.5) + 
-    theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
     scale_y_continuous(
         limits=c(0,100),
         breaks = seq(0,100,20),
@@ -401,13 +449,18 @@ P_NRF <- ggplot(info_duplication_sc, aes(x = Sample, y = NRF)) +
 show(P_NRF)
 
 # dup rate
-info_duplication_sc$Duplication_rate <- round(info_duplication_sc$Duplication_rate * 100, 2)
+info_duplication_sc$Duplication_rate <- info_duplication_sc$Duplication_rate * 100
 
-P_duprate_sc <- ggplot(info_duplication_sc, aes(x = Sample, y = Duplication_rate)) +
+P_duprate_sc <- 
+    ggplot(info_duplication_sc, aes(x = Sample, y = Duplication_rate)) +
     geom_bar(stat = 'identity', position = 'dodge', fill = "steelblue", width = 0.6) +
     theme(legend.position='none') + 
     theme_light() + 
-    theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
     scale_y_continuous(
         limits=c(0,20),
         breaks = seq(0,20,5)
@@ -448,7 +501,11 @@ P_duplication_sc <- ggplot(longinfo_fragment_dup_sc, aes(x = Sample, y = Dup_Num
     geom_col(aes(fill=Duplication_Type), width = 0.6) + 
     # facet_grid(PCR_cycles~fragmentation_time,margins=FALSE) + 
     theme_light() + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1)) + 
+    theme(axis.text.x = element_text(angle = 60, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
     labs(
         # title = "Duplication",
         # subtitle = "Bulk TIP-seq",
