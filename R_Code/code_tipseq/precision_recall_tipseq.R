@@ -129,6 +129,23 @@ for (index_col in (rg[1]):rg[2]){
 }
 ac_tipincut$F1_Score <- 2 * ac_tipincut$Precision * ac_tipincut$Recall / (ac_tipincut$Precision + ac_tipincut$Recall)
 
+# sc in ref
+
+ac_scinref <- as.data.frame(matrix(nrow=0,ncol=3))
+names(ac_scinref) <- c("Sample","Precision","Recall")
+
+for (i in 12:21){
+    index <- i-11
+    ac_scinref[index,"Sample"] <- rownames(ac_overlap)[i]
+    ac_scinref[index, "Recall"] <- ac_overlap[1,i]
+    ac_scinref[index, "Precision"] <- ac_overlap[i,1]
+}
+
+ac_scinref$F1_Score <- 2 * ac_scinref$Precision * ac_scinref$Recall / (ac_scinref$Precision + ac_scinref$Recall)
+
+# H3K27ac bulk in ref
+long_ac_bulkinref <- melt(ac_bulkinref, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
 # inter single cell
 ac_inter_sc <- as.data.frame(matrix(nrow=0,ncol=3))
 names(ac_inter_sc) <- c("Sample","Precision","Recall")
@@ -267,6 +284,36 @@ P_ac_bulkinref <-
 
 
 P_ac_bulkinref
+
+
+# H3K27ac single cell in bulk
+
+long_ac_scinref <- melt(ac_scinref, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
+
+P_ac_scinref <- 
+    ggplot(long_ac_scinref, aes(Sample, Percentage)) +
+    geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
+    scale_fill_viridis(labels = c("Precision", "Recall", "F1_Score"), discrete = TRUE, begin = 0.15, end = 0.7, alpha = 0.7) +
+    theme_light() + 
+    ggtitle("") +
+    # xlab("") +
+    ylab("Percentage") +
+    scale_y_continuous(
+        limits=c(0,100),
+        breaks = seq(0,100,20),
+        expand = c(0,10)
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") 
+
+
+P_ac_scinref
+
 
 # H3K27me3 bulk in ref
 me3_bulkinref$Sample <- factor(me3_bulkinref$Sample,me3_bulkinref$Sample)
