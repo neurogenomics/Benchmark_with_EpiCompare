@@ -350,6 +350,8 @@ P_NRF <-
 
 show(P_NRF)
 
+info_duplication_bulk <- read.csv("/Users/xindong/Downloads/TIP_git/info_TIP_seq/duplication_bulk.csv", header = TRUE)
+library(ggplot2)
 # dup rate
 info_duplication_bulk$Duplication_rate <- round(info_duplication_bulk$Duplication_rate * 100, 2)
 info_duplication_bulk$fragmentation_time <- factor(info_duplication_bulk$fragmentation_time, levels = c("6 min", "10 min"))
@@ -361,7 +363,7 @@ P_duprate_bulk <-
     theme(strip.text.x = element_text(size = 20)) + 
     theme(strip.text.y = element_text(size = 20)) + 
     theme_light() + 
-    theme(axis.text.x = element_text(angle = 70, hjust = 1,vjust = 1)) +
+    theme(axis.text.x = element_blank()) +
     theme(axis.text = element_text(size = 15)) +
     theme(axis.title = element_text(size = 15)) +
     theme(legend.text = element_text(size = 15)) +
@@ -377,6 +379,32 @@ P_duprate_bulk <-
     )
 
 show(P_duprate_bulk)
+
+
+
+P_dup_bulk_enzyme <- 
+    ggplot(info_duplication_bulk, aes(x = Sample, y = Duplication_rate, fill = fragmentation_enzyme)) +
+    geom_bar(stat = 'identity', position = 'dodge', width = 0.6) +
+    scale_fill_manual(values=c("bisque1","cornsilk3")) +
+    # facet_wrap(~fragmentation_enzyme) +
+    theme_light() + 
+    theme(axis.text.x = element_text(angle = 70, hjust = 1,vjust = 1)) +
+    theme(axis.text = element_text(size = 15)) +
+    theme(axis.title = element_text(size = 15)) +
+    theme(plot.title = element_text(size = 20)) +
+    theme(legend.text = element_text(size = 15)) +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "right") + 
+    labs(
+        # title = "Peak Number",
+        # subtitle = "A549 & K562",
+        #tag = "",
+        #caption = "",
+        x = "",
+        y = "Duplication Rate (%)"
+    )
+
+show(P_dup_bulk_enzyme)
 
 
 # duplication distribute

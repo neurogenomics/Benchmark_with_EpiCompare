@@ -1,6 +1,6 @@
 library(ggplot2)
 library(reshape2)
-
+library(grid)
 
 
 info_duplication_bulk <- read.csv("/Users/xindong/Downloads/TIP_git/info_TIP_seq/duplication_bulk.csv", header = TRUE)
@@ -48,14 +48,17 @@ P_fragment_bulk <-
     )
 show(P_fragment_bulk)
 
+legend <- cowplot::get_legend(P_fragment_bulk)
 
+grid.newpage()
+grid.draw(legend)
 
 
 
 P_fragment_bulk_violin <- 
-    ggplot(longinfo_fragment_bulk, aes(x = Sample, y = Length, weight = Read_Numbers)) + 
-    geom_violin(aes(color=Histone_Mark)) +
-    geom_boxplot(aes(color=Histone_Mark), outlier.shape = NA, width = 0.1) + 
+    ggplot(longinfo_fragment_bulk, aes(x = Sample, y = Length, weight = Read_Numbers, fill = Sample)) + 
+    geom_violin() +
+    geom_boxplot(outlier.shape = NA, width = 0.1) + 
     theme_light() + 
     # geom_point(aes(color=Category),size=0.01) +
     scale_y_continuous(
@@ -64,11 +67,9 @@ P_fragment_bulk_violin <-
         expand = c(0,10)
     ) + 
     theme(axis.text.x = element_text(angle = 70, hjust = 1,vjust = 1)) +
-    theme(axis.text = element_text(size = 12)) +
+    theme(axis.text = element_text(size = 15)) +
     theme(axis.title = element_text(size = 15)) +
     theme(plot.title = element_text(size = 20)) +
-    theme(legend.text = element_text(size = 15)) +
-    theme(legend.title = element_blank()) +
     theme(legend.position = "right") + 
     labs(
         # title = "Fragments size distribution",
@@ -85,7 +86,17 @@ show(P_fragment_bulk_violin)
 
 
 
-
+ggplot(aes(x = Sample, y = fragLen, weight = Weight, fill = Sample)) +
+    geom_violin(bw = 5) +
+    scale_y_continuous(breaks = seq(0, 800, 50)) +
+    scale_fill_viridis(discrete = TRUE, begin = 0.1, end = 0.9, option = "magma", alpha = 0.8, labels = labels_list) +
+    scale_color_viridis(discrete = TRUE, begin = 0.1, end = 0.9) +
+    scale_x_discrete(labels = labels_list_reordered) +
+    theme_bw(base_size = 20) +
+    ggpubr::rotate_x_text(angle = 20) +
+    ylab("Fragment Length") +
+    xlab("") +
+    theme(plot.margin = unit(c(0.5,0,0,2), "cm"))
 
 
 

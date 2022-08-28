@@ -1,4 +1,7 @@
 library(EpiCompare)
+library(reshape2)
+library(ggplot2)
+library(viridis)
 calculate_overlap_func <- function(peaklist,
                                    interact=TRUE){
     
@@ -56,6 +59,10 @@ ENCODE_ac_inter$F1_Score <- 2 * ENCODE_ac_inter$Precision * ENCODE_ac_inter$Reca
 # H3K27ac ENCODE
 long_ENCODE_ac <- melt(ENCODE_ac_inter, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
 
+for (i in 1:nrow(long_ENCODE_ac)){
+    long_ENCODE_ac$Sample[i] <- paste("A549",long_ENCODE_ac$Sample[i],sep = "_")
+}
+
 P_ENCODE_ac <- 
     ggplot(long_ENCODE_ac, aes(Sample, Percentage)) +
     geom_bar(aes(fill = Type), width = 0.7, position = position_dodge(width = 0.75), stat = "identity") +
@@ -77,7 +84,7 @@ P_ENCODE_ac <-
     theme(legend.title = element_blank()) +
     theme(legend.position = "right") 
 
-P_ENCODE_ac
+show(P_ENCODE_ac)
 
 # ENCODE H3K27me3 
 H3K27me3_K562_E1 <- rtracklayer::import("https://www.encodeproject.org/files/ENCFF801AHF/@@download/ENCFF801AHF.bed.gz", format = "narrowPeak")
