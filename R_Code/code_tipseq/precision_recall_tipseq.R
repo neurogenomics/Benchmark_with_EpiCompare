@@ -102,6 +102,8 @@ for (i in 2:11){
 
 ac_bulkinref$F1_Score <- 2 * ac_bulkinref$Precision * ac_bulkinref$Recall / (ac_bulkinref$Precision + ac_bulkinref$Recall)
 
+# write.csv(ac_bulkinref,"/Users/xindong/Downloads/TIP_git/info_TIP_seq/ac_bulkinref.csv")
+
 # between tip seq samples
 ac_inter_tipseq <- as.data.frame(matrix(nrow=0,ncol=3))
 names(ac_inter_tipseq) <- c("Sample","Precision","Recall")
@@ -212,7 +214,9 @@ me3_overlap <- calculate_overlap_func(peaklist_me3)
 # heatmap <- EpiCompare::overlap_heatmap(peaklist_me3)
 # show(heatmap)
 # write.csv(me3_overlap,"/Users/xindong/Downloads/tip_seq/info_tip_seq/overlap_H3K27me3.csv", row.names = TRUE)
-
+me3_overlap <- read.csv("/Users/xindong/Downloads/tip_seq/info_tip_seq/overlap_H3K27me3.csv", header = TRUE)
+rownames(me3_overlap) <- me3_overlap[,1]
+me3_overlap <- me3_overlap[,-c(1)]
 ## compare with reference 
 # bulk
 
@@ -228,6 +232,7 @@ for (i in 2:9){
 
 me3_bulkinref$F1_Score <- 2 * me3_bulkinref$Precision * me3_bulkinref$Recall / (me3_bulkinref$Precision + me3_bulkinref$Recall)
 
+write.csv(me3_bulkinref,"/Users/xindong/Downloads/TIP_git/info_TIP_seq/me3_bulkinref.csv")
 # between tip seq samples
 me3_inter_tipseq <- as.data.frame(matrix(nrow=0,ncol=3))
 names(me3_inter_tipseq) <- c("Sample","Precision","Recall")
@@ -347,7 +352,7 @@ P_ac_scinref
 
 # H3K27me3 bulk in ref
 me3_bulkinref$Sample <- factor(me3_bulkinref$Sample,me3_bulkinref$Sample)
-
+me3_bulkinref <- me3_bulkinref[-c(1),]
 long_me3_bulkinref <- melt(me3_bulkinref, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
 
 P_me3_bulkinref <- 
@@ -372,7 +377,7 @@ P_me3_bulkinref <-
     theme(legend.position = "right") 
 
 
-P_me3_bulkinref
+show(P_me3_bulkinref)
 
 
 

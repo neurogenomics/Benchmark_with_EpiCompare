@@ -55,7 +55,8 @@ for (index_col in (rg[1]+1):rg[2]){
     }
 }
 ENCODE_ac_inter$F1_Score <- 2 * ENCODE_ac_inter$Precision * ENCODE_ac_inter$Recall / (ENCODE_ac_inter$Precision + ENCODE_ac_inter$Recall)
-
+mean(ENCODE_ac_inter$F1_Score)
+# write.csv(ENCODE_ac_inter, "/Users/xindong/Downloads/TIP_git/info_TIP_seq/ENCODE_ac.csv")
 # H3K27ac ENCODE
 long_ENCODE_ac <- melt(ENCODE_ac_inter, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
 
@@ -124,7 +125,7 @@ for (index_col in (rg[1]+1):rg[2]){
 ENCODE_me3_inter$F1_Score <- 2 * ENCODE_me3_inter$Precision * ENCODE_me3_inter$Recall / (ENCODE_me3_inter$Precision + ENCODE_me3_inter$Recall)
 
 ENCODE_me3_inter$Sample <- c("K562_E2_in_E1","A549_E2_in_E1")
-
+# write.csv(ENCODE_me3_inter,"/Users/xindong/Downloads/TIP_git/info_TIP_seq/ENCODE_me3.csv")
 
 # H3K27ac ENCODE
 long_ENCODE_me3 <- melt(ENCODE_me3_inter, id.vars=c("Sample"), measure.vars=c("Precision","Recall","F1_Score"), variable.name="Type", value.name="Percentage")
