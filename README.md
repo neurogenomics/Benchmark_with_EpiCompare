@@ -7,8 +7,8 @@ see updating [slides](https://docs.google.com/presentation/d/1RUutxp24KqfAtOKvWk
 ### ENCODE reproducibility 
 see [notes](https://docs.google.com/document/d/11hHNdTwsNA4ggAtvPus_hpmdrkUIPJjVDAXd-HnrSdg/edit?usp=sharing) for information from literature 
 ### R scripts, results metrics and plots
-see EpiCompare peak comparison and plotting R scripts at [R_Code](https://neurogenomics.github.io/Benchmark_with_EpiCompare/R_Code);
-see Plots at [TIP-seq plots](https://neurogenomics.github.io/Benchmark_with_EpiCompare/Report_Figure), and [additional plots](https://neurogenomics.github.io/Benchmark_with_EpiCompare/plot_TIPseq)
+see EpiCompare peak comparison and plotting R scripts at [R_Code](https://github.com/neurogenomics/Benchmark_with_EpiCompare/tree/master/R_Code);
+see Plots at [TIP-seq plots](https://github.com/neurogenomics/Benchmark_with_EpiCompare/tree/master/Report_Figure), and [additional plots](https://github.com/neurogenomics/Benchmark_with_EpiCompare/tree/master/plot_TIPseq).
 
 
 ## cutandrun report (data analysis website): 
