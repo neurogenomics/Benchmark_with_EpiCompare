@@ -6,6 +6,10 @@ Xindong;
 see updating [slides](https://docs.google.com/presentation/d/1RUutxp24KqfAtOKvWkCQTmH0ZVNXelx9vwVgdoKXpAU/edit?usp=sharing) of the progress
 ### ENCODE reproducibility 
 see [notes](https://docs.google.com/document/d/11hHNdTwsNA4ggAtvPus_hpmdrkUIPJjVDAXd-HnrSdg/edit?usp=sharing) for information from literature 
+### R scripts, results metrics and plots
+see EpiCompare peak comparison and plotting R scripts at [R_Code](https://neurogenomics.github.io/Benchmark_with_EpiCompare/R_Code);
+see Plots at [TIP-seq plots](https://neurogenomics.github.io/Benchmark_with_EpiCompare/Report_Figure), and [additional plots](https://neurogenomics.github.io/Benchmark_with_EpiCompare/plot_TIPseq)
+
 
 ## cutandrun report (data analysis website): 
 See [final web report](https://neurogenomics.github.io/Benchmark_with_EpiCompare/DA_Web/Data_Analysis/Data_Analysis_Xindong.html), or at [MSc course server](http://msc.bc.ic.ac.uk/~xs221/DA_Web/Data_Analysis/Data_Analysis_Xindong.html)(with Imperial login)
