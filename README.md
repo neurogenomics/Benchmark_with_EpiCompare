@@ -1,12 +1,17 @@
 # ENCODE reproducibility, cutandrun & TIP-seq benchmark
 Xindong; 
 
-cutandrun report: 
-See [final web report](https://neurogenomics.github.io/CUTandRUN_EpiCompare/DA_Web/Data_Analysis/Data_Analysis_Xindong.html), or at [MSc course server](http://msc.bc.ic.ac.uk/~xs221/DA_Web/Data_Analysis/Data_Analysis_Xindong.html)(with Imperial login)
-
+## TIP-seq benchmark
+### Updating progress
 see updating [slides](https://docs.google.com/presentation/d/1RUutxp24KqfAtOKvWkCQTmH0ZVNXelx9vwVgdoKXpAU/edit?usp=sharing) of the progress
+### ENCODE reproducibility 
 see [notes](https://docs.google.com/document/d/11hHNdTwsNA4ggAtvPus_hpmdrkUIPJjVDAXd-HnrSdg/edit?usp=sharing) for information from literature 
 
+## cutandrun report (data analysis website): 
+See [final web report](https://neurogenomics.github.io/Benchmark_with_EpiCompare
+/DA_Web/Data_Analysis/Data_Analysis_Xindong.html), or at [MSc course server](http://msc.bc.ic.ac.uk/~xs221/DA_Web/Data_Analysis/Data_Analysis_Xindong.html)(with Imperial login)
+
+## Data availability
 ### ENCODE correlation bewteen experiments and replicates: 
 Annotation: H3K4me3_EN4G38_E1_IRpseudo123 <br>
 PTM name;<br>
@@ -66,21 +71,7 @@ These are [overall conclusion](https://doi.org/10.1038/nature09906) with 9 cell 
 
 
 
-### ENCODE ChIP-seq references for CUT&RUN EpiCompare:<br>
-[H3K4me1_ENCFF159VKJ_1.bed](https://www.encodeproject.org/experiments/ENCSR000EWC/)<br>
-[H3K4me1_ENCFF759NWD_2.bed](https://www.encodeproject.org/experiments/ENCSR000AKS/)<br>
-[H3K4me2_ENCFF118PIE.bed](https://www.encodeproject.org/experiments/ENCSR000AKT/)<br>
-[H3K4me3_ENCFF616DLO.bed](https://www.encodeproject.org/experiments/ENCSR668LDD/)<br>
-[H3K9ac_ENCFF558JOB.bed](https://www.encodeproject.org/experiments/ENCSR000EVZ/)<br>
-[H3K27ac_ENCFF038DDS.bed](https://www.encodeproject.org/files/ENCFF038DDS/)<br>
-[H3K9me1_ENCFF285EKW.bed](https://www.encodeproject.org/experiments/ENCSR000AKW/)<br>
-[H3K9me3_ENCFF371GMJ.bed](https://www.encodeproject.org/experiments/ENCSR000APE/)<br>
-[H3K27me3_ENCFF031FSF_1.bed](https://www.encodeproject.org/experiments/ENCSR000EWB/)<br>
-[H3K27me3_ENCFF049HUP_2.bed](https://www.encodeproject.org/experiments/ENCSR000AKQ/)<br>
-[H3K36me3_ENCFF631VWP_1.bed](https://www.encodeproject.org/experiments/ENCSR000DWB/)<br>
-[H3K36me3_ENCFF053DAC_2.bed](https://www.encodeproject.org/experiments/ENCSR000AKR/)<br>
-[H3K79me2_ENCFF212PQN.bed](https://www.encodeproject.org/experiments/ENCSR000APD/)<br>
-[H4K20me1_ENCFF909RKY.bed](https://www.encodeproject.org/experiments/ENCSR000AKX/)<br>
+
 
 
 
